@@ -12,5 +12,5 @@ from .serializers import *
 class SurveyList(APIView):
     def get(self, request):
         surveys = ISurvey.objects.all()
-        surveys_ = SurveysShowSerializer( instance=surveys, many=True)
+        surveys_ = SurveysShowSerializer(instance=surveys, many=True)
         return Response(surveys_.data)
