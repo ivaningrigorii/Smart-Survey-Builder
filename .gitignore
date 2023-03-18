@@ -1,0 +1,34 @@
+#------------- back django --------
+*.pyc 
+*~ 
+__pycache__ 
+/static 
+.DS_Store 
+.idea
+venv
+
+#---------- front react -----------
+
+# dependencies
+/src_front/node_modules
+/src_front/.pnp
+.pnp.js
+
+# testing
+/src_front/coverage
+
+# production
+/src_front/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
