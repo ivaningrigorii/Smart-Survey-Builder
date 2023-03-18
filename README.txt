@@ -53,7 +53,7 @@ This is our team project. The system allows you to collect feedback and analyze 
     Переходим в папку фронтенда src_front.
     Находясь внутри папки фронтенда в командной строке вводим команду:
       npm install
-    ГОТОВО
+    ГОТОВО, если летят ошибки, вероятно, просто не установлена Node.js или активировано в этом окне (venv)
     ЗАПУСКАЕМ клинтскую часть:
       npm start
       
