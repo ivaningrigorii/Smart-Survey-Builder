@@ -29,7 +29,7 @@ This is our team project. The system allows you to collect feedback and analyze 
     
     Переходим в командной строке в папку проекта, например, было Smart-Survey-Builder.
     Внутри папки проекта устанавливаете виртуальную среду python с помощью команды:
-      python -m venv vevn    (для Windows)
+      python -m venv venv    (для Windows)
     Активируйте виртуальное окружение
       .\venv\Scripts\activate
     Должно появиться (venv)
@@ -61,4 +61,11 @@ This is our team project. The system allows you to collect feedback and analyze 
     со сведениями об опросах, уже лежащих в локальной мальнькой бд sql lite.
     
     Всё настроено. Теперь можно глубоко вдохнуть и начать разрабатывать проект.
+    
+    В ДАЛЬНЕЙШЕМ, ДЛЯ ЛОКАЛЬНОГО ЗАПУСКА ПРОЕКТА НУЖНО БУДЕТ:
+    1) перейти в папку проекта,
+    2) активировать виртуальное окружение Python (.\venv\Scripts\activate)
+    3) перейти в src_back и запустить локально сервер (python manage.py runserver localhost:8000)
+    4) в новом окне командной строки перейти в папку проекта, перейти в src_front
+    5) запустить react (npm start)
     

@@ -6,6 +6,9 @@ __pycache__
 .DS_Store 
 .idea
 venv
+/venv
+/vevn
+vevn
 db.sqllite3
 #---------- front react -----------
 
