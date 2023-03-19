@@ -31,7 +31,7 @@ This is our team project. The system allows you to collect feedback and analyze 
     Внутри папки проекта устанавливаете виртуальную среду python с помощью команды:
       python -m venv vevn    (для Windows)
     Активируйте виртуальное окружение
-      .\venv\Scritps\activate
+      .\venv\Scripts\activate
     Должно появиться (venv)
     После этого, в этой же папке вводите команду для установки всех зависимостей python:
       pip install -r requirements_pip.txt
@@ -44,7 +44,7 @@ This is our team project. The system allows you to collect feedback and analyze 
       python manage.py runserver localhost:8000
     ГОТОВО
     
-    Теперь, если перейти в браузе по URL localhost:8080/api/survey-passing/list_surveys/ можно увидеть возвращаемое сервером API
+    Теперь, если перейти в браузе по URL localhost:8000/api/survey-passing/list_surveys/ можно увидеть возвращаемое сервером API
     Для тестового запуска оставляем работать сервер дальше, остановка через ctrl+break.
     
     3. Разворачиваем React и запускаем
