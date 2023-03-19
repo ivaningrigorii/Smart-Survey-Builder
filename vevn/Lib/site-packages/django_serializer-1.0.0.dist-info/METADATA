@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: django-serializer
+Version: 1.0.0
+Summary: Library for creating simple django api
+Home-page: https://github.com/alexopryshko/django-serializer
+Author: Alexander Opryshko
+Author-email: alexopryshko@yandex.ru
+License: MIT
+Keywords: django-serializer setuptools development
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+License-File: LICENSE.txt
+Requires-Dist: Django (>=2.1)
+Requires-Dist: marshmallow (>=3.5.0)
+Requires-Dist: apispec (>=3.3.0)
+
+Library for creating simple django api
