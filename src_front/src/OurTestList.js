@@ -17,6 +17,8 @@ class  OurTestList  extends  Component {
                 this.setState({ surveys: surveys });
       });
     }
+    
+    //лучше такие штуки вообще вынести в отдельный файл, DRY
     types_map = {
         "SurveySimple": "Простой опрос",
         "SurveyTest": "Тестирование"
