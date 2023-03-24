@@ -8,4 +8,3 @@ from apps.survey_passing.serializers import SurveysShowSerializer
 class SurveyList(generics.ListAPIView):
     queryset = ISurvey.objects.all()
     serializer_class = SurveysShowSerializer
-    permission_classes = (AllowAny, )
