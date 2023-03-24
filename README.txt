@@ -1,7 +1,11 @@
 # Smart-Survey-Builder
 This is our team project. The system allows you to collect feedback and analyze it qualitatively
 
-ИНСТРУКЦИЯ для первоначального скачивания проекта и запуска, подготовке к разработке.
+1) простой тестовый пользователь 1: логин test_user, пароль 123qwer123
+2) администратор: логин root, пароль 1234
+
+
+!!! ИНСТРУКЦИЯ для первоначального скачивания проекта и запуска, подготовке к разработке.
 
 Что должно быть изначально установлено? git, npm (node.js), python
 
