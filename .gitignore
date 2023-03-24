@@ -9,7 +9,7 @@ venv
 /venv
 /vevn
 vevn
-#db.sqllite3
+db.sqllite3
 #---------- front react -----------
 
 # dependencies
