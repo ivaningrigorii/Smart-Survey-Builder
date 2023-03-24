@@ -15,6 +15,9 @@ class TakingSurvey(models.Model):
                              null=True, on_delete=models.SET_NULL)
     time_end = models.DateTimeField(auto_now_add=True, verbose_name='Был пройден')
 
+    def __str__(self):
+        return f"{self.user}: {self.survey}"
+
     class Meta:
         db_table = 'taking_survey'
 
@@ -35,6 +38,9 @@ class IResultAnswer(PolymorphicModel, models.Model):
 class ResultSelect(IResultAnswer, models.Model):
     """ для всех ответов, где требуется выбор, тут answer и есть выбранный ответ """
 
+    def __str__(self):
+        return f"ответ: {self.answer}"
+
     class Meta:
         db_table = 'result_select'
 
@@ -42,6 +48,9 @@ class ResultSelect(IResultAnswer, models.Model):
 class ResultTextInput(IResultAnswer, models.Model):
     """ для полей ввода текста """
     input_text = models.CharField(max_length=300, verbose_name='Введённый текст')
+
+    def __str__(self):
+        return f"ответ: {self.input_text}"
 
     class Meta:
         db_table = 'result_test_input'

@@ -10,6 +10,9 @@ class Profile(models.Model):
     photo = models.ImageField(upload_to="photos/profile/%Y/%m/%d/",
                               verbose_name='фото профиля', null=True)
 
+    def __str__(self):
+        return f"{self.user}"
+
     class Meta:
         db_table = 'profile'
 

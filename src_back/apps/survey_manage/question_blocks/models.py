@@ -12,23 +12,24 @@ class IQuestion(PolymorphicModel, models.Model):
     survey = models.ForeignKey(ISurvey, on_delete=models.CASCADE, verbose_name='Опрос')
 
     text_question = models.CharField(max_length=300, verbose_name='Текст вопроса')
-
+    non_polymorphic = models.Manager()
     one_answer_with_a_choice \
         = models.BooleanField(default=True, null=True, verbose_name='Выбор только 1 ответа')
 
+    def __str__(self):
+        return f"{self.text_question}"
+
     class Meta:
+        base_manager_name = 'non_polymorphic'
         db_table = 'i_question'
 
 
 class ITestQuestion(IQuestion, PolymorphicModel, models.Model):
     """ Общая структура всех тестовых блоков вопросов """
-    def save(self, *args, **kwargs):
-        if isinstance(self.survey, SurveySimple):
-            raise Exception('Вы пытаетесь добавить тестовый вопрос в нетестовый опрос!')
-        else:
-            super(ITestQuestion, self).save(self, *args, **kwargs)
+    non_polymorphic = models.Manager()
 
     class Meta:
+        base_manager_name = 'non_polymorphic'
         db_table = 'i_test_question'
 
 # endregion
