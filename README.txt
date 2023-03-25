@@ -5,6 +5,7 @@ This is our team project. The system allows you to collect feedback and analyze 
 1) простой тестовый пользователь 1: логин test_user, пароль 123qwer123
 2) администратор: логин root, пароль 1234 (админка не особо настроена)
 
+НЕ ЗАБУДЬТЕ ДОБАВИТЬ НОВЫЕ ЗАВИСИМОСТИ!
 
 
 
