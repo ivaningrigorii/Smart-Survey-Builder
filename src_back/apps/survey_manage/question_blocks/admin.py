@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from apps.survey_manage.question_blocks.models import *
+
+admin.site.register(IQuestion)
+admin.site.register(QuestionSimple)
+admin.site.register(QuestionTestSimpleEv)

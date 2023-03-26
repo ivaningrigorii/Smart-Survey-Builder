@@ -11,11 +11,21 @@ class  OurTestList  extends  Component {
     }
 //вот так жёстко url не хранить!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
     componentDidMount=() => {
-        axios.get('http://localhost:8000/api/survey-passing/list_surveys/')
+        axios.get('http://localhost:8000/api/v1/passing/list_surveys/')
             .then(res => {
                 const surveys = res.data;
                 this.setState({ surveys: surveys });
       });
+    }
+    
+    //лучше такие штуки вообще вынести в отдельный файл, DRY
+    types_map = {
+        "SurveySimple": "Простой опрос",
+        "SurveyTest": "Тестирование"
+    }
+
+    find_type_survey=(str_type) => {
+        return this.types_map[str_type]
     }
        
 
@@ -29,6 +39,7 @@ class  OurTestList  extends  Component {
                     <th>ID</th>
                     <th>Название тестового опроса</th>
                     <th>Когда создан</th>
+                    <th>Тип опроса</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,6 +48,7 @@ class  OurTestList  extends  Component {
                     <td>{s.pk}  </td>
                     <td>{s.name}</td>
                     <td>{s.time_create}</td>
+                    <td>{this.find_type_survey(s.type_survey)}</td>
                 </tr>)}
                 </tbody>
                 </table>
