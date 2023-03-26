@@ -10,17 +10,23 @@ import OurTestList from "./OurTestList";
 import './App.css';
 
 import React, { Component } from 'react';
-import FrontTest from "./FrontTest";
-//пока тут вызывается только тестовый класс
+import MainPage from "./pages/MainPage/MainPage";
+import PollsPage from "./pages/PollsPage/PollsPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import EnterPage from "./pages/EnterPage";
+
 /*ОБЯЗАТЕЛЬНО СДЕЛАТЬ вызов домена сервера в url где-то в отдельной переменной,
   чтоб потом по 100 раз не переделывать*/
 class  App  extends  Component {
   render() {
-    return (
+    return (   
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<OurTestList />} /> 
-          <Route path="/front_test" element={<FrontTest/>} /> 
+          <Route path="/TestServer" element={<OurTestList />} /> 
+          <Route path="/" element={<MainPage/>} /> 
+          <Route path="/polls" element={<PollsPage/>} /> 
+          <Route path="/profile" element={<ProfilePage/>} /> 
+          <Route path="/enter" element={<EnterPage/>} /> 
         </Routes>
       </BrowserRouter>
     );
