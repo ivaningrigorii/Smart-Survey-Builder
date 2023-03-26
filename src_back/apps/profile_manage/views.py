@@ -1,14 +1,29 @@
-from rest_framework import generics, mixins
+from rest_framework import generics
 
+from apps.profile_manage.serializers import *
 from apps.survey_manage.survey_base.models import ISurvey
-from apps.survey_manage.survey_base.serializers import SurveysShowSerializer
-from src_back.permissions import IsOwner
+from rest_framework.permissions import IsAuthenticated
+
+from src_back.permissions import IsOwnerISurvey, IsOwnerProfile
 
 
-class CreatedSurveys(generics.ListAPIView,
-                     generics.DestroyAPIView):
-    serializer_class = SurveysShowSerializer
-    permission_classes = (IsOwner,)
+class ProfileOwner(generics.RetrieveAPIView):
+    lookup_field = 'pk'
+    queryset = get_user_model().objects.all()
+    serializer_class = UserProfileSerializer
+    permission_classes = (IsOwnerProfile, )
+
+
+class DeleteSurveyFromCretedCat(generics.RetrieveUpdateAPIView):
+    serializer_class = CatCreatedSerializer
+    permission_classes = (IsOwnerISurvey, )
+    lookup_field = 'pk'
+    queryset = ISurvey.objects.all()
+
+
+class ShowCreatedSurveys(generics.ListAPIView):
+    serializer_class = CatCreatedSerializer
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         user = self.request.user

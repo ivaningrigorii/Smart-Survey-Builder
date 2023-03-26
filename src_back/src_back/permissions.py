@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from rest_framework import permissions
 
 
@@ -20,7 +21,12 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         return obj.user == request.user
 
 
-class IsOwner(permissions.BasePermission):
+class IsOwnerISurvey(permissions.BasePermission):
     "Доступ только если хозяин объекта"
     def has_object_permission(self, request, view, obj):
-        return obj.user == request.user
+        return bool(request.user and (obj.user == request.user))
+
+
+class IsOwnerProfile(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return bool(request.user and (obj == request.user))
