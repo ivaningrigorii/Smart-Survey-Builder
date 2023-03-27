@@ -14,7 +14,7 @@ class ProfileOwner(generics.RetrieveAPIView):
     permission_classes = (IsOwnerProfile, )
 
 
-class DeleteSurveyFromCretedCat(generics.RetrieveUpdateAPIView):
+class DeleteSurveyFromCretedCat(generics.DestroyAPIView):
     serializer_class = CatCreatedSerializer
     permission_classes = (IsOwnerISurvey, )
     lookup_field = 'pk'
