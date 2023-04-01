@@ -24,7 +24,11 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 class IsOwnerISurvey(permissions.BasePermission):
     "Доступ только если хозяин объекта"
     def has_object_permission(self, request, view, obj):
-        return bool(request.user and (obj.user == request.user))
+        try:
+            result = bool(request.user and (obj.user == request.user))
+            return result
+        except:
+            return False
 
 
 class IsOwnerProfile(permissions.BasePermission):
