@@ -4,17 +4,25 @@ from apps.profile_manage.serializers import *
 from apps.survey_manage.survey_base.models import ISurvey
 from rest_framework.permissions import IsAuthenticated
 
-from src_back.permissions import IsOwnerISurvey, IsOwnerProfile
+from src_back.permissions import IsOwnerISurvey
 
 
-class ProfileOwner(generics.RetrieveAPIView):
-    lookup_field = 'pk'
-    queryset = get_user_model().objects.all()
-    serializer_class = UserProfileSerializer
-    permission_classes = (IsOwnerProfile, )
+class ProfileOwner(generics.RetrieveUpdateAPIView):
+    """
+    Работа с профилем авторизованного пользователя.
+    """
+    serializer_class = UserProfileOwnSerializer
+    permission_classes = (IsAuthenticated, )
+
+    def get_object(self):
+        user = self.request.user
+        return get_user_model().objects.get(id=user.pk)
 
 
-class DeleteSurveyFromCretedCat(generics.DestroyAPIView):
+class DeleteSurveyFromCreatedCat(generics.DestroyAPIView):
+    """
+    Удаление опроса из каталога созданных ранее опросов
+    """
     serializer_class = CatCreatedSerializer
     permission_classes = (IsOwnerISurvey, )
     lookup_field = 'pk'
@@ -22,6 +30,11 @@ class DeleteSurveyFromCretedCat(generics.DestroyAPIView):
 
 
 class ShowCreatedSurveys(generics.ListAPIView):
+    """
+    Просмотр всех ранее созданных опросов,
+    уникальный slug в дальнейшем нужен для генерации ссылки на прохождение опроса,
+        как на клиенте, так и на сервере
+    """
     serializer_class = CatCreatedSerializer
     permission_classes = (IsAuthenticated,)
 
