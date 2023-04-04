@@ -4,7 +4,7 @@ from src_back.permissions import IsOwnerQuestionInSurvey
 from .serializers import *
 
 
-class QuestionSimpleAddAPIView(generics.CreateAPIView):
+class QuestionAddAPIView(generics.CreateAPIView):
     """
         Создание и добавление нового вопроса в опрос
     """
@@ -12,7 +12,7 @@ class QuestionSimpleAddAPIView(generics.CreateAPIView):
     permission_classes = (IsOwnerQuestionInSurvey,)
 
 
-class QuestionSimpleGetDeleteUpdateAPIView(generics.RetrieveUpdateDestroyAPIView):
+class QuestionGetDeleteUpdateAPIView(generics.RetrieveUpdateDestroyAPIView):
     """
          Просмотр, редактирование, удаление вопроса
     """
@@ -20,4 +20,3 @@ class QuestionSimpleGetDeleteUpdateAPIView(generics.RetrieveUpdateDestroyAPIView
     permission_classes = (IsOwnerQuestionInSurvey,)
     lookup_field = 'pk'
     queryset = IQuestion.objects.all()
-
