@@ -1,14 +1,10 @@
-import { render } from "react-dom";
 import {
     BrowserRouter,
     Routes,
     Route,
-    Link
 } from "react-router-dom";
 
 import OurTestList from "./OurTestList";
-import './App.css';
-
 import React, { Component } from 'react';
 import MainPage from "./pages/MainPage/MainPage";
 import PollsPage from "./pages/PollsPage/PollsPage";

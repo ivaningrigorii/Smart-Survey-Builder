@@ -1,5 +1,8 @@
 import  React, { Component } from  'react';
-
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
+import SearchPolls from "./components/SearchPolls";
+import "./PollsPage.css"
 class  PollsPage  extends  Component {
 
     constructor(props) {
@@ -12,9 +15,11 @@ class  PollsPage  extends  Component {
 
     render() {
         return (
-            
-            <div  className="front--test">
-                <h3>Страница со всеми опросами</h3>
+                                                               // для зарегистрированного пользователя поменять
+            <div  className="polls-page">
+                <Header/>                                         
+                <SearchPolls/>      
+                <Footer/> 
             </div>
             );
             
