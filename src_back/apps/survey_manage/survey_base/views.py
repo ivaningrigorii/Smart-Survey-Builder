@@ -2,7 +2,7 @@ from rest_framework import generics
 
 from src_back.permissions import IsOwnerISurvey
 from rest_framework.permissions import IsAuthenticated
-from .serializers import ISurveyFullSerializer
+from .serializers import ISurveyFullSerializer, SurveySlugSerializer
 from .models import ISurvey
 
 
@@ -25,4 +25,16 @@ class SurveyCreateHeaderView(generics.CreateAPIView):
     """
     serializer_class = ISurveyFullSerializer
     permission_classes = (IsAuthenticated, )
+
+
+class SurveyGetSlugView(generics.RetrieveAPIView):
+    """
+    Передача Slug при GET-запросе для формирования ссылки
+    на прохождение опроса
+    """
+    serializer_class = SurveySlugSerializer
+    permission_classes = (IsOwnerISurvey,)
+    lookup_field = 'pk'
+    queryset = ISurvey.objects.all()
+
 
