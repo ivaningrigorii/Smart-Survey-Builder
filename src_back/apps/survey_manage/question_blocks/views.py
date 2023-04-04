@@ -9,4 +9,15 @@ class QuestionSimpleAddAPIView(generics.CreateAPIView):
         Создание и добавление нового вопроса в опрос
     """
     serializer_class = IQuestionFullSerializer
-    permission_classes = (IsOwnerQuestionInSurvey, )
+    permission_classes = (IsOwnerQuestionInSurvey,)
+
+
+class QuestionSimpleGetDeleteUpdateAPIView(generics.RetrieveUpdateDestroyAPIView):
+    """
+         Просмотр, редактирование, удаление вопроса
+    """
+    serializer_class = IQuestionFullSerializer
+    permission_classes = (IsOwnerQuestionInSurvey,)
+    lookup_field = 'pk'
+    queryset = IQuestion.objects.all()
+

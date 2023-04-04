@@ -4,6 +4,12 @@ from rest_polymorphic.serializers import PolymorphicSerializer
 from apps.survey_manage.question_blocks.models import *
 
 
+class IQuestionShowSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IQuestion
+        fields = '__all__'
+
+
 class QuestionSimpleSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuestionSimple

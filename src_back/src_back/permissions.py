@@ -25,6 +25,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 
 class IsOwnerISurvey(permissions.BasePermission):
     "Доступ только если хозяин объекта"
+
     def has_object_permission(self, request, view, obj):
         try:
             print(obj)
@@ -36,6 +37,14 @@ class IsOwnerISurvey(permissions.BasePermission):
 
 class IsOwnerQuestionInSurvey(permissions.BasePermission):
     "Для вопросов в опросе, которыми user владеет"
+
+    "Для редактирования существующих вопросов"
+
+    def has_object_permission(self, request, view, obj):
+        return bool(obj.survey.user == request.user)
+
+    "Для добавления новых вопросов"
+
     def has_permission(self, request, view):
         survey_id = request.data.get('survey')
         survey = ISurvey.objects.get(pk=survey_id)
