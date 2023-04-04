@@ -13,6 +13,9 @@ This is our team project. The system allows you to collect feedback and analyze 
     модулей на которые python ругается. Или можно просто вручную доустановить, типо:
         pip install "вместо кавычек называние зависимости"
 По опыту людей в команде, почему-то ругается на djangorestframework-simplejwt и djoser
+3)Для src_front:
+npm install @material-ui/core
+npm install @material-ui/icons
 
 
 
