@@ -15,6 +15,8 @@ class IAnswer(PolymorphicModel, models.Model):
     class Meta:
         db_table = 'i_answer'
         base_manager_name = 'non_polymorphic'
+        verbose_name = 'ответ (ianswer)'
+        verbose_name_plural = 'ответы (ianswer)'
 
 
 class IFreeAnswer(IAnswer, PolymorphicModel, models.Model):
@@ -24,6 +26,8 @@ class IFreeAnswer(IAnswer, PolymorphicModel, models.Model):
     class Meta:
         db_table = 'i_answer_free'
         base_manager_name = 'non_polymorphic'
+        verbose_name = 'без варианта ответа'
+        verbose_name_plural = 'без варианта ответа'
 
 # endregion
 
@@ -37,6 +41,8 @@ class AnswerSelectableSimple(IAnswer, PolymorphicModel, models.Model):
 
     class Meta:
         db_table = 'answer_selectable_simple'
+        verbose_name = 'вариант ответа, простой'
+        verbose_name_plural = 'варианты ответа, простые'
 
 
 class AnswerSelectableTest(AnswerSelectableSimple, models.Model):
@@ -45,9 +51,17 @@ class AnswerSelectableTest(AnswerSelectableSimple, models.Model):
 
     class Meta:
         db_table = 'answer_selectable_test'
+        verbose_name = 'вариант ответа, тест'
+        verbose_name_plural = 'варианты ответа, тест'
 
 
 class AnswerTextInput(IFreeAnswer, models.Model):
     """ ответ в виде поля ввода """
+
+    def __str__(self):
+        return f"поле ввода: ____"
+
     class Meta:
         db_table = 'answer_text_input'
+        verbose_name = 'поле ввода текста'
+        verbose_name_plural = 'поля ввода текста'

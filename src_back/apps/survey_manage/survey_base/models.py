@@ -14,10 +14,10 @@ class ISurvey(PolymorphicModel, models.Model):
     """ Условно абстрактный класс. Описывает общую структуру опроса """
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name='Пользователь')
     name = models.CharField(max_length=100, verbose_name='Название опроса')
-    description = models.TextField(max_length=400, verbose_name='Описание опроса', null=True)
+    description = models.TextField(max_length=400, verbose_name='Описание опроса', null=True, blank=True)
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Был создан')
-    slug = models.SlugField(unique=True, max_length=100, null=True)
-    is_published = models.BooleanField(default=False)
+    slug = models.SlugField(unique=True, max_length=100, null=True, blank=True)
+    is_published = models.BooleanField(default=False, verbose_name='Публикация')
 
     def __str__(self):
         return f"{self.name}"
@@ -49,9 +49,9 @@ class SurveySimple(ISurvey, PolymorphicModel, models.Model):
 
 class SurveyTest(ISurvey, PolymorphicModel, models.Model):
     """ Тестовый опрос, может содержать тестовые вопросы, простые вопросы и поля ввода """
-    start_time = models.DateTimeField(verbose_name='Дата открытия теста', null=True)
-    end_time = models.DateTimeField(verbose_name='Дата окончания теста', null=True)
-    time_passing = models.IntegerField(verbose_name='Время прохождения в минутах', null=True)
+    start_time = models.DateTimeField(verbose_name='Дата открытия теста', null=True, blank=True)
+    end_time = models.DateTimeField(verbose_name='Дата окончания теста', null=True, blank=True)
+    time_passing = models.IntegerField(verbose_name='Время прохождения в минутах', null=True, blank=True)
 
     class Meta:
         db_table = 'survey_test'

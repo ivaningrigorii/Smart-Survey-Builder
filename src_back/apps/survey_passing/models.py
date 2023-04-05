@@ -20,6 +20,8 @@ class TakingSurvey(models.Model):
 
     class Meta:
         db_table = 'taking_survey'
+        verbose_name = 'прождение всего опроса'
+        verbose_name_plural = 'прохождения всего опроса'
 
 
 # region ABSTRACT
@@ -31,6 +33,8 @@ class IResultAnswer(PolymorphicModel, models.Model):
 
     class Meta:
         db_table = 'i_result_answer'
+        verbose_name = 'рез. ответ (i_result_answer)'
+        verbose_name_plural = 'рез. ответы (i_result_answer)'
 
 # endregion
 
@@ -39,10 +43,13 @@ class ResultSelect(IResultAnswer, models.Model):
     """ для всех ответов, где требуется выбор, тут answer и есть выбранный ответ """
 
     def __str__(self):
-        return f"ответ: {self.answer}"
+        answer_check_fulltype = IAnswer.objects.get(pk=self.answer.pk)
+        return f"ответ: {answer_check_fulltype.__str__()}"
 
     class Meta:
         db_table = 'result_select'
+        verbose_name = 'выбранный ответ'
+        verbose_name_plural = 'выбранные ответы'
 
 
 class ResultTextInput(IResultAnswer, models.Model):
@@ -54,3 +61,5 @@ class ResultTextInput(IResultAnswer, models.Model):
 
     class Meta:
         db_table = 'result_test_input'
+        verbose_name = 'введённый текст'
+        verbose_name_plural = 'введённые тексты'

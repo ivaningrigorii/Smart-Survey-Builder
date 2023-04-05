@@ -20,7 +20,7 @@ class ModelISurveyAdmin(PolymorphicParentModelAdmin):
     readonly_fields = ('type_survey',)
     child_models = (SurveyTest, SurveySimple)
     list_filter = (PolymorphicChildModelFilter,)
-    list_display = ("id", "name", "user", "type_survey")
+    list_display = ("id", "name", "is_published", "type_survey", "user", )
     list_display_links = ('id', 'name')
 
     def get_queryset(self, request):

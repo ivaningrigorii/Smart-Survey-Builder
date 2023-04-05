@@ -15,6 +15,8 @@ class Profile(models.Model):
 
     class Meta:
         db_table = 'profile'
+        verbose_name = 'дополнительно о пользователе'
+        verbose_name_plural = 'дополнительно о пользователях'
 
 
 @receiver(post_save, sender=User)
