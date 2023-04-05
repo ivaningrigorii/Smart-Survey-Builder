@@ -9,10 +9,8 @@ import React, { Component } from 'react';
 import MainPage from "./pages/MainPage/MainPage";
 import PollsPage from "./pages/PollsPage/PollsPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import EnterPage from "./pages/EnterPage";
+import EnterPage from "./pages/Auth/AuthorizPage";
 
-/*ОБЯЗАТЕЛЬНО СДЕЛАТЬ вызов домена сервера в url где-то в отдельной переменной,
-  чтоб потом по 100 раз не переделывать*/
 class  App  extends  Component {
   render() {
     return (   
@@ -22,7 +20,7 @@ class  App  extends  Component {
           <Route path="/" element={<MainPage/>} /> 
           <Route path="/polls" element={<PollsPage/>} /> 
           <Route path="/profile" element={<ProfilePage/>} /> 
-          <Route path="/enter" element={<EnterPage/>} /> 
+          <Route path="/auth" element={<EnterPage/>} /> 
         </Routes>
       </BrowserRouter>
     );
