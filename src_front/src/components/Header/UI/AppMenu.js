@@ -26,7 +26,7 @@ function AppMenu() {
 
 
   return (
-    <AppBar sx={{ bgcolor: "#171717"}}>
+    <AppBar sx={{ bgcolor: "#171717" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <img src={logoUrl} alt="УКМ" />
@@ -56,7 +56,7 @@ function AppMenu() {
               color="inherit"
             >
               <MenuIcon />
-            </IconButton>           
+            </IconButton>
           </Box>
           <Typography
             variant="h5"
@@ -74,29 +74,29 @@ function AppMenu() {
               textDecoration: 'none',
             }}
           >
-          </Typography>     
+          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Button              
+            <Button
 
-                sx={{ my: 2, color: 'white', display: 'block', marginRight:15, marginLeft:35 }}
-                href="/"                 
-              >
-                Главная
-              </Button>
-              <Button              
+              sx={{ my: 2, color: 'white', display: 'block', marginRight: 15, marginLeft: 35 }}
+              href="/"
+            >
+              Главная
+            </Button>
+            <Button
 
-                sx={{ my: 2, color: 'white', display: 'block', marginRight:15  }}
-                href="/polls"                                                ////ссылка на опросы
-              >
-                Опросы
-              </Button>
-              <Button              
+              sx={{ my: 2, color: 'white', display: 'block', marginRight: 15 }}
+              href="/polls"                                                ////ссылка на опросы
+            >
+              Опросы
+            </Button>
+            <Button
 
-                sx={{ my: 2, color: 'white', display: 'block', marginRight:15  }}
-                href="/profile"                                       ////ссылка на профиль
-              >
-                Профиль
-              </Button>
+              sx={{ my: 2, color: 'white', display: 'block', marginRight: 15 }}
+              href="/profile"                                       ////ссылка на профиль
+            >
+              Профиль
+            </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -104,11 +104,11 @@ function AppMenu() {
               <Button
                 key={enter}
 
-                sx={{ my: 2, color: 'white', backgroundColor: "#a31545", display: 'block'}}
-                variant="contained" href="/enter"                             ////ссылка на вход
+                sx={{ my: 2, color: 'white', backgroundColor: "#a31545", display: 'block' }}
+                variant="contained" href="/auth"                             ////ссылка на вход
               >
                 {enter}
-              </Button>            
+              </Button>
             ))}
           </Box>
 

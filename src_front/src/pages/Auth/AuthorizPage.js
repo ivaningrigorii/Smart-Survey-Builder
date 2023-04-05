@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
-import SearchPolls from "./components/SearchPolls";
-import "./PollsPage.css"
+import Login from "./components/Login"
+
 class PollsPage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            surveys: [],
         };
     }
 
@@ -18,7 +17,7 @@ class PollsPage extends Component {
             // для зарегистрированного пользователя поменять
             <div className="polls-page">
                 <Header />
-                <SearchPolls />
+                <Login />
                 <Footer />
             </div>
         );
