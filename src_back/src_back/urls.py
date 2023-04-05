@@ -10,6 +10,7 @@ urlpatterns = [
     path('api/v1/manage/ans/', include('apps.survey_manage.answer_blocks.urls')),
     path('api/v1/profile/', include('apps.profile_manage.urls')),
     path('api/v1/auth/', include('djoser.urls')),
+    path('accounts/', include('rest_framework.urls')),#только на время разработки!
     path('api/v1/login/', include('djoser.urls.jwt')),
 ]
 
