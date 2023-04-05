@@ -17,6 +17,7 @@ class ISurvey(PolymorphicModel, models.Model):
     description = models.TextField(max_length=400, verbose_name='Описание опроса', null=True)
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Был создан')
     slug = models.SlugField(unique=True, max_length=100, null=True)
+    is_published = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name}"

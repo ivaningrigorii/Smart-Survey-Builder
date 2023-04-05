@@ -1,5 +1,8 @@
 from django.urls import path, re_path
 
-urlpatterns = [
+from apps.survey_manage.question_blocks.views import *
 
+urlpatterns = [
+    path('question/', QuestionAddAPIView.as_view()),
+    path('question/<int:pk>/', QuestionGetDeleteUpdateAPIView.as_view()),
 ]

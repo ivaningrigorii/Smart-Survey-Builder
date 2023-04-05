@@ -40,4 +40,7 @@ class ISurveyFullSerializer(PolymorphicSerializer):
     }
 
 
-
+class SurveySlugSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SurveySimple
+        fields = ("slug",)
