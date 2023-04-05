@@ -32,7 +32,7 @@ class CatCreatedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ISurvey
-        fields = ('id', 'name', 'time_create', 'type_survey', 'slug')
+        fields = ('id', 'name', 'time_create', 'type_survey', 'is_published', 'slug')
 
     def get_type_survey(self, obj):
         return type(obj).__name__
