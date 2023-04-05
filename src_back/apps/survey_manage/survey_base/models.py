@@ -31,6 +31,8 @@ class ISurvey(PolymorphicModel, models.Model):
 
     class Meta:
         db_table = 'i_survey'
+        verbose_name = 'шапка опроса (isurvey)'
+        verbose_name_plural = 'все опросы (isurvey)'
 
 # endregion
 
@@ -40,6 +42,8 @@ class SurveySimple(ISurvey, PolymorphicModel, models.Model):
 
     class Meta:
         db_table = 'survey_simple'
+        verbose_name = 'простой опрос'
+        verbose_name_plural = 'простые опросы'
 
 
 class SurveyTest(ISurvey, PolymorphicModel, models.Model):
@@ -50,3 +54,5 @@ class SurveyTest(ISurvey, PolymorphicModel, models.Model):
 
     class Meta:
         db_table = 'survey_test'
+        verbose_name = 'тестовый опрос'
+        verbose_name_plural = 'тестовые опросы'

@@ -20,6 +20,8 @@ class IQuestion(PolymorphicModel, models.Model):
         return f"{self.text_question}"
 
     class Meta:
+        verbose_name = 'вопрос (iquestion)'
+        verbose_name_plural = 'все вопросы (iquestion)'
         base_manager_name = 'non_polymorphic'
         db_table = 'i_question'
 
@@ -41,10 +43,14 @@ class QuestionSimple(IQuestion, PolymorphicModel, models.Model):
         models.IntegerField(verbose_name='Позиция в списке вопросов', null=True, default=None)
 
     class Meta:
+        verbose_name = 'простой вопрос'
+        verbose_name_plural = 'простые вопросы'
         db_table = 'question_simple'
 
 
 class QuestionTestSimpleEv(ITestQuestion, PolymorphicModel, models.Model):
     """ Тестовый вопрос с простой оценкой: правильно / неправильно """
     class Meta:
+        verbose_name = 'тестовый вопрос с выбором'
+        verbose_name_plural = 'тестовые вопросы с выбором'
         db_table = 'question_test_simple_ev'
