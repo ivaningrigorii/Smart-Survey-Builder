@@ -26,7 +26,7 @@ function AppMenu() {
 
 
   return (
-    <AppBar sx={{ bgcolor: "#171717" }}>
+    <AppBar sx={{ bgcolor: "white" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <img src={logoUrl} alt="УКМ" />
@@ -78,21 +78,21 @@ function AppMenu() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
 
-              sx={{ my: 2, color: 'white', display: 'block', marginRight: 15, marginLeft: 35 }}
+              sx={{ my: 2, color: 'black', display: 'block', marginRight: 15, marginLeft: 35 }}
               href="/"
             >
               Главная
             </Button>
             <Button
 
-              sx={{ my: 2, color: 'white', display: 'block', marginRight: 15 }}
+              sx={{ my: 2, color: 'black', display: 'block', marginRight: 15 }}
               href="/polls"                                                ////ссылка на опросы
             >
               Опросы
             </Button>
             <Button
 
-              sx={{ my: 2, color: 'white', display: 'block', marginRight: 15 }}
+              sx={{ my: 2, color: 'black', display: 'block', marginRight: 15 }}
               href="/profile"                                       ////ссылка на профиль
             >
               Профиль
