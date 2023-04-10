@@ -1,5 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&display=swap');
 
+
+* {
+    margin: 0;/*это свойство можно удалить, если вы используете reset, normalize или нечто подобное*/
+  }
+  
+  html,
+  body {
+    height: 100%;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .content {
+    flex: 1 0 auto;
+  }
+  
+ 
+
 :root {
     --color-neutral-0: #45086d;
     --color-neutral-10: #9783E9;
@@ -19,6 +40,7 @@
 
 
 footer {
+    flex: 0 0 auto;
     width: 100%;
     color: var(--color-neutral-40);
     font-size:smaller;
@@ -30,6 +52,7 @@ footer {
 }
 
 #footer_content {
+    flex: 1 0 auto;
     max-height: min-content;
     background-color: var(--color-neutral-10);
     display: grid;

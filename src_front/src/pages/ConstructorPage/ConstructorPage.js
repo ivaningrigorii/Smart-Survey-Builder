@@ -1,8 +1,7 @@
 import Header from "../../components/Header/Header";
 import  React, { Component } from  'react';
 import Footer from "../../components/Footer/Footer";
-import CreatePoll from "./components/CreatePoll";
-class  CreatePage  extends  Component {
+class  ConsructorPage  extends  Component {
 
     constructor(props) {
         super(props);
@@ -13,16 +12,16 @@ class  CreatePage  extends  Component {
 
     render() {
         return (           
-            <div  className="create-page">
+            <div  className="consructor-page">
                 <Header/>
-                <CreatePoll/>
-                <Footer/>                   
+                {/* <ConstructorPoll/> */}
+                                
             </div>        
             );      
                 
       }
       componentDidMount() {
-        document.title = "Создание опроса";
+        document.title = "Конструктор опроса";
       }
     }
-    export  default  CreatePage;
+    export  default  ConsructorPage;

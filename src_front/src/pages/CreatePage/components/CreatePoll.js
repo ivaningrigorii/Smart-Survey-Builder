@@ -3,9 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Box from '@mui/material/Box';
 import ChangeTypeOfPoll from './ChangeTypeOfPoll';
-import Button from '@material-ui/core/Button';
-
-
+import CreatePollButton from './CreatePollButton';
 export default function CreatePoll ()  {
 
   
@@ -60,7 +58,7 @@ export default function CreatePoll ()  {
       <TextField
           id="name"
           label="Название"
-          style={{ margin: 8 }}
+          style={{ margin: 20 }}
           helperText="Введите название опроса"
           fullWidth
           margin="normal"
@@ -72,7 +70,7 @@ export default function CreatePoll ()  {
          <TextField
           id="description"
           label="Описание"
-          style={{ margin: 8 }}
+          style={{ margin: 20 }}
           helperText="Введите краткое описание"
           fullWidth
           margin="normal"
@@ -82,10 +80,13 @@ export default function CreatePoll ()  {
           variant="outlined"
         />     
        < ChangeTypeOfPoll/>  
-             
-      <Button type="submit" variant="contained" color="secondary" href="/createPoll" >
-  Создать опрос
-</Button>        
+       <Box sx={{ marginTop:10, flexGrow: 1}}>
+    
+    </Box>               
+       <CreatePollButton/>   
+      </Box>     
+      <Box sx={{ marginTop:10, flexGrow: 1}}>
+    
       </Box>     
       </form>    
     </div>

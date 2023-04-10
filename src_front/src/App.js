@@ -11,6 +11,7 @@ import PollsPage from "./pages/PollsPage/PollsPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import EnterPage from "./pages/Auth/AuthorizPage";
 import CreatePage from "./pages/CreatePage/CreatePage";
+import ConstructorPage from "./pages/ConstructorPage/ConstructorPage";
 class  App  extends  Component {
   render() {
     return (   
@@ -22,6 +23,8 @@ class  App  extends  Component {
           <Route path="/profile" element={<ProfilePage/>} /> 
           <Route path="/createPoll" element={<CreatePage/>} /> 
           <Route path="/auth" element={<EnterPage/>} /> 
+          <Route path="/constructorPoll" element={<ConstructorPage/>} /> 
+          
         </Routes>
       </BrowserRouter>
     );

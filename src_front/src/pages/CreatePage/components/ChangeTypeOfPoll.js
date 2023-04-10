@@ -38,15 +38,20 @@ export default function ChangeTypeOfPoll() {
         onChange={handleSelectChange}
         label="Тип опроса"
         helperText="Выберите тип опроса"
+        sx={{ m: 1, minWidth: 130 }}
       >
         <MenuItem value="SurveySimple">Простой</MenuItem>
         <MenuItem value="SurveyTest">Тестовый</MenuItem>
       </Select>
       {showTimeFields && (
         <div>
-          <TextField  type="datetime-local" id="start_time"/>
-          <TextField  type="datetime-local" id="end_time" />
-          <TextField  type="number" id="time_passing"/>
+          <TextField  type="datetime-local" id="start_time" sx={{ m: 1, minWidth: 120 }}
+           helperText="Введите дату открытия опроса"/>
+          <TextField  type="datetime-local" id="end_time" sx={{ m: 1, minWidth: 120 }}ы
+           helperText="Введите дату закрытия опроса"/>
+          <TextField  type="number" id="time_passing" sx={{ m: 1, minWidth: 120 }}
+          label="Время прохождения"
+          helperText="Введите длительность прохождения"/>
         </div>
       )}
       </FormControl>
