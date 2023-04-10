@@ -9,16 +9,13 @@ const styles = {
     height: '5vh'
   }
 };
-
 function CreatePollButton() {
   return (
-    <div style={styles.center}>
-      <Button  sx={{ my: 2, color: 'white', backgroundColor: "#a31545", display: 'block' }} variant="contained" href="/createPoll" >
+    <div style={styles.center}>      
+      <Button  sx={{ my: 2,  display: 'block' }} color="secondary" variant="contained" href="/createPoll" >
         Создать опрос
       </Button>
-    
     </div>
   );
 }
-
 export default CreatePollButton;
