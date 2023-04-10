@@ -62,7 +62,7 @@ export default function SearchPolls() {
           <GridPoll/>
            <Button 
              sx={{ my: 2, color: 'white', backgroundColor: "#a31545",  textAlign:"center", marginTop:5,display: 'block'}}
-             variant="contained" href="/enter"                                                ////ссылка создать опрос
+             variant="contained" href="/createPoll"                                                ////ссылка создать опрос
            >
             Создать опрос
            </Button>            
