@@ -18,7 +18,11 @@ class  CreatePage  extends  Component {
                 <CreatePoll/>
                 <Footer/>                   
             </div>        
-            );          
+            );      
+                
+      }
+      componentDidMount() {
+        document.title = "Создание опроса";
       }
     }
     export  default  CreatePage;

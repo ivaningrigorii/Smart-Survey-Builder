@@ -3,9 +3,9 @@ import { Select, MenuItem, TextField } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
-import FormHelperText from '@mui/material/FormHelperText';
 
-export default function DateTimeForSurveyTest() {
+
+export default function ChangeTypeOfPoll() {
   const [selectedOption, setSelectedOption] = useState('');
   const [showTimeFields, setShowTimeFields] = useState(false);
 
