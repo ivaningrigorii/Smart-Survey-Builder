@@ -77,7 +77,7 @@ const [description, setDescription] = useState('');
             shrink: true,
           }}
           variant="outlined"
-          onChange={(event) => setName(event.target.value)}
+          // onChange={(event) => setName(event.target.value)}
         />     
          <TextField
           id="description"
@@ -91,7 +91,7 @@ const [description, setDescription] = useState('');
             shrink: true,
           }}
           variant="outlined"
-          onChange={(event) => setDescription(event.target.value)}
+          // onChange={(event) => setDescription(event.target.value)}
         />              
       <Button type="submit" variant="contained" color="secondary" href="/createPoll" >
   Создать опрос
