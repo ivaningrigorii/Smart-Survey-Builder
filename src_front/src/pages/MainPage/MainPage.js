@@ -2,6 +2,7 @@ import Header from "../../components/Header/Header";
 import  React, { Component } from  'react';
 import Footer from "../../components/Footer/Footer";
 import MainPageInf from "./components/MainPageInf/MainPageInf";
+import { Helmet } from 'react-helmet-async';
 
 class  MainPage  extends  Component {
 
@@ -13,8 +14,13 @@ class  MainPage  extends  Component {
     }
 
     render() {
-        return (           
+        return (    
+                   
             <div  className="main-page">
+<Helmet>
+<link id="favicon" rel="icon" href="label.bmp" type="bmp"/>
+</Helmet>
+
                 <Header/>
                 <MainPageInf/>
                 <Footer/>                   
