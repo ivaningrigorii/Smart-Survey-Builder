@@ -9,7 +9,7 @@ class  OurTestList  extends  Component {
             surveys: [],
         };
     }
-//вот так жёстко url не хранить!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
     componentDidMount=() => {
         axios.get('http://localhost:8000/api/v1/passing/list_surveys/')
             .then(res => {
@@ -18,7 +18,6 @@ class  OurTestList  extends  Component {
       });
     }
     
-    //лучше такие штуки вообще вынести в отдельный файл, DRY
     types_map = {
         "SurveySimple": "Простой опрос",
         "SurveyTest": "Тестирование"
