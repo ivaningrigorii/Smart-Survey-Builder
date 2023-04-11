@@ -1,7 +1,7 @@
 import {
-    BrowserRouter,
-    Routes,
-    Route,
+  BrowserRouter,
+  Routes,
+  Route,
 } from "react-router-dom";
 
 import OurTestList from "./OurTestList";
@@ -12,23 +12,26 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import EnterPage from "./pages/Auth/AuthorizPage";
 import CreatePage from "./pages/CreatePage/CreatePage";
 import ConstructorPage from "./pages/ConstructorPage/ConstructorPage";
-class  App  extends  Component {
+import Passing from "./pages/PollsPassing/Passing";
+
+
+class App extends Component {
   render() {
-    return (   
+    return (
       <BrowserRouter>
         <Routes>
-          <Route path="/TestServer" element={<OurTestList />} /> 
-          <Route path="/" element={<MainPage/>} /> 
-          <Route path="/polls" element={<PollsPage/>} /> 
-          <Route path="/profile" element={<ProfilePage/>} /> 
-          <Route path="/createPoll" element={<CreatePage/>} /> 
-          <Route path="/auth" element={<EnterPage/>} /> 
-          <Route path="/constructorPoll" element={<ConstructorPage/>} /> 
-          
+          <Route path="/TestServer" element={<OurTestList />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/polls" element={<PollsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/createPoll" element={<CreatePage />} />
+          <Route path="/auth" element={<EnterPage />} />
+          <Route path="/constructorPoll" element={<ConstructorPage />} />
+          <Route path="/polls/:slug" element={<Passing />} />
         </Routes>
       </BrowserRouter>
     );
 
   }
-  }
-  export  default  App;
+}
+export default App;
