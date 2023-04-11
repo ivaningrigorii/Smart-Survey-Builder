@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Box from '@mui/material/Box';
@@ -22,39 +22,12 @@ export default function CreatePoll ()  {
   }));
 
   const classes = useStyles();
-
-// const [name, setName] = useState('');
-// const [description, setDescription] = useState('');
-// const [resourcetype, setResourcetype] = useState('');
-
-
-
-// const handleSubmit = (event) => {
-// event.preventDefault();
-// setResourcetype("SurveySimple");
-// sendData(name, description, resourcetype);
-// };
-
-  // const sendData = (name, description, resourcetype) => {
-  //   fetch('/api/my-endpoint', {
-  //     method: 'POST',
-  //     body: JSON.stringify({ name, description, resourcetype}),
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => console.log(data))
-  //     .catch(error => console.error(error));
-  // };
-
-
-
-    
+ 
      return (
     <div className={classes.root}>
       <form>
-      <Box sx={{ marginTop:10, flexGrow: 1}}>
+      <Box sx={{ marginTop:10, flexGrow: 1,  width: '95%',
+        maxWidth: '100%'}}>
       <TextField
           id="name"
           label="Название"
@@ -67,6 +40,7 @@ export default function CreatePoll ()  {
           }}
           variant="outlined"
         />     
+     <div>        
          <TextField
           id="description"
           label="Описание"
@@ -78,16 +52,16 @@ export default function CreatePoll ()  {
             shrink: true,
           }}
           variant="outlined"
-        />     
+        />   
+         </div> 
+         </Box>    
        < ChangeTypeOfPoll/>  
-       <Box sx={{ marginTop:10, flexGrow: 1}}>
-    
-    </Box>               
+       <div>
+        
+        </div> 
        <CreatePollButton/>   
-      </Box>     
-      <Box sx={{ marginTop:10, flexGrow: 1}}>
-    
-      </Box>     
+      
+      
       </form>    
     </div>
   );

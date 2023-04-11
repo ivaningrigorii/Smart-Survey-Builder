@@ -6,13 +6,15 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '5vh'
+    height: '5vh',
+    marginTop: '6%',
+    marginBottom:'6%',
   }
 };
 function CreatePollButton() {
   return (
-    <div style={styles.center}>      
-      <Button  sx={{ my: 2,  display: 'block' }} color="secondary" variant="contained" href="/constructorPoll" >
+    <div style={styles.center}>    
+      <Button  sx={{ my: 2,  display: 'block'}} color="secondary" variant="contained" href="/constructorPoll" >
         Создать опрос
       </Button>
     </div>
