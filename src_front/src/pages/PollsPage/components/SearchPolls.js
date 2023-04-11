@@ -3,8 +3,9 @@ import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import Button from '@mui/material/Button';
 import GridPoll from './GridPoll';
+import CreatePollButton from './CreatePollButton';
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -60,12 +61,7 @@ export default function SearchPolls() {
             />           
           </Search>
           <GridPoll/>
-           <Button 
-             sx={{ my: 2, color: 'white', backgroundColor: "#a31545",  textAlign:"center", marginTop:5,display: 'block'}}
-             variant="contained" href="/enter"                                                ////ссылка создать опрос
-           >
-            Создать опрос
-           </Button>            
+          <CreatePollButton/>
     </Box>
   );
 }

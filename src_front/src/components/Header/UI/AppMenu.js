@@ -8,14 +8,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import logoUrl from '../images/label.svg';
-
-
-
+import './style.css';
 
 const enters = ['Войти'];
-
-
-
 function AppMenu() {
   const [setAnchorElNav] = React.useState(null);
 
@@ -26,10 +21,12 @@ function AppMenu() {
 
 
   return (
-    <AppBar sx={{ bgcolor: "#171717" }}>
+    <AppBar sx={{ bgcolor: "white" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          <div className='ImageLogo'>
           <img src={logoUrl} alt="УКМ" />
+          </div>        
           <Typography
             variant="h6"
             noWrap
@@ -75,31 +72,29 @@ function AppMenu() {
             }}
           >
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ justifyContent: 'space-between',flexWrap: 'wrap', flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
             <Button
 
-              sx={{ my: 2, color: 'white', display: 'block', marginRight: 15, marginLeft: 35 }}
+              sx={{ my: 2, color: 'black', display: 'block'}}
               href="/"
             >
               Главная
             </Button>
             <Button
 
-              sx={{ my: 2, color: 'white', display: 'block', marginRight: 15 }}
+              sx={{ my: 2, color: 'black', display: 'block'}}
               href="/polls"                                                ////ссылка на опросы
             >
               Опросы
             </Button>
             <Button
 
-              sx={{ my: 2, color: 'white', display: 'block', marginRight: 15 }}
+              sx={{ my: 2, color: 'black', display: 'block'}}
               href="/profile"                                       ////ссылка на профиль
             >
               Профиль
-            </Button>
-          </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+            </Button>
             {enters.map((enter) => (
               <Button
                 key={enter}
@@ -115,7 +110,10 @@ function AppMenu() {
         </Toolbar>
       </Container>
     </AppBar>
+   
   );
+
+
 }
 export default AppMenu;
 

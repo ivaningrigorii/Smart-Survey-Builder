@@ -16,7 +16,10 @@ This is our team project. The system allows you to collect feedback and analyze 
 3)Для src_front:
 npm install @material-ui/core
 npm install @material-ui/icons
+npm install --save react-helmet
+npm install react-helmet-async
 Если проблемы с зависимостями тут, попробуйте (удалить билиотеки и ) сделать: npm install --force
+
 
 
 

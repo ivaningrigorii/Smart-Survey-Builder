@@ -19,5 +19,8 @@ class  ProfilePage  extends  Component {
             );
             
       }
+      componentDidMount() {
+        document.title = "Профиль";
+      }
     }
     export  default   ProfilePage;

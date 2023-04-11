@@ -4,6 +4,7 @@ import logoPen from '../../images/pen.jpg';
 import logoQuestion from '../../images/question.png';
 import logoAnalze from '../../images/analize.png';
 import './MainPageInf.css';
+import CreatePollButton from './CreatePollButton';
 class MainPageInf extends Component {
 
   constructor(props) {
@@ -18,13 +19,13 @@ class MainPageInf extends Component {
 
       <div className="main-page">
         
-        <div class="main-page-inf">
+        
           <h5>Умный конструктор опросов</h5>
           <div className="main-page-img">
             <img src={logoUrl} alt="УКМ" />
-          </div>
+         
         </div>
-
+        <CreatePollButton/>
         
         <div className="main-page-block">
           <div className="main-page-block-inf">

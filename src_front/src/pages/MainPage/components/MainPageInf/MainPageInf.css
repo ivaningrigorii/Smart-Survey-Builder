@@ -18,9 +18,24 @@ margin-right: auto;
 width: fit-content;
 }
 
+h5
+{
+  font-style: normal;
+font-weight: 500;
+font-size: 42px;
+line-height: 56px;
+color: #502EDD;
+margin-left: auto;
+margin-right: auto;
+width: fit-content;
+margin-bottom: 3%;
+margin-top: 10%;
+}
+
 .main-page-img 
 {
  text-align: center;
+ margin-bottom: 2%;
 }
 
 .down_background_for_picture

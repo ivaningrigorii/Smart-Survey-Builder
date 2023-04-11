@@ -23,5 +23,8 @@ class PollsPage extends Component {
             </div>
         );
     }
+    componentDidMount() {
+        document.title = "Все опросы";
+      }
 }
 export default PollsPage;
