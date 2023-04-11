@@ -19,14 +19,13 @@ class MainPageInf extends Component {
 
       <div className="main-page">
         
-        <div class="main-page-inf">
+        
           <h5>Умный конструктор опросов</h5>
           <div className="main-page-img">
             <img src={logoUrl} alt="УКМ" />
-            <CreatePollButton/>
-          </div>
+         
         </div>
-
+        <CreatePollButton/>
         
         <div className="main-page-block">
           <div className="main-page-block-inf">

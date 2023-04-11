@@ -6,7 +6,8 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '5vh'
+    height: '5vh',
+    marginBottom:'1%'
   }
 };
 function CreatePollButton() {
