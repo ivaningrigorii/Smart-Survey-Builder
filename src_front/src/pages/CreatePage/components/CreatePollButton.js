@@ -11,10 +11,12 @@ const styles = {
     marginBottom:'6%',
   }
 };
+
 function CreatePollButton() {
+
   return (
     <div style={styles.center}>    
-      <Button  sx={{ my: 2,  display: 'block'}} color="secondary" variant="contained" href="/constructorPoll" >
+      <Button sx={{ my: 2,  display: 'block'}} color="secondary" variant="contained" type="submit" >
         Создать опрос
       </Button>
     </div>

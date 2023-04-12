@@ -1,69 +1,45 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Box from '@mui/material/Box';
 import ChangeTypeOfPoll from './ChangeTypeOfPoll';
 import CreatePollButton from './CreatePollButton';
-export default function CreatePoll ()  {
+import Name from './Name';
+import Description from './Description';
 
+function CreatePoll() {
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = {
+      name: event.target.name.value,
+      description: event.target.description.value,
+      // resourcetype: event.target.resourcetype.value,
+      start_time: event.target.start_time.value,
+      end_time: event.target.end_time.value,
+      time_passing: event.target.time_passing.value
+    };
   
-  
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        width: '25ch',
+    fetch('http://localhost:8000/api/v1/manage/surv/survey-header/', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
       }
-  
-  }));
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
+  };
 
-  const classes = useStyles();
- 
-     return (
-    <div className={classes.root}>
-      <form>
-      <Box sx={{ marginTop:10, flexGrow: 1,  width: '95%',
-        maxWidth: '100%'}}>
-      <TextField
-          id="name"
-          label="Название"
-          style={{ margin: 20 }}
-          helperText="Введите название опроса"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-        />     
-     <div>        
-         <TextField
-          id="description"
-          label="Описание"
-          style={{ margin: 20 }}
-          helperText="Введите краткое описание"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-        />   
-         </div> 
-         </Box>    
-       < ChangeTypeOfPoll/>  
-       <div>
-        
-        </div> 
-       <CreatePollButton/>   
-      
-      
-      </form>    
-    </div>
+  
+  return (
+  
+    <form onSubmit={handleSubmit}>
+      <Name/>
+      <Description/>          
+        <ChangeTypeOfPoll/>      
+    <CreatePollButton/>
+  </form>
+  
   );
 }
 
+export default CreatePoll;
