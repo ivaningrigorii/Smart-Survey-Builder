@@ -26,7 +26,7 @@ class MainPageInf extends Component {
          
         </div>
         <CreatePollButton/>
-        
+        <div id="top_heigh"></div>
         <div className="main-page-block">
           <div className="main-page-block-inf">
             Создавай опрос с помощью удобных инструментов
