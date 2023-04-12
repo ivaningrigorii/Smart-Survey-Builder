@@ -3,6 +3,7 @@ import ChangeTypeOfPoll from './ChangeTypeOfPoll';
 import CreatePollButton from './CreatePollButton';
 import Name from './Name';
 import Description from './Description';
+import plus_url_server_api_v1 from './plus_url_server';
 
 function CreatePoll() {
 
@@ -17,7 +18,7 @@ function CreatePoll() {
       time_passing: event.target.time_passing.value
     };
   
-    fetch('http://localhost:8000/api/v1/manage/surv/survey-header/', {
+    fetch(plus_url_server_api_v1("/manage/surv/survey-header/"), {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {

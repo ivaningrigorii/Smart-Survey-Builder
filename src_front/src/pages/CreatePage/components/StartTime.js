@@ -5,7 +5,8 @@ import { TextField } from '@mui/material';
 export default function StartTime() {
 
     const [ start_time, setStartTime] = useState('');
-
+    const today = new Date();
+    today.setDate(today.getDate());
     const handleChange = (event) => {
       setStartTime(event.target.value);
     };
@@ -16,7 +17,7 @@ export default function StartTime() {
            helperText="Введите дату открытия опроса"
            value={start_time}         
            onChange={handleChange}
-           inputProps={{ min: new Date().toISOString().slice(0, 16),ref: (input) => input && input.focus() }}
+           inputProps={{ min: today.toISOString().slice(0, 16),ref: (input) => input && input.focus() }}
            />
   );
 }

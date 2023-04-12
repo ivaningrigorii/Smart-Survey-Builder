@@ -18,7 +18,7 @@ export default function TimePassing() {
           helperText="Введите длительность прохождения"
            value={time_passing}
            onChange={handleChange}
-           inputProps={{ ref: (input) => input && input.focus() }}
+           inputProps={{ min:1, ref: (input) => input && input.focus() }}
            />
   );
 }

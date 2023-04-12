@@ -6,6 +6,8 @@ import { TextField } from '@mui/material';
 export default function DataEnd() {
 
     const [ end_time, setEndTime] = useState('');
+    const today = new Date();
+    today.setDate(today.getDate());
 
     const handleChange = (event) => {
       setEndTime(event.target.value);
@@ -18,7 +20,7 @@ export default function DataEnd() {
           helperText="Введите дату закрытия опроса"
            value={end_time}
            onChange={handleChange}
-           inputProps={{ min: new Date().toISOString().slice(0, 16), ref: (input) => input && input.focus() }}
+           inputProps={{ min: today.toISOString().slice(0, 16), ref: (input) => input && input.focus() }}
            />
   );
 }
