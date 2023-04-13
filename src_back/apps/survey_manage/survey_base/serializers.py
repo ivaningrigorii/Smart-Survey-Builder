@@ -20,7 +20,8 @@ class SurveyTestSerializer(serializers.ModelSerializer):
         fields = (
             "id", "name", "description",
             "time_create", "start_time", "end_time",
-            "time_passing", "slug", "is_published",
+            "time_passing", "slug", "option_is_published",
+            "option_only_for_register_users",
         )
 
 
@@ -29,7 +30,8 @@ class SurveySimpleSerializer(serializers.ModelSerializer):
         model = SurveySimple
         fields = (
             "id", "name", "description",
-            "time_create", "slug", "is_published",
+            "time_create", "slug", "option_is_published",
+            "option_only_for_register_users",
         )
 
 
