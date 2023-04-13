@@ -99,7 +99,7 @@ export default function ControllableStates() {
         }}
         id="resourcetype"
         options={options}
-        sx={{ width: 300 }}
+        sx={{ m: 1, width: 300 }}
         renderInput={(params) => <TextField {...params}  label="Тип вопроса" /> }
 
       />
