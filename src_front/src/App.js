@@ -4,7 +4,6 @@ import {
   Route,
 } from "react-router-dom";
 
-import OurTestList from "./OurTestList";
 import React, { Component } from 'react';
 import MainPage from "./pages/MainPage/MainPage";
 import PollsPage from "./pages/PollsPage/PollsPage";
@@ -20,7 +19,6 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/TestServer" element={<OurTestList />} />
           <Route path="/" element={<MainPage />} />
           <Route path="/polls" element={<PollsPage />} />
           <Route path="/profile" element={<ProfilePage />} />

@@ -15,30 +15,30 @@ class Footer extends Component {
                                            
                         </div>
          
-                        <ul class="footer-list">
+                        <ul className="footer-list">
                             <li>
                                 <h3>Разделы</h3>
                             </li>
                             <li>
-                                <a href="#" class="footer-link">УКМ</a>
+                                <a href="#" className="footer-link">УКМ</a>
                             </li>
                             <li>
-                                <a href="#" class="footer-link">Цены</a>
+                                <a href="#" className="footer-link">Цены</a>
                             </li>
                             <li>
-                                <a href="#" class="footer-link">Партнерская программа</a>
+                                <a href="#" className="footer-link">Партнерская программа</a>
                             </li>
                         </ul>    
 
-                        <ul class="footer-list">
+                        <ul className="footer-list">
                             <li>
                                 <h3>Поддержка</h3>
                             </li>
                             <li>
-                                <a href="#" class="footer-link">Связаться с нами</a>
+                                <a href="#" className="footer-link">Связаться с нами</a>
                             </li>
                             <li>
-                                <a href="#" class="footer-link">О команде</a>
+                                <a href="#" className="footer-link">О команде</a>
                             </li>
                         </ul>
                   
