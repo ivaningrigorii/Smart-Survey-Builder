@@ -5,9 +5,12 @@ import { TextField } from '@mui/material';
 
 export default function DataEnd() {
 
-    const [ end_time, setEndTime] = useState('');
-    const today = new Date();
+  const today = new Date();
     today.setDate(today.getDate());
+    const dayToEnd = new Date();
+    dayToEnd.setDate(dayToEnd.getDate()+1);
+    const [ end_time, setEndTime] = useState(dayToEnd.toISOString().slice(0, 16));
+    
 
     const handleChange = (event) => {
       setEndTime(event.target.value);

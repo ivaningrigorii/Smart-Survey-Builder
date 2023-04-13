@@ -3,10 +3,9 @@ import { TextField } from '@mui/material';
 
 
 export default function StartTime() {
-
-    const [ start_time, setStartTime] = useState('');
-    const today = new Date();
+  const today = new Date();
     today.setDate(today.getDate());
+    const [ start_time, setStartTime] = useState(today.toISOString().slice(0, 16)); 
     const handleChange = (event) => {
       setStartTime(event.target.value);
     };
