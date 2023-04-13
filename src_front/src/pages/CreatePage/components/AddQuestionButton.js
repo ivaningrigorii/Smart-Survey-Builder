@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { Link as RouterLink } from 'react-router-dom';
 
 const styles = {
   center: {
@@ -14,7 +13,7 @@ const styles = {
 };
 
 
-function CreatePollButton() {
+function AddQuestionButton() {
 
   return (
     <div style={styles.center}>    
@@ -22,12 +21,11 @@ function CreatePollButton() {
       color="secondary" 
       variant="contained" 
       type="submit"  
-      component={RouterLink} to="/constructorPoll"
       >
-        Создать опрос
+        Добавить вопрос
       </Button>
 
     </div>
   );
 }
-export default CreatePollButton;
+export default AddQuestionButton;

@@ -4,8 +4,8 @@ import CreatePollButton from './CreatePollButton';
 import Name from './Name';
 import Description from './Description';
 import plus_url_server_api_v1 from './plus_url_server';
-
 function CreatePoll() {
+
 
   const DeterminePollTypeFromAutocomplete = function(res) {
    if(res==='Обычный опрос')
@@ -49,8 +49,8 @@ function CreatePoll() {
     <form onSubmit={handleSubmit}>
       <Name/>
       <Description/>          
-        <ChangeTypeOfPoll/>      
-    <CreatePollButton/>
+      <ChangeTypeOfPoll/>      
+    <CreatePollButton/> 
   </form>
   
   );

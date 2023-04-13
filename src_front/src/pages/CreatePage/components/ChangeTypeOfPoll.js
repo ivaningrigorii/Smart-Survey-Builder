@@ -11,8 +11,8 @@ import { useState } from 'react';
 const options = ['Обычный опрос', 'Тестовый опрос'];
 
 export default function ControllableStates() {
-  const [resourcetype, setValue] = React.useState(options[0]);
-  const [inputValue, setInputValue] = React.useState('');
+  const [resourcetype, setValue] = useState(options[0]);
+  const [inputValue, setInputValue] = useState('');
   const [showTimeFields, setShowTimeFields] = useState(false);
 
   return (
