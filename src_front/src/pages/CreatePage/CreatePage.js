@@ -2,6 +2,7 @@ import Header from "../../components/Header/Header";
 import  React, { Component } from  'react';
 import Footer from "../../components/Footer/Footer";
 import CreatePoll from "./components/CreatePoll";
+
 class  CreatePage  extends  Component {
 
     constructor(props) {
@@ -16,7 +17,7 @@ class  CreatePage  extends  Component {
             <div  className="create-page">
                 <Header/>
                 <CreatePoll/>
-                <Footer/>                   
+                <Footer />               
             </div>        
             );      
                 
@@ -26,3 +27,5 @@ class  CreatePage  extends  Component {
       }
     }
     export  default  CreatePage;
+
+

@@ -7,6 +7,13 @@ class AuthServices {
 
     constructor() { }
 
+    findAuthTokens() {
+        if (cookies.get('tokens')) {
+            return true;
+        }
+        return false;
+    }
+
     //save jwt
     saveToken(tokens_from) {
         cookies.remove('tokens');
@@ -21,6 +28,24 @@ class AuthServices {
             sameSite: "none",
             path: '/',
         });
+    }
+
+    //delete jwt from cookie
+    deleteToken() {
+        try {
+            cookies.remove('tokens', {
+                secure: true,
+                sameSite: "none",
+                path: '/',
+            });
+            cookies.remove('tt', {
+                secure: true,
+            sameSite: "none",
+            path: '/',
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     // login

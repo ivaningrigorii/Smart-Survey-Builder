@@ -5,6 +5,9 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import GridPoll from './GridPoll';
 import CreatePollButton from './CreatePollButton';
+import PollsServices from '../PollsServices';
+import { Pagination } from '@mui/material';
+const pollsServices = new PollsServices();
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -46,22 +49,27 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
+
 export default function SearchPolls() {
+  const [data_request, setData] = React.useState();
+
 
   return (
-    <Box sx={{ marginTop:10, flexGrow: 1 }}>
-         
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Найти..."
-              inputProps={{ 'aria-label': 'search' }}
-            />           
-          </Search>
-          <GridPoll/>
-          <CreatePollButton/>
+    <Box sx={{ marginTop: 10, flexGrow: 1 }}>
+
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Найти..."
+          inputProps={{ 'aria-label': 'search' }}
+        />
+      </Search>
+      <GridPoll />
+      <Pagination count={11} defaultPage={6} size="medium" color="secondary"/>
+      <CreatePollButton />
     </Box>
   );
 }

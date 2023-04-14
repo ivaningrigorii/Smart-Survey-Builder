@@ -3,9 +3,14 @@ from rest_framework import generics
 from apps.profile_manage.serializers import *
 from apps.survey_manage.survey_base.models import ISurvey
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.pagination import PageNumberPagination
 
 from src_back.permissions import IsOwnerISurvey
 
+class ResultsSetPaginationSyrveys(PageNumberPagination):
+    page_size = 4
+    page_size_query_param = 'page_size'
+    max_page_size = 4
 
 class ProfileOwner(generics.RetrieveUpdateAPIView):
     """
@@ -37,6 +42,7 @@ class ShowCreatedSurveys(generics.ListAPIView):
     """
     serializer_class = CatCreatedSerializer
     permission_classes = (IsAuthenticated,)
+    pagination_class = ResultsSetPaginationSyrveys
 
     def get_queryset(self):
         user = self.request.user

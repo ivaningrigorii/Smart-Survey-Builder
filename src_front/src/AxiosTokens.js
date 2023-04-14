@@ -22,7 +22,9 @@ export default function _token() {
     }
     
     if (Date.now() - time_update_tokens > time_life_access_token) {
-        if (Date.now() - time_update_tokens > time_life_refresh_token){
+        if (Date.now() - time_update_tokens > time_life_refresh_token) {
+            cookies.remove('tokens');
+            cookies.remove('tt');
             return window.location.replace(login_url);
         }
         try {
