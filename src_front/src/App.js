@@ -1,8 +1,4 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, } from "react-router-dom";
 
 import React, { Component } from 'react';
 import MainPage from "./pages/MainPage/MainPage";
@@ -20,12 +16,12 @@ class App extends Component {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/polls" element={<PollsPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/createPoll" element={<CreatePage />} />
-          <Route path="/auth" element={<EnterPage />} />
-          <Route path="/constructorPoll" element={<ConstructorPage />} />
-          <Route path="/polls/:slug" element={<Passing />} />
+          <Route path="/polls/" element={<PollsPage />} />
+          <Route path="/profile/" element={<ProfilePage />} />
+          <Route path="/polls/create/" element={<CreatePage />} />
+          <Route path="/auth/login/" element={<EnterPage />} />
+          <Route path="/polls/constructor/" element={<ConstructorPage />} />
+          <Route path="/polls/:slug/" element={<Passing />} />
         </Routes>
       </BrowserRouter>
     );

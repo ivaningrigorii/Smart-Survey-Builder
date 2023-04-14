@@ -14,7 +14,7 @@ const styles = {
 function CreatePollButton() {
   return (
     <div style={styles.center}>      
-      <Button  sx={{ my: 2,  display: 'block' }} color="secondary" variant="contained" href="/createPoll" >
+      <Button  sx={{ my: 2,  display: 'block' }} color="secondary" variant="contained" href="/polls/create/" >
         Создать опрос
       </Button>
     </div>

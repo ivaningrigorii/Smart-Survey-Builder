@@ -17,7 +17,7 @@ const Login = () => {
     } else {
       aths.getTokenData(login_data.username, login_data.password).then((result)=>{
         if (result.name=="resolve") {
-          window.location.replace('/');
+          window.location.replace('/profile/');
         } else {
           alert('Ошибка входа! \nПроверьте логин и пароль!');
         }

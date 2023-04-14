@@ -8,23 +8,9 @@ import _token from '../../AxiosTokens';
 const Passing = () => {
     const {slug} = useParams();
     console.log(slug);
-    axios.get("api/v1/profile/me/", {
-        headers: {
-            'Authorization': `Bearer ${_token()}`
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        return Promise.resolve();
-    })
-    .catch(function (error) {
-        return Promise.reject();
-    });
     
     return (
         <div></div>
     );
-
-    
 }
 export default Passing;
