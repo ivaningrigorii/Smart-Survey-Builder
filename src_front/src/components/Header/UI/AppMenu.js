@@ -83,14 +83,14 @@ function AppMenu() {
             <Button
 
               sx={{ my: 2, color: 'black', display: 'block'}}
-              href="/polls"                                                ////ссылка на опросы
+              href="/polls/"                                                ////ссылка на опросы
             >
               Опросы
             </Button>
             <Button
 
               sx={{ my: 2, color: 'black', display: 'block'}}
-              href="/profile"                                       ////ссылка на профиль
+              href="/profile/"                                       ////ссылка на профиль
             >
               Профиль
 
@@ -100,7 +100,7 @@ function AppMenu() {
                 key={enter}
 
                 sx={{ my: 2, color: 'white', backgroundColor: "#a31545", display: 'block' }}
-                variant="contained" href="/auth"                             ////ссылка на вход
+                variant="contained" href="/auth/login/"                             ////ссылка на вход
               >
                 {enter}
               </Button>
