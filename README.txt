@@ -18,6 +18,7 @@ npm install @material-ui/core
 npm install @material-ui/icons
 npm install --save react-helmet
 npm install react-helmet-async
+добавлял ещё библиотечки, через npm install --force должны добавиться.
 Если проблемы с зависимостями тут, попробуйте (удалить билиотеки и ) сделать: npm install --force
 
 
