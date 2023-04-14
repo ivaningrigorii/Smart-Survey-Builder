@@ -11,13 +11,21 @@ const styles = {
     marginBottom:'6%',
   }
 };
-function CreatePollButton() {
+
+
+function AddQuestionButton() {
+
   return (
     <div style={styles.center}>    
-      <Button  sx={{ my: 2,  display: 'block'}} color="secondary" variant="contained" href="/polls/constructor/" >
-        Создать опрос
+      <Button sx={{ my: 2,  display: 'block'}} 
+      color="secondary" 
+      variant="contained" 
+      type="submit"  
+      >
+        Добавить вопрос
       </Button>
+
     </div>
   );
 }
-export default CreatePollButton;
+export default AddQuestionButton;

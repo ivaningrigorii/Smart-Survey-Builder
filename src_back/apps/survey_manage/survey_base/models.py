@@ -16,8 +16,11 @@ class ISurvey(PolymorphicModel, models.Model):
     name = models.CharField(max_length=100, verbose_name='Название опроса')
     description = models.TextField(max_length=400, verbose_name='Описание опроса', null=True, blank=True)
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Был создан')
-    slug = models.SlugField(unique=True, max_length=100, null=True, blank=True)
-    is_published = models.BooleanField(default=False, verbose_name='Публикация')
+    slug = models.SlugField(unique=True, max_length=108, null=True, blank=True)
+
+    option_is_published = models.BooleanField(default=False, verbose_name='Публикация', blank=True)
+    option_only_for_register_users = \
+        models.BooleanField(default=False, verbose_name="Необходимость авторизации", blank=True)
 
     def __str__(self):
         return f"{self.name}"

@@ -1,10 +1,5 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, } from "react-router-dom";
 
-import OurTestList from "./OurTestList";
 import React, { Component } from 'react';
 import MainPage from "./pages/MainPage/MainPage";
 import PollsPage from "./pages/PollsPage/PollsPage";
@@ -13,6 +8,7 @@ import EnterPage from "./pages/Auth/AuthorizPage";
 import CreatePage from "./pages/CreatePage/CreatePage";
 import ConstructorPage from "./pages/ConstructorPage/ConstructorPage";
 import Passing from "./pages/PollsPassing/Passing";
+import LogoutWithotPage from "./pages/Auth/LogoutWithotPage";
 
 
 class App extends Component {
@@ -20,14 +16,19 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/TestServer" element={<OurTestList />} />
           <Route path="/" element={<MainPage />} />
-          <Route path="/polls" element={<PollsPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/createPoll" element={<CreatePage />} />
-          <Route path="/auth" element={<EnterPage />} />
-          <Route path="/constructorPoll" element={<ConstructorPage />} />
-          <Route path="/polls/:slug" element={<Passing />} />
+
+          <Route path="/profile/" element={<ProfilePage />} />
+          <Route path="/auth/login/" element={<EnterPage />} />
+          <Route path="/auth/logout/" element={<LogoutWithotPage/>}/>
+
+
+          <Route path="/polls/" element={<PollsPage />} />
+
+          <Route path="/polls/create/" element={<CreatePage />} />
+          <Route path="/polls/constructor/" element={<ConstructorPage />} />
+
+          <Route path="/polls/:slug/" element={<Passing />} />
         </Routes>
       </BrowserRouter>
     );

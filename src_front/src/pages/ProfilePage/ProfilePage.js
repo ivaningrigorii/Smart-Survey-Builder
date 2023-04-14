@@ -1,26 +1,29 @@
-import  React, { Component } from  'react';
+import Header from "../../components/Header/Header";
+import React, { Component } from 'react';
+import Footer from "../../components/Footer/Footer";
+import ProfileShow from "./components/ProfileShow";
 
-class  ProfilePage  extends  Component {
+class ProfilePage extends Component {
 
     constructor(props) {
         super(props);
-        this.state  = {
+        this.state = {
             surveys: [],
         };
     }
 
-
     render() {
         return (
-            
-            <div  className="front--test">
-                <h3>Страница профиля</h3>
+            <div>
+                <Header />
+                <ProfileShow />
+                <Footer />
             </div>
-            );
-            
-      }
-      componentDidMount() {
-        document.title = "Профиль";
-      }
+        );
+
     }
-    export  default   ProfilePage;
+    componentDidMount() {
+        document.title = "Профиль";
+    }
+}
+export default ProfilePage;

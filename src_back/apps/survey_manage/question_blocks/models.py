@@ -15,6 +15,8 @@ class IQuestion(PolymorphicModel, models.Model):
     non_polymorphic = models.Manager()
     one_answer_with_a_choice \
         = models.BooleanField(default=True, null=True, verbose_name='Выбор только 1 ответа')
+    option_required_for_pass = models.BooleanField(default=False, verbose_name="Необходим при прохождении",
+                                                   blank=True)
 
     def __str__(self):
         return f"{self.text_question}"

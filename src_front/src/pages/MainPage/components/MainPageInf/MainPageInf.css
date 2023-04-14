@@ -29,7 +29,7 @@ margin-left: auto;
 margin-right: auto;
 width: fit-content;
 margin-bottom: 3%;
-margin-top: 10%;
+margin-top: 15%;
 }
 
 .main-page-img 
@@ -55,6 +55,10 @@ width: 700px;
 height: 109px;
 background: #a998ed;
 box-shadow: 0 0 16px 16px white inset;
+}
+
+#top_heigh {
+   margin-top: 10%;
 }
 
 .main-page-block-inf
