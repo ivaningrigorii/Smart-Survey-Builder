@@ -5,11 +5,11 @@ import React, { Component } from 'react';
 import MainPage from "./pages/other/MainPage/MainPage";
 import PollsPage from "./pages/polls_/catalogs/Own/PollsPage";
 import ProfilePage from "./pages/personal/ProfilePage/ProfilePage";
-import EnterPage from "./pages/personal/Auth/AuthorizPage";
+import EnterPage from "./pages/personal/Auth/Authorization/AuthorizPage";
 import CreatePage from "./pages/polls_/constructor/Create/CreatePage";
 import ConstructorPage from "./pages/polls_/constructor/Main/ConstructorPage";
 import StartPassing from "./pages/polls_/passing/StartPage/Passing";
-import LogoutWithotPage from "./pages/personal/Auth/LogoutWithotPage";
+import LogoutWithotPage from "./pages/personal/Auth/LogOut/LogoutWithotPage";
 import routes from './routes.js'
 
 
