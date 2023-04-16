@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import logoUrl from '../../images/label.svg';
-import logoPen from '../../images/pen.jpg';
-import logoQuestion from '../../images/question.png';
-import logoAnalze from '../../images/analize.png';
+
+import logoUrl from '../images/label.svg';
+import logoPen from '../images/pen.jpg';
+import logoQuestion from '../images/question.png';
+import logoAnalze from '../images/analize.png';
 import './MainPageInf.css';
 import CreatePollButton from './CreatePollButton';
 class MainPageInf extends Component {

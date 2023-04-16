@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
-import TimePassing from './custom_elements/TimePassing';
-import StartTime from './custom_elements/StartTime';
-import EndTime from './custom_elements/EndTime';
+import TimePassing from './custom_mui/TimePassing';
+import StartTime from './custom_mui//StartTime';
+import EndTime from './custom_mui/EndTime';
 import { Grid, Container } from '@mui/material';
 
 const SSimple = ({ data, setData }) => {
