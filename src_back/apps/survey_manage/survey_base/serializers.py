@@ -21,7 +21,7 @@ class SurveyTestSerializer(serializers.ModelSerializer):
             "id", "name", "description",
             "time_create", "start_time", "end_time",
             "time_passing", "slug", "option_is_published",
-            "option_only_for_register_users",
+            "option_only_for_register_users", "user",
         )
 
 
@@ -31,7 +31,7 @@ class SurveySimpleSerializer(serializers.ModelSerializer):
         fields = (
             "id", "name", "description",
             "time_create", "slug", "option_is_published",
-            "option_only_for_register_users",
+            "option_only_for_register_users", "user",
         )
 
 

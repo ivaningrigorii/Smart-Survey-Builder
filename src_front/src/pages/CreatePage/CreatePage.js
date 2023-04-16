@@ -1,31 +1,26 @@
 import Header from "../../components/Header/Header";
-import  React, { Component } from  'react';
+import React, { Component, useEffect } from 'react';
 import Footer from "../../components/Footer/Footer";
-import CreatePoll from "./components/CreatePoll";
+import CreateSelecter from "./components/CreateSelecter";
+import AuthServices from "../Auth/AuthServices";
+import routes from "../../routes";
+const auths = new AuthServices();
 
-class  CreatePage  extends  Component {
-
-    constructor(props) {
-        super(props);
-        this.state  = {
-            surveys: [],
-        };
-    }
-
-    render() {
-        return (           
-            <div  className="create-page">
-                <Header/>
-                <CreatePoll/>
-                <Footer />               
-            </div>        
-            );      
-                
-      }
-      componentDidMount() {
-        document.title = "Создание опроса";
-      }
-    }
-    export  default  CreatePage;
+const CreatePage = () => {
+    document.title = "Создание опроса";
+    useEffect(()=>{
+        if (!auths.findAuthTokens()) {
+            window.location.replace(routes.auth.login);
+        }
+    });
+    return (
+        <div className="create-page">
+            <Header />
+            <CreateSelecter />
+            <Footer />
+        </div>
+    );
+}
+export default CreatePage;
 
 
