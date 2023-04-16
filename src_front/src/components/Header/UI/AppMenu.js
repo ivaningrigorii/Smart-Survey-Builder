@@ -1,17 +1,13 @@
 import logoUrl from '../images/label.svg';
-import ButtonLoginSelecter from '../components/ButtonLoginSelecter';
+import ButtonLoginSelecter from '../components/ButtonLoginComponents/ButtonLoginSelecter';
 import AuthServices from '../../../pages/personal/Auth/AuthServices';
 import routes from '../../../routes';
 import { AppBar, Box, Toolbar, Button, } from '@mui/material';
 import React, { useState, useEffect } from 'react';
+import ButtonMenuPolls from '../components/Menu/Polls/ButtonMenuPolls';
 
 const auths = new AuthServices();
 
-const enters = [
-  { href: routes.home, name: "Главная" },
-  { href: routes.polls.all, name: "Опросы" },
-  { href: routes.profile, name: "Профиль" },
-];
 let input_enter = "Войти";
 
 function AppMenu() {
@@ -35,11 +31,15 @@ function AppMenu() {
         </Box>
         <Box sx={{ flexGrow: 1, width: 40, height: 30 }}></Box>
         <Box sx={{ height: 50, justifyContent: 'space-between', flexWrap: 'wrap', flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
-          {enters.map((res) => {
-            return <Button sx={{ color: 'black', display: 'block', height: 30, my: 1, }}
-              href={res.href}>{res.name}</Button>
-          })}
+
+        
+          <Button sx={{ color: 'black', display: 'block', height: 30, my: 1, }}
+            href={routes.home}>Главная</Button>
+          <ButtonMenuPolls />
+          <Button sx={{ color: 'black', display: 'block', height: 30, my: 1, }}
+            href={routes.profile}>Профиль</Button>
           {but_log}
+
         </Box>
       </Toolbar>
     </AppBar>
