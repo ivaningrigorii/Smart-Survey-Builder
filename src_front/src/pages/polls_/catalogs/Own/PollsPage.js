@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Footer from "../../../../components/Footer/Footer";
 import Header from "../../../../components/Header/Header";
 import SearchPolls from "./components/SearchPolls";
-import "./PollsPage.css"
 import AuthServices from '../../../personal/Auth/AuthServices';
 import routes from '../../../../routes';
 const auths = new AuthServices();
@@ -14,7 +13,7 @@ const PollsPage = () => {
         return window.location.replace(routes.auth.login);
     } else {
         return (
-            <div className="polls-page">
+            <div >
                 <Header />
                 <SearchPolls />
                 <Footer />
