@@ -8,23 +8,17 @@ const auths = new AuthServices();
 
 const CreatePage = () => {
     document.title = "Создание опроса";
-    const [load, setLoad] = useState(false);
-    useEffect(() => {
-        if (!auths.findAuthTokens()) {
-            window.location.replace(routes.auth.login);
-            setLoad(true);
-        }
-    });
-    return (
-
-        <div className="create-page">
-            <Header />
-            <CreateSelecter />
-            <Footer />
-        </div>
-
-
-    );
+    if (!auths.findAuthTokens()) {
+        return window.location.replace(routes.auth.login);
+    } else {
+        return (
+            <div className="create-page">
+                <Header />
+                <CreateSelecter />
+                <Footer />
+            </div>
+        );
+    }
 }
 export default CreatePage;
 
