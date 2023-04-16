@@ -69,23 +69,18 @@ class AuthServices {
 
     // refresh jwt
     refreshToken(tokens) {
-        let work_tokens = JSON.stringify(tokens);
-        const ussss = "hello";
         return axios.post('api/v1/login/jwt/refresh/', {
-            hello: 'hell',
-            name_aboba: 'aboba'
-        })
+            refresh: tokens.refresh
+        }, { headers: { 'Authorization': 'Bearer ' + tokens.access, }})
             .then(function (response) {
-                let result =  JSON.stringify({
-                    accessToken: response.data.access,
-                    refreshToken: response.data.refresh
-                });
-                return result;
+                return  {
+                    access: response.data.access,
+                    refresh: response.data.refresh
+                };
             })
             .catch(function (error) {
-                return Promise.reject;
+                return Promise.reject(error.response.status);
             });
-
     }
 }
 export default AuthServices;

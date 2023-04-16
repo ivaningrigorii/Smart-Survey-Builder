@@ -29,7 +29,7 @@ class ISurvey(PolymorphicModel, models.Model):
         if not self.id:
             new_slug = slugify(self.name, max_length=100)
             while ISurvey.objects.filter(slug=new_slug).exists():
-                new_slug = f'{new_slug}-{uuid4().hex[:8]}'
+                new_slug = f'{new_slug}-{uuid4().hex[:7]}'
             self.slug = new_slug
         super(ISurvey, self).save(*args, **kwargs)
 

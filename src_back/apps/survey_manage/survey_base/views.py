@@ -26,6 +26,10 @@ class SurveyCreateHeaderView(generics.CreateAPIView):
     serializer_class = ISurveyFullSerializer
     permission_classes = (IsAuthenticated, )
 
+    def post(self, request, *args, **kwargs):
+        request.data["user"] = request.user.id
+        return self.create(request, *args, **kwargs)
+
 
 class SurveyGetSlugView(generics.RetrieveAPIView):
     """
