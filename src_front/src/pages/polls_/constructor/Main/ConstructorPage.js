@@ -1,6 +1,6 @@
-import Header from "../../components/Header/Header";
+import Header from "../../../../components/Header/Header";
 import  React, { Component } from  'react';
-import Footer from "../../components/Footer/Footer";
+import Footer from "../../../../components/Footer/Footer";
 class  ConsructorPage  extends  Component {
 
     constructor(props) {

@@ -1,14 +1,15 @@
 import { BrowserRouter, Routes, Route, } from "react-router-dom";
 
 import React, { Component } from 'react';
-import MainPage from "./pages/MainPage/MainPage";
-import PollsPage from "./pages/PollsPage/PollsPage";
-import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import EnterPage from "./pages/Auth/AuthorizPage";
-import CreatePage from "./pages/CreatePage/CreatePage";
-import ConstructorPage from "./pages/ConstructorPage/ConstructorPage";
-import Passing from "./pages/PollsPassing/Passing";
-import LogoutWithotPage from "./pages/Auth/LogoutWithotPage";
+
+import MainPage from "./pages/other/MainPage/MainPage";
+import PollsPage from "./pages/polls_/catalogs/Own/PollsPage";
+import ProfilePage from "./pages/personal/ProfilePage/ProfilePage";
+import EnterPage from "./pages/personal/Auth/AuthorizPage";
+import CreatePage from "./pages/polls_/constructor/Create/CreatePage";
+import ConstructorPage from "./pages/polls_/constructor/Main/ConstructorPage";
+import StartPassing from "./pages/polls_/passing/StartPage/Passing";
+import LogoutWithotPage from "./pages/personal/Auth/LogoutWithotPage";
 import routes from './routes.js'
 
 
@@ -29,7 +30,7 @@ class App extends Component {
           <Route path={routes.polls.create} element={<CreatePage />} />
           <Route path={routes.polls.constructor} element={<ConstructorPage />} />
 
-          <Route path={routes.polls.passing.to} element={<Passing />} />
+          <Route path={routes.polls.passing.to} element={<StartPassing />} />
         </Routes>
       </BrowserRouter>
     );

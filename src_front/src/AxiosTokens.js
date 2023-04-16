@@ -1,5 +1,5 @@
 import { Cookies } from 'react-cookie';
-import AuthServices from './pages/Auth/AuthServices';
+import AuthServices from './pages/personal/Auth/AuthServices';
 import routes from './routes';
 import { useState } from 'react';
 

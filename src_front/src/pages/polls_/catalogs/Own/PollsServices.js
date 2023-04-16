@@ -1,5 +1,5 @@
 import axios from 'axios';
-import _token from '../../AxiosTokens';
+import _token from '../../../../AxiosTokens';
 
 class PollsServices {
     getPollsOwn() {

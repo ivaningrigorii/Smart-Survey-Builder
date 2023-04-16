@@ -1,7 +1,7 @@
 import { useState, Component } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import _token from '../../AxiosTokens';
+import _token from '../../../../AxiosTokens';
 
 //получение slug и поиск опроса в бд
 //пока просто тестовый хук "тыкал"
