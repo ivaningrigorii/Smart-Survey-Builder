@@ -2,17 +2,16 @@ import Header from "../../../components/Header/Header";
 import React, { Component } from 'react';
 import Footer from "../../../components/Footer/Footer";
 import ProfileShow from "./components/ProfileShow";
+import AuthServices from "../Auth/AuthServices";
+import routes from "../../../routes";
+const auths = new AuthServices();
 
-class ProfilePage extends Component {
+const ProfilePage = () => {
+    document.title = "Профиль";
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            surveys: [],
-        };
-    }
-
-    render() {
+    if (!auths.findAuthTokens()) {
+        return window.location.replace(routes.auth.login);
+    } else {
         return (
             <div>
                 <Header />
@@ -20,10 +19,6 @@ class ProfilePage extends Component {
                 <Footer />
             </div>
         );
-
-    }
-    componentDidMount() {
-        document.title = "Профиль";
     }
 }
 export default ProfilePage;
