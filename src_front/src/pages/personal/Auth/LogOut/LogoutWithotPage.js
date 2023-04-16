@@ -1,5 +1,5 @@
-import AuthServices from "./AuthServices";
-import routes from "../../../routes";
+import AuthServices from "../AuthServices";
+import routes from "../../../../routes";
 
 const auths = new AuthServices();
 

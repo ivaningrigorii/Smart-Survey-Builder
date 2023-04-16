@@ -63,7 +63,7 @@ class AuthServices {
                 return Promise.resolve;
             })
             .catch(function (error) {
-                return Promise.reject;
+                return Promise.reject(error);
             });
     }
 
