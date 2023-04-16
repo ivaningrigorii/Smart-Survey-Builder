@@ -1,4 +1,4 @@
-import _token from '../../AxiosTokens';
+import _token from '../../../../AxiosTokens';
 import axios from 'axios';
 
 export default class ServicesCreatePage {

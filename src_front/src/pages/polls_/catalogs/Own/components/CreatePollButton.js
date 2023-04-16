@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import routes from '../../../routes';
+import routes from '../../../../../routes';
 
 const styles = {
   center: {

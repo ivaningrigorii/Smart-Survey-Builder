@@ -1,5 +1,5 @@
-import Description from './custom_elements/Description';
-import Name from './custom_elements/Name';
+import Description from './custom_mui/Description';
+import Name from './custom_mui/Name';
 import React, { useState, } from 'react';
 import { SSimple, STest } from './Polls';
 import {
@@ -7,9 +7,9 @@ import {
   Autocomplete, Grid, Container,
   FormLabel, InputLabel, Select, MenuItem,
 } from '@mui/material';
-import CreatePollButton from './custom_elements/CreatePollButton';
+import CreatePollButton from './custom_mui/CreatePollButton';
 import ServicesCreatePage from '../ServicesCreatePage';
-import routes from '../../../routes';
+import routes from '../../../../../routes';
 import { reverse } from 'named-urls';
 
 const createPageServices = new ServicesCreatePage();

@@ -1,6 +1,6 @@
 import logoUrl from '../images/label.svg';
 import ButtonLoginSelecter from '../components/ButtonLoginSelecter';
-import AuthServices from '../../../pages/Auth/AuthServices';
+import AuthServices from '../../../pages/personal/Auth/AuthServices';
 import routes from '../../../routes';
 import { AppBar, Box, Toolbar, Button, } from '@mui/material';
 import React, { useState, useEffect } from 'react';

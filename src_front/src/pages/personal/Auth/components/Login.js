@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./AuthorizPage.css";
 import AuthServices from '../AuthServices';
-import routes from '../../../routes';
+import routes from '../../../../routes';
 const aths = new AuthServices();
 
 const Login = () => {
