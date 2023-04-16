@@ -1,6 +1,13 @@
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
+import { makeStyles } from '@mui/styles';
 
+const main = makeStyles({
+  body_style: {
+    backgroundColor: " #b7eac5 ",
+  }
+});
+export {main, };
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',

@@ -11,7 +11,11 @@ export default {
     }),
 
     polls: include('/polls/', {
-        all: '',
+        cats: {
+            default: "catalogs/",
+            own: "catalogs/own/:page/",
+        },
+
         create: "create/",
         constructor: "constructor/:poll/",
 

@@ -15,7 +15,7 @@ export default function ButtonMenuPolls() {
     const handleClose = () => setAnchorEl(null);
 
     const openCreatePoll = () => window.location.replace(routes.polls.create);
-    const openCatalogsPolls = () => window.location.replace(routes.polls.all);
+    const openCatalogsPolls = () => window.location.replace(routes.polls.cats.default);
 
     return (
         <div>

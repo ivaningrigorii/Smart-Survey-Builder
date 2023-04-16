@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, } from "react-router-dom";
 import React, { Component } from 'react';
 
 import MainPage from "./pages/other/MainPage/MainPage";
-import PollsPage from "./pages/polls_/catalogs/Own/PollsPage";
+import PollsPage from "./pages/polls_/catalogs/List/type_list/own/PollsPage";
 import ProfilePage from "./pages/personal/ProfilePage/ProfilePage";
 import EnterPage from "./pages/personal/Auth/Authorization/AuthorizPage";
 import CreatePage from "./pages/polls_/constructor/Create/CreatePage";
@@ -25,7 +25,7 @@ class App extends Component {
           <Route path={routes.auth.logout} element={<LogoutWithotPage/>}/>
 
 
-          <Route path={routes.polls.all} element={<PollsPage />} />
+          <Route path={routes.polls.cats.default} element={<PollsPage />} />
 
           <Route path={routes.polls.create} element={<CreatePage />} />
           <Route path={routes.polls.constructor} element={<ConstructorPage />} />
