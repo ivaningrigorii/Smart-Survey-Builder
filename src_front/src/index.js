@@ -6,20 +6,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import axios from 'axios';
 
 axios.defaults.baseURL = "http://localhost:8000/";
-/*
-axios.interceptors.request.use(function (request) {
-  console.log(request);
-  return request;
-}, function (error) {
-  return Promise.reject(error);
-});
-axios.interceptors.response.use(function (response) {
-  console.log(response);
-  return response;
-}, function (error) {
-  return Promise.reject(error);
-});
-*/
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
