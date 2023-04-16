@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./AuthorizPage.css";
 import AuthServices from '../AuthServices';
+import routes from '../../../routes';
 const aths = new AuthServices();
 
 const Login = () => {
@@ -17,7 +18,7 @@ const Login = () => {
     } else {
       aths.getTokenData(login_data.username, login_data.password).then((result)=>{
         if (result.name=="resolve") {
-          window.location.replace('/profile/');
+          window.location.replace(routes.profile);
         } else {
           alert('Ошибка входа! \nПроверьте логин и пароль!');
         }

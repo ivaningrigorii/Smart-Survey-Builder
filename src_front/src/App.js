@@ -9,6 +9,7 @@ import CreatePage from "./pages/CreatePage/CreatePage";
 import ConstructorPage from "./pages/ConstructorPage/ConstructorPage";
 import Passing from "./pages/PollsPassing/Passing";
 import LogoutWithotPage from "./pages/Auth/LogoutWithotPage";
+import routes from './routes.js'
 
 
 class App extends Component {
@@ -16,19 +17,19 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route path={routes.home} element={<MainPage />} />
 
-          <Route path="/profile/" element={<ProfilePage />} />
-          <Route path="/auth/login/" element={<EnterPage />} />
-          <Route path="/auth/logout/" element={<LogoutWithotPage/>}/>
+          <Route path={routes.profile} element={<ProfilePage />} />
+          <Route path={routes.auth.login} element={<EnterPage />} />
+          <Route path={routes.auth.logout} element={<LogoutWithotPage/>}/>
 
 
-          <Route path="/polls/" element={<PollsPage />} />
+          <Route path={routes.polls.all} element={<PollsPage />} />
 
-          <Route path="/polls/create/" element={<CreatePage />} />
-          <Route path="/polls/constructor/" element={<ConstructorPage />} />
+          <Route path={routes.polls.create} element={<CreatePage />} />
+          <Route path={routes.polls.constructor} element={<ConstructorPage />} />
 
-          <Route path="/polls/:slug/" element={<Passing />} />
+          <Route path={routes.polls.passing.to} element={<Passing />} />
         </Routes>
       </BrowserRouter>
     );
