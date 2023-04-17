@@ -15,8 +15,11 @@ export default {
         create: "create/",
         constructor: "constructor/:poll/",
 
+        
+
         passing: {
             to: ":slug/",
         }
     }),
+
 }
