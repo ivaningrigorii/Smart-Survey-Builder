@@ -21,6 +21,7 @@ class ISurvey(PolymorphicModel, models.Model):
     option_is_published = models.BooleanField(default=False, verbose_name='Публикация', blank=True)
     option_only_for_register_users = \
         models.BooleanField(default=False, verbose_name="Необходимость авторизации", blank=True)
+    max_attempts = models.IntegerField(default=1, verbose_name='Максимальное число попыток')
 
     def __str__(self):
         return f"{self.name}"
