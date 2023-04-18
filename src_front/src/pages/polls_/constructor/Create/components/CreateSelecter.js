@@ -39,6 +39,7 @@ const CreateSelecter = () => {
 
     createPageServices.createPoll(data)
       .then((result) => {
+        localStorage.setItem('position_survey', JSON.stringify(0));
         window.location.replace(reverse(routes.polls.constructor, { poll: result.id }));
       })
       .catch((exp) => {

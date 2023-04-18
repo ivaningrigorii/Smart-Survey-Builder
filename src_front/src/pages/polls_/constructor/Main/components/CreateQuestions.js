@@ -34,8 +34,11 @@ const CreateQuestions = () => {
     setOptionResourcetype(event.target.value);
   };
 
-  const [clickCount, setClickCount] = useState(0);
+
+  const [position_survey, setPositionSurvey] = useState(JSON.parse(localStorage.getItem('position_survey')));
   const [id_question, setIdQuestion] = useState(0);
+
+ 
 
   const handleSubmit = (event, selectedOption) => {
     event.preventDefault();
@@ -44,14 +47,17 @@ const CreateQuestions = () => {
     data_.text_question = event.target.text_question.value;
     data_.one_answer_with_a_choice = event.target.one_answer_with_a_choice.value;
     data_.survey =preLastPath;
-    data_.position_survey = clickCount+1;
+    data_.position_survey = position_survey+1;
+    console.log(position_survey);
     
     
     setData(data_);
 
     createQuestionServices.createQuestion(data)
       .then((result) => {       
-        setClickCount(clickCount + 1);
+        setPositionSurvey(position_survey + 1);
+        // Сохраняем переменную в локальное хранилище
+localStorage.setItem('position_survey', JSON.stringify(position_survey));
         setIdQuestion(result.id)
         // window.location.replace(reverse(routes.polls.constructor, { poll: result.id }));
       })
@@ -82,7 +88,7 @@ const CreateQuestions = () => {
         }
         <TextQuestion/>
         <TypeAnswer defaultTrue={true} trueLabel="Да" falseLabel="Нет" />
-        <QuestionAll count={clickCount} />
+        <QuestionAll count={position_survey} />
         <CreateQuestionButton />
       </form>
     </Container>
