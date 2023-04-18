@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from apps.survey_manage.survey_base.models import ISurvey
 from src_back.permissions import IsPublishedSurvey
 from .models import TakingSurvey
-from .serializers import TakingSurveySerializer
+from .serializers import *
 from ..survey_manage.answer_blocks.models import IAnswer
 from ..survey_manage.answer_blocks.serializers import IAnswerFullSerializer
 from ..survey_manage.question_blocks.models import IQuestion
@@ -48,6 +48,9 @@ class ListQuestionsInSurvey(APIView):
 
 
 class StartTakingSurveyAPIView(generics.CreateAPIView):
+    """
+        Создание прохождения опроса
+    """
     serializer_class = TakingSurveySerializer
     permission_classes = (IsAuthenticated, IsPublishedSurvey)
 
@@ -68,3 +71,27 @@ class StartTakingSurveyAPIView(generics.CreateAPIView):
             return Response({'error': 'Превышено количество попыток прохождения.'}, status=status.HTTP_400_BAD_REQUEST)
 
         return self.create(request, *args, **kwargs)
+
+
+class EndTakingSurveyAPIView(generics.UpdateAPIView):
+    """
+        Завершение прохождения опроса
+    """
+    serializer_class = TakingSurveyEndSerializer
+    permission_classes = (IsAuthenticated, IsPublishedSurvey)
+    http_method_names = ['patch']
+
+    def patch(self, request, *args, **kwargs):
+        survey = get_object_or_404(ISurvey, id=request.data.get('survey'))
+        request.data["user"] = request.user.id
+        user = request.data["user"]
+        try:
+            taking_survey = TakingSurvey.objects.get(survey_id=survey, user_id=user, is_completed=False)
+        except:
+            return Response({'error': 'Не найдено прохождение опроса.'}, status=status.HTTP_400_BAD_REQUEST)
+        serializer = self.get_serializer(taking_survey, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(is_completed=True)
+
+        return Response(serializer.data)
+

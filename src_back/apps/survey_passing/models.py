@@ -30,7 +30,7 @@ class TakingSurvey(models.Model):
             self.time_start = timezone.now()
             if hasattr(self.survey, 'time_passing'):
                 self.time_passing = self.survey.time_passing
-        elif self.is_completed and 'update_fields' in kwargs and 'is_completed' in kwargs['update_fields']:
+        elif self.is_completed:
             self.time_end = timezone.now()
         super(TakingSurvey, self).save(*args, **kwargs)
 
