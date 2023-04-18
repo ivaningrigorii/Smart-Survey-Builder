@@ -1,9 +1,9 @@
-import _token from '../../../../AxiosTokens';
+import _token from '../../../../../../AxiosTokens';
 import axios from 'axios';
 
-export default class ServicesCreateQuestion {
-    createQuestion(data) {
-        return axios.post('api/v1/manage/quest/question/', data, {
+export default class ServicesCreateAnswer {
+    createAnswer(data) {
+        return axios.post('api/v1/manage/ans/answer/', data, {
             headers: { 'Authorization': 'Bearer ' + _token(), }
         },)
             .then((response) => {

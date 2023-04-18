@@ -3,31 +3,30 @@ import Switch from '@mui/material/Switch';
 import { TextField, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 
-  function TypeAnswer({ defaultTrue = false, trueLabel = 'True', falseLabel = 'False' }) {
-    const [one_answer_with_a_choice, setValue] = useState(defaultTrue);
+  function Correct({ defaultTrue = false, trueLabel = 'Да', falseLabel = 'Нет' }) {
+    const [сorrect, setСorrect] = useState(defaultTrue);
   
     const handleChange = (event) => {
-      setValue(event.target.checked);
+        setСorrect(event.target.checked);
     };
   
     return (
       <div>
-         <Box sx={{
+         <Box sx={{mt:1,
        flexGrow: 1, width: '95%',
       maxWidth: '100%'
     }}>
-      <Typography  >Один вариант ответа</Typography>
+      <Typography>Правильный ответ</Typography>
         <Switch
-           id="one_answer_with_a_choice"
-          
-          checked={one_answer_with_a_choice}
+           id="сorrect"        
+          checked={сorrect}
           onChange={handleChange}
           color="primary"
           inputProps={{ 'aria-label': 'true false switch' }}
         />
-        <div>{one_answer_with_a_choice ? trueLabel : falseLabel}</div>
+        <div>{сorrect ? trueLabel : falseLabel}</div>
         </Box>
       </div>
     );
   }
-  export default TypeAnswer;
+  export default Correct;

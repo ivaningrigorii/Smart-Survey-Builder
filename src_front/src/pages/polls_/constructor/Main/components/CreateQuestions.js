@@ -38,6 +38,7 @@ const CreateQuestions = () => {
   const [position_survey, setPositionSurvey] = useState(JSON.parse(localStorage.getItem('position_survey')));
   const [id_question, setIdQuestion] = useState(0);
 
+
  
 
   const handleSubmit = (event, selectedOption) => {
@@ -56,10 +57,14 @@ const CreateQuestions = () => {
     createQuestionServices.createQuestion(data)
       .then((result) => {       
         setPositionSurvey(position_survey + 1);
+        setIdQuestion(result.id)
+        console.log(result.id);
         // Сохраняем переменную в локальное хранилище
 localStorage.setItem('position_survey', JSON.stringify(position_survey));
-        setIdQuestion(result.id)
-        // window.location.replace(reverse(routes.polls.constructor, { poll: result.id }));
+localStorage.setItem('id_question', JSON.stringify(result.id));
+// console.log(id_question);
+        
+
       })
       .catch((exp) => {
         console.log(exp);

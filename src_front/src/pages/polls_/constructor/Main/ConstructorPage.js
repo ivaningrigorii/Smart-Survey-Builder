@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import Footer from "../../../../components/Footer/Footer";
 import routes from "../../../../routes";
 import AuthServices from "../../../personal/Auth/AuthServices";
-import CreateQuestions from "./components/CreateQuestions"
+import CreateQuestions from "./components/CreateQuestions";
+import ConstructorTabs from "./components/ConstructorTabs";
 const auths = new AuthServices();
 
 const ConsructorPage = () => {
@@ -14,7 +15,8 @@ const ConsructorPage = () => {
         return (
             <div className="consructor-page">
                 <Header />
-                <CreateQuestions/>
+                <ConstructorTabs />
+                {/* <CreateQuestions/> */}
                 <Footer />
             </div>
         );

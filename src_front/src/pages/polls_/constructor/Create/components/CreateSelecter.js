@@ -40,6 +40,7 @@ const CreateSelecter = () => {
     createPageServices.createPoll(data)
       .then((result) => {
         localStorage.setItem('position_survey', JSON.stringify(0));
+        localStorage.setItem('type_of_surv', JSON.stringify(optionResourcetype));
         window.location.replace(reverse(routes.polls.constructor, { poll: result.id }));
       })
       .catch((exp) => {
@@ -52,7 +53,7 @@ const CreateSelecter = () => {
     <Container>
       <form onSubmit={handleSubmit}>
         <Grid container direction="column" alignItems="center">
-          <FormControl sx={{ mt: 15, minWidth: 120 }}>
+          <FormControl sx={{ mt:10, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-label">Тип опроса</InputLabel>
             <Select labelId="demo-simple-select-label" id="demo-simple-select"
               value={optionResourcetype} label="Тип опроса"
