@@ -12,8 +12,8 @@ import ServicesCreatePage from '../ServicesCreatePage';
 import routes from '../../../../../routes';
 import { reverse } from 'named-urls';
 
-const createPageServices = new ServicesCreatePage();
-const options = ['Обычный опрос', 'Тестовый опрос'];
+const createPageServices = new ServicesCreatePage();                 /////option_is_published  публикация
+
 
 
 const CreateSelecter = () => {

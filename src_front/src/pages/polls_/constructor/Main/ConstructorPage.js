@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Footer from "../../../../components/Footer/Footer";
 import routes from "../../../../routes";
 import AuthServices from "../../../personal/Auth/AuthServices";
-
+import CreateQuestions from "./components/CreateQuestions"
 const auths = new AuthServices();
 
 const ConsructorPage = () => {
@@ -13,9 +13,12 @@ const ConsructorPage = () => {
     } else {
         return (
             <div className="consructor-page">
-                <p>Конструктор создания опроса</p>
+                <Header />
+                <CreateQuestions/>
+                <Footer />
             </div>
         );
     }
 }
 export default ConsructorPage;
+
