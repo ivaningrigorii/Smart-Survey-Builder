@@ -18,7 +18,7 @@ const SearchElement = () => {
 
     return (
         <Box>
-            <TextField size='small' sx={{ marginLeft: '5%', backgroundColor: "white",
+            <TextField size='small' sx={{ marginLeft: '5%', backgroundColor: " #eceaec ",
                 borderRadius: '5%', }}
                 onKeyUp={handlEnterKeyUp}
                 InputProps={{

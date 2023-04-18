@@ -18,7 +18,7 @@ const useStyles = makeStyles({
         marginTop: '5%',
     },
     label_style: {
-        color: ' #727372 ',
+        color: ' #eceaec ',
     },
 });
 

@@ -26,6 +26,7 @@ class App extends Component {
 
 
           <Route path={routes.polls.cats.default} element={<PollsPage />} />
+          <Route path={routes.polls.cats.own} element={<PollsPage />} />
 
           <Route path={routes.polls.create} element={<CreatePage />} />
           <Route path={routes.polls.constructor} element={<ConstructorPage />} />

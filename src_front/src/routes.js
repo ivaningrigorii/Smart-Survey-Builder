@@ -13,7 +13,7 @@ export default {
     polls: include('/polls/', {
         cats: {
             default: "catalogs/",
-            own: "catalogs/own/:page/",
+            own: "catalogs/:page/",
         },
 
         create: "create/",
