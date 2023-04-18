@@ -12,6 +12,7 @@ const styles = {
   }
 };
 function CreatePollButton() {
+
   return (
     <div style={styles.center}>      
       <Button  sx={{ my: 2,  display: 'block' }} color="secondary" variant="contained" href={routes.polls.create} >
