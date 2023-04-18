@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 
 const main = makeStyles({
   body_style: {
-    backgroundColor: " #b7eac5 ",
+    background: 'linear-gradient(45deg, #8778eb 30%, #78a6eb 90%)',
   }
 });
 export {main, };
