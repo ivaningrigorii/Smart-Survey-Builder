@@ -88,7 +88,10 @@ class IsPublishedSurvey(permissions.BasePermission):
 
     def has_permission(self, request, view):
         try:
-            survey_id = request.data.get('survey')
+            if view.kwargs.get('id') is not None:
+                survey_id = view.kwargs.get('id')
+            else:
+                survey_id = request.data.get('survey')
             survey = ISurvey.objects.get(pk=survey_id)
         except:
             message = 'Опроса не существует.'

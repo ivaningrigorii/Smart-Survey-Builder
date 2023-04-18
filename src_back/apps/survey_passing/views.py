@@ -1,50 +1,54 @@
 from rest_framework import generics, status
 from rest_framework.generics import get_object_or_404
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
 from apps.survey_manage.survey_base.models import ISurvey
 from src_back.permissions import IsPublishedSurvey
-from .models import TakingSurvey
 from .serializers import *
 from ..survey_manage.answer_blocks.models import IAnswer
 from ..survey_manage.answer_blocks.serializers import IAnswerFullSerializer
 from ..survey_manage.question_blocks.models import IQuestion
 from ..survey_manage.question_blocks.serializers import IQuestionFullSerializer
-from ..survey_manage.survey_base.serializers import SurveysHeaderShowSerializer, ISurveyFullSerializer
+from ..survey_manage.survey_base.serializers import ISurveyFullSerializer
 
 
-class ListQuestionsInSurvey(APIView):
-    def get(self, request):
-        slug = "nuzhny-li-bufety-v-vuze"
-        survey = ISurvey.objects.get(slug=slug)
-        questions = IQuestion.objects.filter(survey=survey)
-        # answers = IAnswer.objects.filter(question=questions[0])
-        # questions_data = [IQuestionFullSerializer(question).data for question in questions]
-        # answers_dict = {}
-        # for question in questions:
-        #     answers = IAnswer.objects.filter(question=question)
-        #     answers_data = IAnswerFullSerializer(answers, many=True).data
-        #     answers_dict[question.id] = answers_data
-        question_blocks = []
-        for question in questions:
-            answers = IAnswer.objects.filter(question=question)
-            answers_data = IAnswerFullSerializer(answers, many=True).data
-            question_block = {
-                "question": IQuestionFullSerializer(question).data,
-                "answers": answers_data
-            }
-            question_blocks.append(question_block)
+class QuestionsPagination(PageNumberPagination):
+    page_size = 5
+    page_query_param = 'page'
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
 
-        content = {
-            "survey": ISurveyFullSerializer(survey).data,
-            "question_blocks": question_blocks,
-            # "questions": questions_data,
-            # "answers": answers_dict,
 
-        }
-        return Response(content)
+class ListAllQuestionsInSurvey(generics.RetrieveAPIView):
+    """
+        Возврат шапки опроса и вопросов с вариантами ответов (5 вопросов на странице)
+    """
+    serializer_class = ISurveyFullSerializer
+    permission_classes = (IsAuthenticated, IsPublishedSurvey)
+    lookup_field = 'id'
+    queryset = ISurvey.objects.all()
+    pagination_class = QuestionsPagination
+
+    def get(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        questions = IQuestion.objects.filter(survey=instance)
+        # Пагинация ответа по вопросам
+        paginator = self.pagination_class()
+        result_page = paginator.paginate_queryset(questions, request)
+        questions_serializer = IQuestionFullSerializer(result_page, many=True)
+        questions_data = questions_serializer.data
+        # Добавление вывода ответов вопроса
+        for question in questions_data:
+            answers = IAnswer.objects.filter(question_id=question['id'])
+            answers_serializer = IAnswerFullSerializer(answers, many=True)
+            question['answers'] = answers_serializer.data
+        response = serializer.data
+        response['questions'] = questions_serializer.data
+        # Возвращаем не просто ответ, а пагинированный ответ
+        return paginator.get_paginated_response(response)
 
 
 class StartTakingSurveyAPIView(generics.CreateAPIView):
@@ -94,4 +98,3 @@ class EndTakingSurveyAPIView(generics.UpdateAPIView):
         serializer.save(is_completed=True)
 
         return Response(serializer.data)
-
