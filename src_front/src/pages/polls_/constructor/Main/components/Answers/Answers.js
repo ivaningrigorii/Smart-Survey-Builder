@@ -6,12 +6,12 @@ import ConstructorServices from "../../ConstructorServices";
 
 const cs = new ConstructorServices();
 
-const ATextInput = ({ answer, deleteOneAnswer}) => {
+const ATextInput = ({ answer, deleteOneAnswer, changeAnswer }) => {
     const classes = TypesCSS();
 
     const handleDelete = useCallback(event => {
         deleteOneAnswer(answer.id);
-    }, [deleteOneAnswer, ]);
+    }, [deleteOneAnswer,]);
 
     return (
         <Box>
@@ -19,7 +19,7 @@ const ATextInput = ({ answer, deleteOneAnswer}) => {
                 <CardContent>
                     <Stack direction="row" alignItems="center" justifyContent="flex-end">
                         нетестовый ответ <IconButton size="small" color="primary">
-                            <DeleteOutline fontSize="inherit" onClick={handleDelete}/>
+                            <DeleteOutline fontSize="inherit" onClick={handleDelete} />
                         </IconButton>
                     </Stack>
                     <p>ТЕКСТОВОЕ ПОЛЕ: <TextField fullWidth disabled variant="standard" /></p>
@@ -28,7 +28,7 @@ const ATextInput = ({ answer, deleteOneAnswer}) => {
         </Box>
     );
 }
-const ASelectableTest = ({ answer, deleteOneAnswer}) => {
+const ASelectableTest = ({ answer, deleteOneAnswer, changeAnswer }) => {
     const classes = TypesCSS();
     const [disSave, setDisSave] = useState(true);
     const [del_, setDel_] = useState(false);
@@ -37,9 +37,18 @@ const ASelectableTest = ({ answer, deleteOneAnswer}) => {
         setDisSave(false);
     }
 
+    const saveNewData = useCallback(event => {
+        changeAnswer({
+            id: answer.id,
+            text: event.target.text,
+            correct: event.target.correct
+        });
+        setDisSave(true);
+    }, [changeAnswer,]);
+
     const handleDelete = useCallback(event => {
         deleteOneAnswer(answer.id);
-    }, [deleteOneAnswer, ]);
+    }, [deleteOneAnswer,]);
 
     return (
         <Box>
@@ -50,15 +59,17 @@ const ASelectableTest = ({ answer, deleteOneAnswer}) => {
                             onClick={handleDelete}>
                             <DeleteOutline fontSize="inherit" />
                         </IconButton>
-                        <IconButton size="small" color="primary" disabled={disSave}>
+                        <IconButton size="small" color="primary" disabled={disSave} 
+                        onClick={saveNewData}>
                             <CheckTwoTone fontSize="inherit" />
                         </IconButton>
                     </Stack>
-                    <TextField fullWidth size="small" label="Ответ на вопрос"
+                    <TextField name="text" fullWidth size="small" label="Ответ на вопрос"
                         defaultValue={answer.text} onChange={handleReadyToSave} />
 
                     правильный ли ответ: <Switch defaultChecked color="secondary" size="small"
-                        checked={answer.correct} onChange={handleReadyToSave} />
+                        defaultChecked={answer.correct} onChange={handleReadyToSave} name="correct"
+                        id="correct" />
 
                 </CardContent>
             </Card>
@@ -66,7 +77,7 @@ const ASelectableTest = ({ answer, deleteOneAnswer}) => {
     );
 }
 
-const ASelectableSimple = ({ answer, deleteOneAnswer}) => {
+const ASelectableSimple = ({ answer, deleteOneAnswer, changeAnswer }) => {
     const classes = TypesCSS();
     const [disSave, setDisSave] = useState(true);
 
@@ -77,8 +88,15 @@ const ASelectableSimple = ({ answer, deleteOneAnswer}) => {
 
     const handleDelete = useCallback(event => {
         deleteOneAnswer(answer.id);
-    }, [deleteOneAnswer, ]);
+    }, [deleteOneAnswer,]);
 
+    const saveNewData = useCallback(event => {
+        changeAnswer({
+            id: answer.id,
+            text: event.target.text,
+        });
+        setDisSave(true);
+    }, [changeAnswer,]);
 
     return (
         <Box>
@@ -86,10 +104,10 @@ const ASelectableSimple = ({ answer, deleteOneAnswer}) => {
                 <CardContent>
                     <Stack direction="row" alignItems="center" justifyContent="flex-end">
                         нетестовый ответ <IconButton size="small" color="primary">
-                            <DeleteOutline fontSize="inherit" onClick={handleDelete}/>
+                            <DeleteOutline fontSize="inherit" onClick={handleDelete} />
                         </IconButton>
                         <IconButton size="small" color="primary" disabled={disSave}>
-                            <CheckTwoTone fontSize="inherit" />
+                            <CheckTwoTone fontSize="inherit" onClick={saveNewData}/>
                         </IconButton>
                     </Stack>
                     <TextField fullWidth size="small" label="Ответ на вопрос"

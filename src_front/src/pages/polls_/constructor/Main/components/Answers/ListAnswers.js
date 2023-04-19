@@ -44,41 +44,46 @@ const ListAnswers = ({ answers, setAnswers, question, }) => {
         setAnswers(data__);
     });
 
-    const deleteOneAnswer = (event, id) => {
-        event.preventDefault();
+    const deleteOneAnswer = (id) => {
         cs.delAnswer(id)
             .then((res) => {
-                setData__(answers.filter((ans) => { if (ans.id != id) return ans; }));
+                let data_ = data__;
+                for (let i = 0; i < data_.length; i++) {
+                    if (data_[i].id == id) {
+                        delete data_[i];
+                        break;
+                    }
+                }
+                setData__(data_);
+                setFront(get_front());
             })
             .catch((res) => alert("Ошибка"));
     }
 
-    const changeAnswer = (event, id, data) => {
-        event.preventDefault();
-        cs.changeAnswer(data)
+    const changeAnswer = (mydata) => {
+        cs.changeAnswer(mydata)
             .then((res) => {
-                let data_ = answers;
+                let data_ = data__;
                 for (let i = 0; i < data_.length; i++) {
-                    if (data_[i].id == id) {
-                        data_[i] = data;
+                    if (data_[i].id == mydata.id) {
+                        data_[i] = res;
                         setData__(data_);
-                        handleInputChange();
-                        return;
+                        break;
                     }
                 }
+                setFront(get_front());
             })
             .catch((err) => alert("ошибка"))
     }
 
-    const createAnswer = (event, default_variat) => {
-        event.preventDefault();
+    const createAnswer = (default_variat) => {
         default_variat.question = question;
         cs.addAnswer(default_variat)
             .then((res) => {
                 let mydata = data__;
                 mydata.push(res);
                 setData__(mydata);
-                console.log(data__);
+                setFront(get_front());
             })
             .catch((err) => alert("ошибочка"))
     }
@@ -88,18 +93,26 @@ const ListAnswers = ({ answers, setAnswers, question, }) => {
         let resourcetype = answer.resourcetype;
 
         if (resourcetype === "AnswerSelectableSimple")
-            return <ASelectableSimple key={answer.id} answer={answer} deleteOneAnswer={deleteOneAnswer} />;
+            return <ASelectableSimple key={answer.id} answer={answer} 
+            deleteOneAnswer={deleteOneAnswer} 
+            changeAnswer={changeAnswer}/>;
         if (resourcetype === "AnswerSelectableTest")
-            return <ASelectableTest key={answer.id} answer={answer} deleteOneAnswer={deleteOneAnswer} />;
+            return <ASelectableTest key={answer.id} answer={answer} 
+            deleteOneAnswer={deleteOneAnswer} 
+            changeAnswer={changeAnswer}/>;
         if (resourcetype === "AnswerTextInput")
-            return <ATextInput key={answer.id} answer={answer} deleteOneAnswer={deleteOneAnswer} />;
+            return <ATextInput key={answer.id} answer={answer} 
+            deleteOneAnswer={deleteOneAnswer} 
+            changeAnswer={changeAnswer}/>;
     }
 
     return (
         <Box>
             {front_anwers}
-            <CreateAnswer
-                createAnswer={createAnswer} />
+            <Stack justifyContent="center">
+                <CreateAnswer createAnswer={createAnswer} />
+            </Stack>
+            
         </Box>
     )
 }
