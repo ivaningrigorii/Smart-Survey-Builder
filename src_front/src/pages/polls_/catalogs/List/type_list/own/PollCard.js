@@ -8,6 +8,8 @@ import { styled } from '@mui/material/styles';
 import { Poll, Reply, Delete, Edit } from '@mui/icons-material';
 import { pink } from '@mui/material/colors';
 import PollsServices from '../../PollsServices';
+import { reverse } from 'named-urls';
+import routes from '../../../../../../routes';
 
 const ps = new PollsServices();
 
@@ -36,6 +38,11 @@ const PollCard = ({ poll, make_get }) => {
     }
   }
 
+  const handleEditCards = (event) => {
+    let path = reverse(routes.polls.constructor, {poll:poll.id});
+    window.location.replace(path);
+  }
+
   return (
     <Item>
       <Card sx={{ minWidth: 275, backgroundColor: ' #f8f7f8 ', }}>
@@ -50,7 +57,7 @@ const PollCard = ({ poll, make_get }) => {
         <Grid alignItems="center">
           <IconButton onClick={handleReloadCards}><Delete sx={{ color: pink[500] }} /></IconButton>
           <IconButton><Poll /></IconButton>
-          <IconButton><Edit /></IconButton>
+          <IconButton onClick={handleEditCards}><Edit /></IconButton>
           {poll.option_is_published &&
             <IconButton><Reply /></IconButton>}
         </Grid>
