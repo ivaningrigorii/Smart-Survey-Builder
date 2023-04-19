@@ -5,4 +5,5 @@ from apps.survey_manage.answer_blocks.views import *
 urlpatterns = [
     path('answer/', AnswerAddAPIView.as_view()),
     path('answer/<int:pk>/', AnswerGetDeleteUpdateAPIView.as_view()),
+    path('answers-question/<int:pk>/', AnswersInQuestion.as_view()),
 ]
