@@ -1,9 +1,12 @@
+import pytz
 from django.db import models
+from django.utils import timezone
 
 from apps.survey_manage.answer_blocks.models import IAnswer
 from apps.survey_manage.survey_base.models import ISurvey
 from polymorphic.models import PolymorphicModel
 from django.contrib.auth import get_user_model
+
 
 # ВСЕ МОДЕЛИ В: src_back.model_descriptions
 
@@ -13,10 +16,23 @@ class TakingSurvey(models.Model):
     survey = models.ForeignKey(ISurvey, verbose_name='Проходимый опрос', on_delete=models.CASCADE)
     user = models.ForeignKey(get_user_model(), verbose_name='Проходящий',
                              null=True, on_delete=models.SET_NULL)
-    time_end = models.DateTimeField(auto_now_add=True, verbose_name='Был пройден')
+
+    time_passing = models.IntegerField(verbose_name='Время прохождения в минутах', null=True, blank=True)
+    time_start = models.DateTimeField(null=True, verbose_name='Начало прохождения')
+    time_end = models.DateTimeField(null=True, verbose_name='Завершение прохождения')
+    is_completed = models.BooleanField(default=False, verbose_name='Статус прохождения')
 
     def __str__(self):
         return f"{self.user}: {self.survey}"
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.time_start = timezone.now()
+            if hasattr(self.survey, 'time_passing'):
+                self.time_passing = self.survey.time_passing
+        elif self.is_completed:
+            self.time_end = timezone.now()
+        super(TakingSurvey, self).save(*args, **kwargs)
 
     class Meta:
         db_table = 'taking_survey'
@@ -35,6 +51,7 @@ class IResultAnswer(PolymorphicModel, models.Model):
         db_table = 'i_result_answer'
         verbose_name = 'рез. ответ (i_result_answer)'
         verbose_name_plural = 'рез. ответы (i_result_answer)'
+
 
 # endregion
 
