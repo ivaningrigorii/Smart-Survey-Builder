@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from rest_framework import permissions
+from rest_framework import permissions, exceptions
 from rest_framework.generics import get_object_or_404
 
 from apps.survey_manage.question_blocks.models import IQuestion
@@ -82,6 +82,25 @@ class IsOwnerAnswerInQuestionInSurvey(permissions.BasePermission):
             return user and (survey.user == user)
         except:
             return False
+
+
+class IsPublishedSurvey(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        try:
+            if view.kwargs.get('id') is not None:
+                survey_id = view.kwargs.get('id')
+            else:
+                survey_id = request.data.get('survey')
+            survey = ISurvey.objects.get(pk=survey_id)
+        except:
+            message = 'Опроса не существует.'
+            raise exceptions.PermissionDenied(detail=message)
+        if survey.option_is_published:
+            return True
+        else:
+            message = 'Опрос не опубликован.'
+            raise exceptions.PermissionDenied(detail=message)
 
 
 class IsOwnerProfile(permissions.BasePermission):
