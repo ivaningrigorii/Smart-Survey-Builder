@@ -32,10 +32,12 @@ function AppMenu() {
         <Box sx={{ flexGrow: 1, width: 40, height: 30 }}></Box>
         <Box sx={{ height: 50, justifyContent: 'space-between', flexWrap: 'wrap', flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
 
-        
+
           <Button sx={{ color: 'black', display: 'block', height: 30, my: 1, }}
             href={routes.home}>Главная</Button>
           <ButtonMenuPolls />
+          <Button sx={{ color: 'black', display: 'block', height: 30, my: 1, }}
+            href={routes.home}>Шаблоны</Button>
           <Button sx={{ color: 'black', display: 'block', height: 30, my: 1, }}
             href={routes.profile}>Профиль</Button>
           {but_log}

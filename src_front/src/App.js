@@ -7,7 +7,7 @@ import PollsPage from "./pages/polls_/catalogs/List/type_list/own/PollsPage";
 import ProfilePage from "./pages/personal/ProfilePage/ProfilePage";
 import EnterPage from "./pages/personal/Auth/Authorization/AuthorizPage";
 import CreatePage from "./pages/polls_/constructor/Create/CreatePage";
-import ConstructorPage from "./pages/polls_/constructor/Main/LoadPage/ConstructorPage";
+import ConstructorPage from "./pages/polls_/constructor/Main/StartPage/ConstructorPage";
 import StartPassing from "./pages/polls_/passing/StartPage/Passing";
 import LogoutWithotPage from "./pages/personal/Auth/LogOut/LogoutWithotPage";
 import routes from './routes.js'

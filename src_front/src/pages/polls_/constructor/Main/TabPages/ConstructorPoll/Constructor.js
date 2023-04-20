@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { useRef, useState, useEffect } from "react";
 import ListQuestions from "./Questions/ListQuestions";
-import ConstructorServices from "../ConstructorServices";
+import ConstructorServices from '../../ConstructorServices';
 
 const cs = new ConstructorServices();
 
