@@ -6,7 +6,7 @@ from .serializers import ISurveyFullSerializer, SurveySlugSerializer
 from .models import ISurvey
 
 
-class SurveyGetUpdateHeader(generics.RetrieveUpdateAPIView):
+class SurveyGetUpdateHeader(generics.RetrieveUpdateDestroyAPIView):
     """
     Работа только с шабкой опроса (без вопросов и ответов внутри опроса)
     """

@@ -1,6 +1,13 @@
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
+import { makeStyles } from '@mui/styles';
 
+const main = makeStyles({
+  body_style: {
+    background: 'linear-gradient(45deg, #8778eb 30%, #78a6eb 90%)',
+  }
+});
+export {main, };
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
