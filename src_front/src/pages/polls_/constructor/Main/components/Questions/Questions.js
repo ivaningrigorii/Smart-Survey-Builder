@@ -66,7 +66,7 @@ const QuestTestSimpleEv = ({ question }) => {
 
     return (
         <Box>
-            <Card className={classes.card_style}>
+            <Card className={classes.card_style} >
                 <CardContent>
                     <p className={classes.header_question}>{question.text_question}</p>
                     {answers &&
