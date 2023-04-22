@@ -2,8 +2,10 @@ from django.contrib.auth import get_user_model
 from rest_framework import permissions, exceptions
 from rest_framework.generics import get_object_or_404
 
+from apps.survey_manage.answer_blocks.models import IAnswer
 from apps.survey_manage.question_blocks.models import IQuestion
 from apps.survey_manage.survey_base.models import ISurvey
+from apps.survey_passing.models import TakingSurvey, IResultAnswer
 
 
 class IsAdminOrReadOnly(permissions.BasePermission):
@@ -61,7 +63,9 @@ class IsOwnerQuestionInSurvey(permissions.BasePermission):
 
 
 class IsOwnerAnswerInQuestionInSurvey(permissions.BasePermission):
-    "Для ответов в вопрос, которыми user владеет"
+    """
+        Для ответов в вопрос, которыми user владеет
+    """
 
     "Для редактирования существующих ответов"
 
@@ -85,12 +89,18 @@ class IsOwnerAnswerInQuestionInSurvey(permissions.BasePermission):
 
 
 class IsPublishedSurvey(permissions.BasePermission):
-
+    """
+        Проверка опроса на опубликованность
+    """
     def has_permission(self, request, view):
         try:
+            if request.data.get('taking_survey') is not None:
+                taking_survey_id = request.data.get('taking_survey')
+                taking_survey = TakingSurvey.objects.get(pk=taking_survey_id)
+                survey_id = taking_survey.survey.id
             if view.kwargs.get('id') is not None:
                 survey_id = view.kwargs.get('id')
-            else:
+            elif request.data.get('survey') is not None:
                 survey_id = request.data.get('survey')
             survey = ISurvey.objects.get(pk=survey_id)
         except:
@@ -100,6 +110,82 @@ class IsPublishedSurvey(permissions.BasePermission):
             return True
         else:
             message = 'Опрос не опубликован.'
+            raise exceptions.PermissionDenied(detail=message)
+
+
+class IsActiveTakingSurvey(permissions.BasePermission):
+    """
+        Проверка завершённости прохождения опроса
+    """
+    def has_permission(self, request, view):
+        try:
+            taking_survey_id = request.data.get('taking_survey')
+            taking_survey = TakingSurvey.objects.get(pk=taking_survey_id)
+        except:
+            message = 'Опрос не проходился'
+            raise exceptions.PermissionDenied(detail=message)
+        if not taking_survey.is_completed:
+            return True
+        else:
+            message = 'Опрос завершён'
+            raise exceptions.PermissionDenied(detail=message)
+
+
+class IsAnswerInSurvey(permissions.BasePermission):
+    """
+        Проверка корректного выбора ответа и вопроса
+    """
+    def has_permission(self, request, view):
+        try:
+            taking_survey_id = request.data.get('taking_survey')
+            taking_survey = TakingSurvey.objects.get(pk=taking_survey_id)
+            survey = taking_survey.survey
+            answer_id = request.data.get('answer')
+            answer = IAnswer.objects.get(pk=answer_id)
+            question_answer = answer.question
+            question_id = request.data.get('question')
+            question = IQuestion.objects.get(pk=question_id)
+            if question.survey == survey and question_answer.id == question.id:
+                return True
+            else:
+                message = 'Ответ не принадлежит вопросу'
+                raise exceptions.PermissionDenied(detail=message)
+        except:
+            message = 'Ответ не из этого опроса'
+            raise exceptions.PermissionDenied(detail=message)
+
+
+class IsCorrectAnswerSerializer(permissions.BasePermission):
+    """
+        Проверка корректного сериализатора при сохранениии ответа
+    """
+    def has_permission(self, request, view):
+
+        resource_type = request.data.get('resourcetype')
+        result_select = request.data.get('answer')
+        answer = IAnswer.objects.get(pk=result_select)
+        model_name = answer._meta.model_name
+        if ((model_name == "answerselectablesimple" or "AnswerSelectableTest") and resource_type == "ResultSelect") \
+                or (model_name == "answertextinput" and resource_type == "ResultTextInput"):
+            return True
+        else:
+            message = 'Выбран неправильный resourcetype'
+            raise exceptions.PermissionDenied(detail=message)
+
+
+class IsOnlySelectAnswer(permissions.BasePermission):
+    """
+        Проверка на наличие уже выбранного ответа
+    """
+    def has_permission(self, request, view):
+
+        taking_survey_id = request.data.get('taking_survey')
+        question = request.data.get('question')
+        result_answer = IResultAnswer.objects.filter(taking_survey_id=taking_survey_id, question_id=question)
+        if result_answer.count() == 0:
+            return True
+        else:
+            message = 'Ответ уже выбран'
             raise exceptions.PermissionDenied(detail=message)
 
 
