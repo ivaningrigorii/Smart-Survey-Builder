@@ -9,7 +9,6 @@ import GetTypeAnswer from './GetTypeAnswer';
 
 import CreateAnswer from '../../Answers/DialogCreateAnswer';
 
-import _token from '../../../../../../../../AxiosTokens';
 
 const allow_fields_adding = [
     "AnswerTextInput",
@@ -77,16 +76,35 @@ const QuestSimple = ({ question }) => {
             });
     };
 
+    const saveAnswer = answer => {
+        return cs.changeAnswer(answer)
+            .then(answer => {
+                for (let i = 0; i < answers.lenght; i++) {
+                    if (answers[i].id == answer) {
+                        answers[i] = answer;
+                        break;
+                    }
+                }
+                setAnswers(answers.slice(0));
+            })
+            .catch((err) => {
+                alert("Изменения не были внесены!");
+                console.log(err);
+            })
+    }
+    
+
     return (
         <Box>
-            <Card className={classes.card_style}>
+            <Card className={classes.card_style} sx={{backgroundColor: " #d5dbeb ",
+                borderRadius: "25px",}}>
                 <CardContent>
                     <p className={classes.header_question}>{question.text_question}</p>
                     {answers &&
                         answers.map((answer) => {
-                            return GetTypeAnswer({ answer, deleteAnswer, });
+                            return GetTypeAnswer({ answer, deleteAnswer, saveAnswer, });
                         })}
-                    <Stack container justifyContent="center">
+                    <Stack container justifyContent="center" direction="row" align="center">
                         <CreateAnswer createAnswer={createAnswer} allow_fields={allow_fields} />
                     </Stack>
                 </CardContent>

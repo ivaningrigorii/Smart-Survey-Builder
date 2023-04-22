@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
     formControl: {
         marginTop: theme.spacing(2),
-        minWidth: 120,
+        minWidth: "40vw",
     },
     formControlLabel: {
         marginTop: theme.spacing(1),
@@ -84,7 +84,8 @@ const CreateAnswer = ({ createAnswer, allow_fields }) => {
 
     return (
         <React.Fragment>
-            <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
+            <IconButton variant="outlined" color="primary" onClick={handleClickOpen}
+                sx={{width: 'fit-content',}}>
                 <ControlPoint />
             </IconButton>
             <Dialog
@@ -104,10 +105,6 @@ const CreateAnswer = ({ createAnswer, allow_fields }) => {
                                 autoFocus
                                 value={selectAnswer}
                                 onChange={handleSelectAnswer}
-                                inputProps={{
-                                    name: 'max-width',
-                                    id: 'max-width',
-                                }}
                             >
                                 {allow_fields &&
                                     allow_fields.map(allow_answer => {
@@ -126,7 +123,7 @@ const CreateAnswer = ({ createAnswer, allow_fields }) => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
-                        Close
+                        Отмена
                     </Button>
                 </DialogActions>
             </Dialog>
