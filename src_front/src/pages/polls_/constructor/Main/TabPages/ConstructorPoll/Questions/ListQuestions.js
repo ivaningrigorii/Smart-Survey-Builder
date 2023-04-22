@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import ConstructorServices from '../../../ConstructorServices';
 import { Box, Stack } from "@mui/material";
-import { QuestTestSimpleEv, QuestSimple } from "./Questions";
+
+import QuestSimple from "./Base/QuestionSimple";
+import QuestTestSimpleEv from './Base/QuestionTestSimpleEv';
 
 
 const cs = new ConstructorServices();
 
 const ListQuestions = ({ questions, setQuestions }) => {
-
-
 
     const type_question = (question) => {
         let resourcetype = question.resourcetype;
@@ -27,9 +27,6 @@ const ListQuestions = ({ questions, setQuestions }) => {
                     </Box>
                 );
             })}
-            
-
-
         </Box>
     )
 }

@@ -44,7 +44,7 @@ class ConstructorServices {
     }
 
     //ответы
-    getAllAnswers(id) {
+    getAllAnswers (id) {
         let path = reverse("api/v1/manage/ans/answers-question/:id/", {id: id});
         return axios.get(path, {
             headers: { 'Authorization': 'Bearer ' + _token(), }
