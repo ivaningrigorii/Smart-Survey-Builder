@@ -10,7 +10,6 @@ import GetTypeAnswer from './GetTypeAnswer';
 import CreateAnswer from '../../Answers/DialogCreateAnswer';
 
 const allow_fields_adding = [
-    "AnswerTextInput",
     "AnswerSelectableTest",
 ];
 

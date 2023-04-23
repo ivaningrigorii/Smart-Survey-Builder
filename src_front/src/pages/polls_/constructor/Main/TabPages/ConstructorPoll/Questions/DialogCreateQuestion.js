@@ -10,11 +10,11 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         margin: 'auto',
-        width: 'fit-content',
+        width: '40vw',
     },
     formControl: {
         marginTop: theme.spacing(2),
-        minWidth: 120,
+        minWidth: "40vw",
     },
     formControlLabel: {
         marginTop: theme.spacing(1),
@@ -23,18 +23,18 @@ const useStyles = makeStyles((theme) => ({
 
 //дефолтные варинты вопросов при создании
 const QSimple = {
-    text_question: "",
+    text_question: "Вопрос по умолчанию?",
     survey: 0,
-    one_answer_with_a_choice: true,
+    one_answer_with_a_choice: false,
     option_required_for_pass: true,
     resourcetype: "QuestionSimple",
 }
 const QTest = {
-    text_question: "",
+    text_question: "Вопрос по умолчанию?",
     survey: 0,
-    one_answer_with_a_choice: true,
+    one_answer_with_a_choice: false,
     option_required_for_pass: true,
-    resourcetype: "QuestionTest",
+    resourcetype: "QuestionTestSimpleEv",
 }
 
 
@@ -65,9 +65,10 @@ const CreateQuestion = ({ createQuestion,  }) => {
 
     return (
         <React.Fragment>
-            <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
-                <ControlPoint/>
-            </IconButton>
+            <Button variant="contained" onClick={handleClickOpen} color="secondary"
+                sx={{marginTop: "5vh", }}>
+                Добавить вопрос
+            </Button>
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -77,7 +78,7 @@ const CreateQuestion = ({ createQuestion,  }) => {
                 <DialogContent>
                     <DialogContentText>
                         Установите тип вопроса
-                    </DialogContentText>
+                    </DialogContentText><br/><br/>
                     <form className={classes.form} noValidate>
                         <FormControl className={classes.formControl}>
                             <InputLabel htmlFor="max-width">Тип ответа</InputLabel>
@@ -85,10 +86,6 @@ const CreateQuestion = ({ createQuestion,  }) => {
                                 autoFocus
                                 value={selectAnswer}
                                 onChange={handleSelectAnswer}
-                                inputProps={{
-                                    name: 'max-width',
-                                    id: 'max-width',
-                                }}
                             >
                                 <MenuItem value="1">Простой вопрос</MenuItem>
                                 <MenuItem value="2">Тестовый вопрос</MenuItem>
@@ -101,7 +98,7 @@ const CreateQuestion = ({ createQuestion,  }) => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
-                        Close
+                        Отмена
                     </Button>
                 </DialogActions>
             </Dialog>

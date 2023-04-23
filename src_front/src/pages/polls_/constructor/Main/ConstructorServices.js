@@ -36,7 +36,7 @@ class ConstructorServices {
             headers: { 'Authorization': 'Bearer ' + _token(), }
         },)
             .then((response) => {
-                return Promise.resolve({id: response.data.id});
+                return Promise.resolve(response.data);
             } )
             .catch((error) => {
                 return Promise.reject(error);

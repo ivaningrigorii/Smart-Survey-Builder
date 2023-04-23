@@ -7,14 +7,14 @@ import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
 import Box from '@mui/material/Box';
 import { useState, useEffect, useLayoutEffect } from 'react';
-import Constructor from '../TabPages/ConstructorPoll/Constructor';
+
 import SpecialSettings from '../TabPages/SettingPoll/SpecialSettings';
 import StandartSettings from '../TabPages/SettingPoll/StandartSettings';
-import axios from 'axios';
-import { reverse } from 'named-urls';
+
 import _token from '../../../../../AxiosTokens';
 import ConstructorServices from '../ConstructorServices';
-import { makeStyles } from '@mui/styles';
+
+import ListQuestions from '../TabPages/ConstructorPoll/Questions/ListQuestions';
 
 const cs = new ConstructorServices();
 
@@ -47,7 +47,7 @@ const ConstructorTabs = ({ poll, }) => {
               <Tab value={2}>Специальные настройки</Tab>
             }
           </TabsList>
-          <TabPanel value={0}><Constructor idPoll={pollOptions.id} 
+          <TabPanel value={0}><ListQuestions idPoll={pollOptions.id} 
             typePoll={pollOptions.resourcetype}/> </TabPanel>
           <TabPanel value={1}><StandartSettings /></TabPanel>
           {pollOptions.resourcetype != "SurveySimple" &&
