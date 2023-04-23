@@ -1,9 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
-import {Button, Dialog, DialogActions, DialogContent, DialogContentText,
-        DialogTitle, FormControl, FormControlLabel, InputLabel, 
-        MenuItem, Select, Switch, IconButton, } from '@mui/material';
+import {
+    Button, Dialog, DialogActions, DialogContent, DialogContentText,
+    DialogTitle, FormControl, FormControlLabel, InputLabel,
+    MenuItem, Select, Switch, IconButton,
+} from '@mui/material';
 import React, { useCallback } from 'react';
-import { ControlPoint,  } from '@mui/icons-material';
+import { ControlPoint, } from '@mui/icons-material';
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -23,14 +25,14 @@ const useStyles = makeStyles((theme) => ({
 
 //дефолтные варинты вопросов при создании
 const QSimple = {
-    text_question: "Вопрос по умолчанию?",
+    text_question: "Это текст вопроса по умолчанию",
     survey: 0,
     one_answer_with_a_choice: false,
     option_required_for_pass: true,
     resourcetype: "QuestionSimple",
 }
 const QTest = {
-    text_question: "Вопрос по умолчанию?",
+    text_question: "Это текст вопроса по умолчанию",
     survey: 0,
     one_answer_with_a_choice: false,
     option_required_for_pass: true,
@@ -38,12 +40,19 @@ const QTest = {
 }
 
 
-const CreateQuestion = ({ createQuestion,  }) => {
+const CreateQuestion = ({ createQuestion, poll_type, }) => {
     const default_variats_ = [QSimple, QTest];
 
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-    const [selectAnswer, setSelectAnswer] = React.useState(1);
+    const [selectAnswer, setSelectAnswer] = React.useState(()=>{
+        switch (poll_type) {
+            case "SurveySimple":
+                return 1;
+            case "SurveyTest":
+                return 2;
+        }
+    });
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -58,7 +67,7 @@ const CreateQuestion = ({ createQuestion,  }) => {
     };
 
     const addValue = useCallback(event => {
-        let mydata = default_variats_[selectAnswer-1];
+        let mydata = default_variats_[selectAnswer - 1];
         createQuestion(mydata);
         setOpen(false);
     });
@@ -66,7 +75,7 @@ const CreateQuestion = ({ createQuestion,  }) => {
     return (
         <React.Fragment>
             <Button variant="contained" onClick={handleClickOpen} color="secondary"
-                sx={{marginTop: "5vh", }}>
+                sx={{ marginTop: "5vh", }}>
                 Добавить вопрос
             </Button>
             <Dialog
@@ -78,20 +87,26 @@ const CreateQuestion = ({ createQuestion,  }) => {
                 <DialogContent>
                     <DialogContentText>
                         Установите тип вопроса
-                    </DialogContentText><br/><br/>
+                    </DialogContentText><br /><br />
                     <form className={classes.form} noValidate>
                         <FormControl className={classes.formControl}>
                             <InputLabel htmlFor="max-width">Тип ответа</InputLabel>
-                            <Select
-                                autoFocus
-                                value={selectAnswer}
-                                onChange={handleSelectAnswer}
-                            >
-                                <MenuItem value="1">Простой вопрос</MenuItem>
-                                <MenuItem value="2">Тестовый вопрос</MenuItem>
-                            </Select>
+
+                            {poll_type === "SurveySimple" &&
+                                <Select autoFocus value={selectAnswer} onChange={handleSelectAnswer}>
+                                    <MenuItem value="1">Простой вопрос</MenuItem>
+                                </Select>
+                            }
+
+                            {poll_type === "SurveyTest" &&
+                                <Select autoFocus value={selectAnswer} onChange={handleSelectAnswer}>
+                                    <MenuItem value="1">Простой вопрос</MenuItem>
+                                    <MenuItem value="2">Тестовый вопрос</MenuItem>
+                                </Select>
+                            }
+
                         </FormControl>
-                        <Button size='small' onClick={ addValue }>
+                        <Button size='small' onClick={addValue}>
                             Добавить
                         </Button>
                     </form>
@@ -101,8 +116,8 @@ const CreateQuestion = ({ createQuestion,  }) => {
                         Отмена
                     </Button>
                 </DialogActions>
-            </Dialog>
-        </React.Fragment>
+            </Dialog >
+        </React.Fragment >
     );
 }
 export default CreateQuestion;

@@ -48,6 +48,7 @@ const ConstructorTabs = ({ poll, }) => {
             }
           </TabsList>
           <TabPanel value={0}><ListQuestions idPoll={pollOptions.id} 
+            poll_type={pollOptions.resourcetype} 
             typePoll={pollOptions.resourcetype}/> </TabPanel>
           <TabPanel value={1}><StandartSettings /></TabPanel>
           {pollOptions.resourcetype != "SurveySimple" &&

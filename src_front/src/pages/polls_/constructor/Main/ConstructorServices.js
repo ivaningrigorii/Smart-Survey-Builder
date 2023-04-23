@@ -43,6 +43,24 @@ class ConstructorServices {
             });
     }
 
+    deleteQuestion(id) {
+        let path = reverse("api/v1/manage/quest/question/:id/", {id: id});
+        return axios.delete(path, {
+            headers: { 'Authorization': 'Bearer ' + _token(), }
+        })
+        .then((respone)=>{ return Promise.resolve(respone.data);})
+        .catch((error)=>{ return Promise.reject(error);})
+    }
+
+    saveQuestion(dataquestion) {
+        let path = reverse("api/v1/manage/quest/question/:id/", {id: dataquestion.id});
+        return axios.patch(path, dataquestion, {
+            headers: { 'Authorization': 'Bearer ' + _token(), }
+        })
+        .then((respone)=>{ return Promise.resolve(respone.data);})
+        .catch((error)=>{ return Promise.reject(error);})
+    }
+
     //ответы
     getAllAnswers (id) {
         let path = reverse("api/v1/manage/ans/answers-question/:id/", {id: id});

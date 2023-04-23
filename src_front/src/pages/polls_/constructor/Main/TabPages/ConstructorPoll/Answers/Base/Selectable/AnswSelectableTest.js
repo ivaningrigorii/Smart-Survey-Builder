@@ -1,15 +1,16 @@
 import {
     TextField, Box, Card, CardContent, Stack, IconButton, Switch,
-    FormControlLabel, Checkbox,
+    FormControlLabel, Checkbox, Radio,
 } from "@mui/material";
 import { TypesCSS } from "../../style";
 import { DeleteOutline, CheckTwoTone, CheckBox, Edit, Undo, } from "@mui/icons-material";
 import { useState, useEffect, useCallback } from "react";
 import ConstructorServices from '../../../../../ConstructorServices';
+import { red, green, } from '@mui/material/colors';
 
 const cs = new ConstructorServices();
 
-const ASelectableTest = ({ answer, deleteAnswer, saveAnswer, }) => {
+const ASelectableTest = ({ answer, deleteAnswer, saveAnswer, one_answer_with_a_choice, }) => {
     const classes = TypesCSS();
 
     const [field_edit, setFieldEdit] = useState(false);
@@ -17,6 +18,11 @@ const ASelectableTest = ({ answer, deleteAnswer, saveAnswer, }) => {
 
     const [text, setText] = useState(answer.text);
     const [correct, setCorrect] = useState(answer.correct);
+    const [correct_color, setCorrectColor] = useState();
+
+    useEffect(() => {
+        correct == true ? setCorrectColor('success') : setCorrectColor('error');
+    }, [correct,])
 
     const handleDelete = useCallback(event => {
         deleteAnswer(answer.id);
@@ -72,7 +78,7 @@ const ASelectableTest = ({ answer, deleteAnswer, saveAnswer, }) => {
 
     return (
         <Box>
-            <Card className={classes.card_style} sx={{borderRadius: "25px",}}>
+            <Card className={classes.card_style} sx={{ borderRadius: "25px", }}>
                 {field_edit == true &&
                     <CardContent>
                         <Stack direction="row" alignItems="center" justifyContent="flex-end">
@@ -99,9 +105,15 @@ const ASelectableTest = ({ answer, deleteAnswer, saveAnswer, }) => {
                             defaultValue={text} onChange={handleChangeText}
                             onKeyUp={handlEnterKeyUp} />
 
-                        правильный ли ответ: <Switch defaultChecked color="secondary" size="small"
-                            defaultChecked={correct} name="correct" id="correct"
-                            onChange={handleChangeCorrect} />
+                        правильный ли ответ: {correct == true ?
+                            <Switch color="secondary" size="small"
+                                defaultChecked name="correct" id="correct"
+                                onChange={handleChangeCorrect} /> :
+                            <Switch color="secondary" size="small"
+                                name="correct" id="correct"
+                                onChange={handleChangeCorrect} />
+                        }
+
                     </CardContent>
                 }
                 {field_edit == false &&
@@ -110,27 +122,20 @@ const ASelectableTest = ({ answer, deleteAnswer, saveAnswer, }) => {
                         alignItems="center"
                         onClick={() => setFieldEdit(true)}
                     >
-                        {correct == true &&
-                            <FormControlLabel control={<Checkbox
-                                defaultChecked
-                                size="small"
-                                color="primary" />}
-                                label={text}
-                                sx={{ marginLeft: "5px", }}
-                            />
-                        } {correct == false &&
-                            <FormControlLabel control={<Checkbox
-                                defaultChecked
-                                size="small" color="secondary" />}
-                                label={text}
-                                sx={{ marginLeft: "5px", }}
-                            />
+
+                        <FormControlLabel control={one_answer_with_a_choice != true ?
+                            <Checkbox defaultChecked size="small" color={correct_color} /> :
+                            <Radio defaultChecked size="small" color={correct_color} />
                         }
+                            label={text}
+                            sx={{ marginLeft: "5px", }}
+                        />
+
                         <Stack direction="row"
                             justifyContent="flex-end"
                             alignItems="center"
-                            onClick={(event)=>event.stopPropagation()}
-                            >
+                            onClick={(event) => event.stopPropagation()}
+                        >
                             <IconButton size="small" color="primary"
                                 onClick={handleDelete}>
                                 <DeleteOutline fontSize="inherit" />

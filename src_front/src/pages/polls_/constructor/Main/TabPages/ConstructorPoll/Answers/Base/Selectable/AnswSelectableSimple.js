@@ -1,8 +1,9 @@
-import { 
-    TextField, Box, Card, 
-    CardContent, Stack, 
+import {
+    TextField, Box, Card,
+    CardContent, Stack,
     IconButton, FormControlLabel,
     Checkbox,
+    Radio,
 } from "@mui/material";
 import { DeleteOutline, CheckTwoTone, Undo, Edit, } from "@mui/icons-material";
 import { useState, useEffect, useCallback } from "react";
@@ -12,7 +13,7 @@ import ConstructorServices from '../../../../../ConstructorServices';
 const cs = new ConstructorServices();
 
 
-const ASelectableSimple = ({ answer, deleteAnswer, saveAnswer, }) => {
+const ASelectableSimple = ({ answer, deleteAnswer, saveAnswer, one_answer_with_a_choice, }) => {
     const classes = TypesCSS();
 
     const [field_edit, setFieldEdit] = useState(false);
@@ -65,7 +66,7 @@ const ASelectableSimple = ({ answer, deleteAnswer, saveAnswer, }) => {
 
     return (
         <Box>
-            <Card className={classes.card_style} sx={{borderRadius: "25px",}}>
+            <Card className={classes.card_style} sx={{ borderRadius: "25px", }}>
                 {field_edit == true &&
                     <CardContent>
                         <Stack direction="row" alignItems="center" justifyContent="flex-end">
@@ -100,27 +101,28 @@ const ASelectableSimple = ({ answer, deleteAnswer, saveAnswer, }) => {
                         alignItems="center"
                         onClick={() => setFieldEdit(true)}
                     >
-                        <FormControlLabel control={<Checkbox
-                                size="small"/>}
-                                label={text}
-                                sx={{ marginLeft: "5px", }}
-                            />
+                        <FormControlLabel control={one_answer_with_a_choice != true ?
+                            <Checkbox size="small" /> : <Radio size="small" />
+                        }
+                            label={text}
+                            sx={{ marginLeft: "5px", }}
+                        />
 
-                            <Stack direction="row"
-                                justifyContent="flex-end"
-                                alignItems="center"
-                                onClick={(event)=>event.stopPropagation()}>
-                                <IconButton size="small" color="primary"
-                                    onClick={handleDelete}>
-                                    <DeleteOutline fontSize="inherit" />
-                                </IconButton>
+                        <Stack direction="row"
+                            justifyContent="flex-end"
+                            alignItems="center"
+                            onClick={(event) => event.stopPropagation()}>
+                            <IconButton size="small" color="primary"
+                                onClick={handleDelete}>
+                                <DeleteOutline fontSize="inherit" />
+                            </IconButton>
 
-                                <IconButton size="small" color="primary"
-                                    onClick={() => setFieldEdit(true)}>
-                                    <Edit fontSize="inherit" />
-                                </IconButton>
-                            </Stack>
-                        
+                            <IconButton size="small" color="primary"
+                                onClick={() => setFieldEdit(true)}>
+                                <Edit fontSize="inherit" />
+                            </IconButton>
+                        </Stack>
+
                     </Stack>
                 }
             </Card>
