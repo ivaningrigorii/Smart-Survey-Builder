@@ -5,7 +5,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from apps.survey_manage.survey_base.models import ISurvey
-from src_back.permissions import IsPublishedSurvey
+from src_back.permissions import IsPublishedSurvey, IsActiveTakingSurvey, IsAnswerInSurvey, IsCorrectAnswerSerializer, \
+    IsOnlySelectAnswer
+from .models import IResultAnswer
 from .serializers import *
 from ..survey_manage.answer_blocks.models import IAnswer
 from ..survey_manage.answer_blocks.serializers import IAnswerFullSerializer
@@ -97,4 +99,41 @@ class EndTakingSurveyAPIView(generics.UpdateAPIView):
         serializer.is_valid(raise_exception=True)
         serializer.save(is_completed=True)
 
+        return Response(serializer.data)
+
+
+class SaveResultAnswerAPIView(generics.CreateAPIView):
+    """
+        Сохранение выбранного ответа
+    """
+    serializer_class = IResultAnswerFullSerializer
+    permission_classes = (IsAuthenticated, IsPublishedSurvey,
+                          IsActiveTakingSurvey, IsAnswerInSurvey,
+                          IsCorrectAnswerSerializer, IsOnlySelectAnswer)
+    queryset = IResultAnswer.objects.all()
+
+
+
+
+class UpdateResultAnswerAPIView(generics.UpdateAPIView):
+    """
+        Изменение выбранного ответа
+    """
+    serializer_class = IResultAnswerFullSerializer
+    permission_classes = (IsAuthenticated, IsPublishedSurvey,
+                          IsActiveTakingSurvey, IsAnswerInSurvey,
+                          IsCorrectAnswerSerializer)
+    http_method_names = ['patch']
+
+    def patch(self, request, *args, **kwargs):
+        try:
+            result_answer = get_object_or_404(IResultAnswer,
+                                              taking_survey=request.data.get('taking_survey'),
+                                              question=request.data.get('question'))
+        except:
+            return Response({'error': 'Ответ не был выбран.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = self.get_serializer(result_answer, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
         return Response(serializer.data)
