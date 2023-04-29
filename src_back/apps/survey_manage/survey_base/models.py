@@ -17,6 +17,8 @@ class ISurvey(PolymorphicModel, models.Model):
     description = models.TextField(max_length=400, verbose_name='Описание опроса', null=True, blank=True)
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Был создан')
     slug = models.SlugField(unique=True, max_length=108, null=True, blank=True)
+    img =  models.ImageField(upload_to="photos/isurvey/%Y/%m/%d/", 
+                             verbose_name='фото к опросу', null=True, blank=True)
 
     option_is_published = models.BooleanField(default=False, verbose_name='Публикация', blank=True)
     option_only_for_register_users = \

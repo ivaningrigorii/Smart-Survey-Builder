@@ -5,7 +5,8 @@ import { SSimple, STest } from './Polls';
 import {
   FormControl, TextField,
   Autocomplete, Grid, Container,
-  FormLabel, InputLabel, Select, MenuItem,
+  FormLabel, InputLabel, Select, MenuItem, Button,
+  Stack,
 } from '@mui/material';
 import CreatePollButton from './custom_mui/CreatePollButton';
 import ServicesCreatePage from '../ServicesCreatePage';
@@ -24,7 +25,7 @@ const CreateSelecter = () => {
     1: <SSimple data={data} setData={setData} />,
     2: <STest data={data} setData={setData} />
   };
-    
+
   const handleChange = (event) => {
     setOptionResourcetype(event.target.value);
   };
@@ -52,17 +53,39 @@ const CreateSelecter = () => {
   return (
     <Container>
       <form onSubmit={handleSubmit}>
-        <Grid container direction="column" alignItems="center">
-          <FormControl sx={{ mt:10, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-label">Тип опроса</InputLabel>
+
+        <Stack direction="column"
+          justifyContent="center"
+          alignItems="center"
+          spacing={2}>
+          <FormControl sx={{ mt: 10, minWidth: 120, maxLength: 400, }}>
+            <InputLabel id="demo-simple-select-label" sx={{ maxLength: 400, }}>Тип опроса</InputLabel>
             <Select labelId="demo-simple-select-label" id="demo-simple-select"
               value={optionResourcetype} label="Тип опроса"
-              onChange={handleChange} >
+              onChange={handleChange} sx={{ maxLength: 400, }}>
               <MenuItem value={1}>Обычный опрос</MenuItem>
               <MenuItem value={2}>Тестовый опрос</MenuItem>
             </Select>
           </FormControl>
-        </Grid>
+          <input
+            accept="image/*"
+            style={{ display: 'none' }}
+            id="raised-button-file"
+            multiple
+            type="file"
+          />
+          <label htmlFor="raised-button-file">
+            <Button variant="raised" component="span">
+              Добавить фото-обложку
+            </Button>
+          </label>
+
+        </Stack>
+
+
+
+
+
         <Name />
         <Description />
         {optionResourcetype &&

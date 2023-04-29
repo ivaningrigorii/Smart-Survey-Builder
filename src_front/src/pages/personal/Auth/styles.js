@@ -15,6 +15,14 @@ const useStyles = makeStyles({
         minHeight: '300px',
     },
 
+    box_elements2: {
+        marginTop: '10%',
+        width: 250,
+        backgroundColor: "#adadeb",
+        borderRadius: '25px',
+        minHeight: '360px',
+    },
+
     box_element_with_text: {
         background: "#6666ff",
         borderTopLeftRadius: '25px',
@@ -56,7 +64,7 @@ export { useStyles, theme };
 const ButtonInFormAuth = styled(Button)({
     background: 'linear-gradient(45deg, #ccffff 10%, #e6ccff 30%)',
     border: 0,
-    borderRadius: '25px',
+
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     color: 'black',
     padding: '0 30px',

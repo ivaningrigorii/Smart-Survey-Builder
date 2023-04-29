@@ -7,7 +7,8 @@ export default {
 
     auth: include('/auth/', {
         login: "login/",
-        logout: "logout/"
+        logout: "logout/",
+        registration: "reg/",
     }),
 
     polls: include('/polls/', {

@@ -4,9 +4,7 @@ const cookies = new Cookies();
 
 
 class AuthServices {
-
-    constructor() { }
-
+    
     findAuthTokens() {
         if (cookies.get('tokens')) {
             return true;
@@ -66,6 +64,18 @@ class AuthServices {
                 return Promise.reject(error);
             });
     }
+
+    //registration
+    registr(data) {
+        return axios.post('api/v1/auth/users/', data)
+        .then((resp) => {
+            return Promise.resolve(resp);
+        })
+        .catch((err)=>{
+            return Promise.reject(err);
+        })
+    }
+
 
     // refresh jwt
     refreshToken(tokens) {
