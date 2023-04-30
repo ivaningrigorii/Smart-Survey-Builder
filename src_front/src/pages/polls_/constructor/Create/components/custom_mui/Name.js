@@ -15,17 +15,18 @@ function Name() {
   return (
 
     <Box sx={{
-      marginTop: 1, flexGrow: 1, width: '95%',
+      marginTop: 1, flexGrow: 1,
       maxWidth: '100%'
     }}>
       <TextField
         name="name"
         id="name"
         label="Название"
-        style={{ margin: 20 }}
+        style={{ mt: "10px", }}
         helperText="Введите название опроса"
         fullWidth
         margin="normal"
+        size="small"
         InputLabelProps={{
           shrink: true,
         }}

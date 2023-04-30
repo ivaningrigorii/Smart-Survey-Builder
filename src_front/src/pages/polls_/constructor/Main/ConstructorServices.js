@@ -6,6 +6,8 @@ import { reverse } from 'named-urls';
 
 class ConstructorServices {
 
+    constructor(){}
+
     //опрос
     getPollOptions(id) {
         return axios.get(reverse("api/v1/manage/surv/survey-header/:id/", {id: id, }), {
@@ -17,6 +19,20 @@ class ConstructorServices {
         .catch((error)=>{
             console.log("ошибочка");
             return Promise.reject(error);
+        })
+    }
+
+    updateIsPublished(id, option_is_published) {
+        return axios.patch(reverse("api/v1/manage/surv/survey-header/:id/", {id:id}), {
+            option_is_published: option_is_published,
+        }, {
+            headers: { 'Authorization': 'Bearer ' + _token(), }
+        })
+        .then((response) => {
+            return(Promise.resolve);
+        })
+        .catch((err) => {
+            return Promise.reject(err);
         })
     }
 

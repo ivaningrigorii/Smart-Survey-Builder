@@ -16,14 +16,15 @@ function Description() {
   return (
 
     <Box sx={{
-      marginTop: 1, flexGrow: 1, width: '95%',
+      marginTop: 1, flexGrow: 1,
       maxWidth: '100%',
     }}>
       <TextField
         id="description"
         name="description"
         label="Описание"
-        style={{ margin: 20 }}
+        style={{ mt: "10px", }}
+        size="small"
         helperText="Введите краткое описание"
         fullWidth
         margin="normal"
