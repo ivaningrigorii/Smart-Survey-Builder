@@ -6,7 +6,7 @@ import { Container, Pagination } from '@mui/material';
 import routes from '../../../../../../routes';
 import { reverse } from 'named-urls';
 
-const PAGE_SIZE = 4;
+const PAGE_SIZE = 6;
 
 function finde_size_pagination_line(elements) {
   let count = Math.floor(elements / PAGE_SIZE);
@@ -24,10 +24,10 @@ const ShowPolls = ({ pollsOwnList, setPollsOwnList, make_get, pagination_data })
   return (
     <Box sx={{ minHeight: '80vh', marginTop: 5, }}>
       <Container>
-        <Grid container rowSpacing={4} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid container rowSpacing={{xs: 1, sm: 2, md: 3}} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           {pollsOwnList.map(poll => {
             return (
-              <Grid key={poll.id} item xs={6}>
+              <Grid key={poll.id} item xs={8} sm={6} md={4}>
                 <PollCard poll={poll} make_get={make_get} />
               </Grid>
             );

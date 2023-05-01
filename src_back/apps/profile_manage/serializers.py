@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from .models import Profile
 from ..survey_manage.survey_base.models import ISurvey
+import base64
+from django.core.files import File
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -29,12 +31,20 @@ class UserProfileOwnSerializer(serializers.ModelSerializer):
 
 class CatCreatedSerializer(serializers.ModelSerializer):
     type_survey = serializers.SerializerMethodField('get_type_survey')
+    base64_image = serializers.SerializerMethodField()
 
     class Meta:
         model = ISurvey
         fields = ('id', 'name', 'time_create', 
             'type_survey', 'option_is_published', 
-            'slug', 'description', )
+            'slug', 'description', 'base64_image', )
 
     def get_type_survey(self, obj):
         return type(obj).__name__
+
+    def get_base64_image(self, obj):
+        f = open(obj.img.path, 'rb')
+        image = File(f)
+        data = base64.b64encode(image.read())
+        f.close()
+        return data

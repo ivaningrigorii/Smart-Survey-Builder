@@ -15,6 +15,7 @@ class PollsServices {
             },
         })
             .then((response) => {
+                console.log(response.data);
                 return Promise.resolve(response.data);
             })
             .catch(function (error) {
