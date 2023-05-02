@@ -14,30 +14,39 @@ This is our team project. The system allows you to collect feedback and analyze 
 ##1. НАСТРОЙКА git и скачивание проекта
   Работу описал в GIT BASH, можно попробовать через дескотную версию github - не пробовал.
   Для работы с github лучше в git сразу установить свои name и email, лучше такие же, какие у ваc на github:
+  
   ```
     $ git config --global user.name "John Doe"
     $ git config --global user.email johndoe@example.com
   ```
     
-    Более подробно можно почитать в документации git про первоначальный запуск и настройку git.
+  Более подробно можно почитать в документации git про первоначальный запуск и настройку git.
   С помощью команд <cd>, <cd ..>, <dir или ls> можно переместиться в нужную вам папку.
   Создаёте свою папку:
+  
 ```
     $ mkdir <вместо этого вводите название проекта, например Smart-Survey-Builder>
 ```
+  
   ПЕРЕХОДИТЕ в созданную папку (cd Smart-Survey-Builder)
   Инициализируете git в созданной папке:
+  
 ```
     $ git init
 ```
+  
   После этого в git hub берёте ссылку на проект и вводите команду:
+  
 ```
     $ git remote add origin https://github.com/ivaningrigorii/Smart-Survey-Builder.git
 ```
+  
   Скачиваете файл:
+  
 ```
     $ git pull origin main
 ```
+  
   (понадобится авторизация в github по логину и паролю или по временному токену)
     В дальнейшем будет достаточно команды git pull для скачивания
   ##2. Разворачиваем Python Django и запускаем
@@ -47,25 +56,33 @@ This is our team project. The system allows you to collect feedback and analyze 
     Внутри папки проекта устанавливаете виртуальную среду python с помощью команды:
       python -m venv venv    (для Windows)
     Активируйте виртуальное окружение
+  
  ```
       .\venv\Scripts\activate
  ```
+  
     Должно появиться (venv)
     После этого, в этой же папке вводите команду для установки всех зависимостей python:
+  
  ```
       pip install -r requirements_pip.txt
  ```
+  
     Серверная часть развёрнута. В дальнейшем, для разработчиков бэка, в PyCharm, ещё папку src_back нужно сделать Source Root.
    
    ЗАПУСКАЕМ СЕРВЕРНУЮ ЧАСТЬ:
      переходим в src_back:
+  
  ```
       cd src_back
  ```
+  
      запускаем веб сервер на порте 8000:
+  
  ```
       python manage.py runserver localhost:8000
  ```
+  
     ГОТОВО
     
     Теперь, если перейти в браузе по URL localhost:8000/api/survey-passing/list_surveys/ можно увидеть возвращаемое сервером API
@@ -76,11 +93,14 @@ This is our team project. The system allows you to collect feedback and analyze 
     
     Переходим в папку фронтенда src_front.
     Находясь внутри папки фронтенда в командной строке вводим команду:
+  
 ```
       npm install
 ```
+  
     ГОТОВО, если летят ошибки, вероятно, просто не установлена Node.js или активировано в этом окне (venv)
     ЗАПУСКАЕМ клинтскую часть:
+  
 ```
       npm start
 ```
