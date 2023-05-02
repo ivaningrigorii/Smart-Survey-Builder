@@ -7,7 +7,7 @@ This is our team project. The system allows you to collect feedback and analyze 
 
 
 
-##Установка и запуск
+#Установка и запуск
 
 Что должно быть изначально установлено? git, npm (node.js), python
 
