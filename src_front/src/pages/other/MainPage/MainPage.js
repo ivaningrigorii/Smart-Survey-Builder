@@ -4,6 +4,7 @@ import Footer from "../../../components/Footer/Footer";
 import MainPageInf from "./components/MainPageInf";
 import './styles.css';
 import { Helmet } from 'react-helmet-async';
+import { Box } from "@mui/material";
 
 class MainPage extends Component {
 
@@ -17,7 +18,7 @@ class MainPage extends Component {
     render() {
         return (
 
-            <div className="main-page">
+            <Box>
                 <Helmet>
                     <link id="favicon" rel="icon" href="label.bmp" type="bmp" />
                 </Helmet>
@@ -25,7 +26,7 @@ class MainPage extends Component {
                 <Header />
                 <MainPageInf />
                 <Footer />
-            </div>
+            </Box>
         );
     }
 }

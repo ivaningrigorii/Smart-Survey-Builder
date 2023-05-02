@@ -6,70 +6,34 @@ import logoQuestion from '../images/question.png';
 import logoAnalze from '../images/analize.png';
 import './MainPageInf.css';
 import CreatePollButton from './CreatePollButton';
-class MainPageInf extends Component {
+import { Typography, Box, Container, } from '@mui/material';
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from '@mui/material/styles';
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      surveys: [],
-    };
-  }
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
 
-  render() {
-    return (
 
-      <div className="main-page">
-        
-        
-          <h5>Умный конструктор опросов</h5>
-          <div className="main-page-img">
-            <img src={logoUrl} alt="УКМ" />
-         
+const MainPageInf = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <Container sx={{minHeight: "80vh", }}>
+        <Typography color=" #ef5b7f " variant="h3"
+          sx={{ mt: "40vh", }} textAlign="center"
+          justifyContent="center">
+          <b>Умный конструктор опросов</b>
+        </Typography>
+
+        <div className="main-page-img">
+          <img src={logoUrl} alt="УКМ" />
         </div>
-        <CreatePollButton/>
-        <div id="top_heigh"></div>
-        <div className="main-page-block">
-          <div className="main-page-block-inf">
-            Создавай опрос с помощью удобных инструментов
-          </div>
-        </div>
-        <div class="down_background_for_picture">
-          <div className="main-page-block-inf-image">
-            <img src={logoPen} alt="УКМ" />
-          </div>
-        </div>
-        <br /><br />
+        <CreatePollButton />
+      </Container>
+    </ThemeProvider>
 
-
-
-        <div className="main-page-block">
-          <div className="main-page-block-inf">
-            Делись ссылкой и проходи опрос
-          </div>
-        </div>
-        <div class="down_background_for_picture">
-          <div className="main-page-block-inf-image">
-            <img src={logoQuestion} alt="УКМ" />
-          </div>
-        </div>
-        <br /><br />
-
-
-        <div className="main-page-block">
-          <div className="main-page-block-inf">
-            Получай результат
-          </div>
-        </div>
-        <div class="down_background_for_picture">
-          <div className="main-page-block-inf-image">
-            <img src={logoAnalze} alt="УКМ" />
-          </div>
-        </div>
-        <br /><br /><br />
-
-      </div>
-    );
-
-  }
+  );
 }
 export default MainPageInf;

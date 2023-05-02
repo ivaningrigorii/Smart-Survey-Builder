@@ -1,32 +1,56 @@
 from django.contrib.auth import get_user_model
+from django.dispatch import receiver
 from rest_framework import serializers
 from .models import Profile
 from ..survey_manage.survey_base.models import ISurvey
 import base64
 from django.core.files import File
+from django.db.models.signals import pre_save
+from PIL import Image
+import logging
 
+logger = logging.getLogger(__name__)
 
 class ProfileSerializer(serializers.ModelSerializer):
+    base64_image = serializers.SerializerMethodField()
+
     class Meta:
         model = Profile
-        fields = ['id', 'bio']
+        fields = ['id', 'bio', 'img', 'base64_image']
+
+
+    @receiver(pre_save, sender=Image)
+    def pre_save_image(sender, instance, *args, **kwargs):
+        try:
+            logging.warning("работает")
+            old_img = instance.__class__.objects.get(id=instance.id).img.path
+            try:
+                new_img = instance.image.path
+            except:
+                new_img = None
+            if new_img != old_img:
+                import os
+                if os.path.exists(old_img):
+                    os.remove(old_img)
+        except:
+            pass
+    
+    def get_base64_image(self, obj):
+        if obj.img:
+            f = open(obj.img.path, 'rb')
+            image = File(f)
+            res = base64.b64encode(image.read())
+            f.close()
+            return res
+        
 
 
 class UserProfileOwnSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer(many=False, required=True)
 
-    def update(self, instance, validated_data):
-        instance.username = validated_data.get("username", instance.username)
-        instance.first_name = validated_data.get("first_name", instance.first_name)
-        if "profile" in validated_data:
-            instance.profile.bio = validated_data["profile"].get("bio", instance.profile.bio)
-
-        instance.save()
-        return instance
-
     class Meta:
         model = get_user_model()
-        fields = ['username', 'first_name', 'profile']
+        fields = ['username', 'first_name', 'last_name', 'email' , 'profile']
 
 
 class CatCreatedSerializer(serializers.ModelSerializer):
@@ -43,8 +67,10 @@ class CatCreatedSerializer(serializers.ModelSerializer):
         return type(obj).__name__
 
     def get_base64_image(self, obj):
-        f = open(obj.img.path, 'rb')
-        image = File(f)
-        data = base64.b64encode(image.read())
-        f.close()
-        return data
+        if obj.img:
+            f = open(obj.img.path, 'rb')
+            image = File(f)
+            data = base64.b64encode(image.read())
+            f.close()
+            return data
+    

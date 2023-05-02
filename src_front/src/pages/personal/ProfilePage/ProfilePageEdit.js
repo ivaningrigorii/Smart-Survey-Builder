@@ -1,14 +1,14 @@
 import Header from "../../../components/Header/Header";
 import React, { Component } from 'react';
 import Footer from "../../../components/Footer/Footer";
-import ProfileShowMain from './components/ProfileShowMain';
+import ProfileEdit from './components/ProfileEdit';
 import AuthServices from "../Auth/AuthServices";
 import routes from "../../../routes";
-import { Box, Container,  } from "@mui/material";
+import { Box, Container, } from "@mui/material";
 import { AddBoxTwoTone } from "@mui/icons-material";
 const auths = new AuthServices();
 
-const ProfilePage = () => {
+const ProfilePageEdit = () => {
     document.title = "Профиль";
 
     if (!auths.findAuthTokens()) {
@@ -17,10 +17,10 @@ const ProfilePage = () => {
         return (
             <Box>
                 <Header />
-                <ProfileShowMain />
+                <ProfileEdit />
                 <Footer />
             </Box>
         );
     }
 }
-export default ProfilePage;
+export default ProfilePageEdit;

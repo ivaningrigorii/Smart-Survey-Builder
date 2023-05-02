@@ -18,5 +18,40 @@ class ProfileServices {
                 console.log(error);
             });
     }
+
+    //username, first_name, last_name, email
+    updateUser(data) {
+        const token_ = _token();
+        const bearer_str = 'Bearer ' + token_;
+
+        return axios.patch("api/v1/profile/me/", data, {
+            headers: {
+                'Authorization': bearer_str,
+            },
+        })
+            .then(function (response) {
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+    //img, bio
+    updateProfile(data) {
+        const token_ = _token();
+        const bearer_str = 'Bearer ' + token_;
+
+        return axios.patch("api/v1/profile/more-me/", data, {
+            headers: {
+                'Authorization': bearer_str,
+            },
+        })
+            .then(function (response) {
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 }
 export default ProfileServices;

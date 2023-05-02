@@ -12,6 +12,14 @@ import PollsServices from '../../PollsServices';
 import { reverse } from 'named-urls';
 import routes from '../../../../../../routes';
 import { useClipboard } from 'use-clipboard-copy';
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from '@mui/material/styles';
+
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
 
 const ps = new PollsServices();
 
@@ -52,34 +60,40 @@ const PollCard = ({ poll, make_get }) => {
   }
 
   return (
+    <ThemeProvider theme={theme}>
+      <Card sx={{ backgroundColor: ' #f8f7f8 ', }}>
+        <CardMedia
+          component="img"
+          sx={{ height: { xs: "150px" } }}
+          src={`data:image;base64,${poll.base64_image}`}
+          title="green iguana"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {poll.name}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" sx={{
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}>
+            {poll.description}
+          </Typography>
 
-    <Card sx={{ backgroundColor: ' #f8f7f8 ', }}>
-      <CardMedia
-        component="img"
-        sx={{ height: { xs: "150px" } }}
-        src={`data:image;base64,${poll.base64_image}`}
-        title="green iguana"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {poll.name}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {poll.description}
-        </Typography>
+        </CardContent>
+        <Grid alignItems="center">
+          <IconButton onClick={handleReloadCards}><Delete sx={{ color: pink[500] }} /></IconButton>
+          <IconButton><Poll /></IconButton>
+          <IconButton onClick={handleEditCards}><Edit /></IconButton>
+          {poll.option_is_published &&
+            <IconButton onClick={() => {
+              clipboard.copy(url);
+              alert("Ссылка на опрос скопирована");
+            }}><Reply /></IconButton>}
+        </Grid>
+      </Card>
+    </ThemeProvider>
 
-      </CardContent>
-      <Grid alignItems="center">
-        <IconButton onClick={handleReloadCards}><Delete sx={{ color: pink[500] }} /></IconButton>
-        <IconButton><Poll /></IconButton>
-        <IconButton onClick={handleEditCards}><Edit /></IconButton>
-        {poll.option_is_published &&
-          <IconButton onClick={() => {
-            clipboard.copy(url);
-            alert("Ссылка на опрос скопирована");
-          }}><Reply /></IconButton>}
-      </Grid>
-    </Card>
 
   );
 }

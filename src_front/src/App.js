@@ -11,6 +11,7 @@ import ConstructorPage from "./pages/polls_/constructor/Main/StartPage/Construct
 import StartPassing from "./pages/polls_/passing/StartPage/Passing";
 import LogoutWithotPage from "./pages/personal/Auth/LogOut/LogoutWithotPage";
 import RegistrationPage from "./pages/personal/Auth/Registration/RegistrationPage";
+import ProfilePageEdit from "./pages/personal/ProfilePage/ProfilePageEdit";
 import routes from './routes.js'
 
 
@@ -22,6 +23,9 @@ class App extends Component {
           <Route path={routes.home} element={<MainPage />} />
 
           <Route path={routes.profile} element={<ProfilePage />} />
+          <Route path={routes.profile_next.edit} element={<ProfilePageEdit/>}/>
+
+
           <Route path={routes.auth.login} element={<EnterPage />} />
           <Route path={routes.auth.logout} element={<LogoutWithotPage/>}/>
           <Route path={routes.auth.registration} element={<RegistrationPage/>}/>
