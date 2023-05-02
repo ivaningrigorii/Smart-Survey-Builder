@@ -4,6 +4,7 @@ from .yasg import urlpatterns as doc_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/analytics/', include('apps.analitics.simple_analytics.urls')),
     path('api/v1/passing/', include('apps.survey_passing.urls')),
     path('api/v1/manage/surv/', include('apps.survey_manage.survey_base.urls')),
     path('api/v1/manage/quest/', include('apps.survey_manage.question_blocks.urls')),
