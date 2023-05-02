@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import permissions, exceptions
 from rest_framework.generics import get_object_or_404
 
+from apps.analitics.simple_analytics.models import SimpleAnalytics
 from apps.survey_manage.answer_blocks.models import IAnswer
 from apps.survey_manage.question_blocks.models import IQuestion
 from apps.survey_manage.survey_base.models import ISurvey
@@ -37,6 +38,20 @@ class IsOwnerISurvey(permissions.BasePermission):
             return result
         except:
             return False
+
+    def has_permission(self, request, view):
+        message = 'Опрос или вопрос не существуют'
+        try:
+            survey_id = request.data.get('survey')
+            survey = ISurvey.objects.get(pk=survey_id)
+
+            if survey.user == request.user:
+                return True
+            else:
+                message = 'Не владелец опроса'
+                raise exceptions.PermissionDenied(detail=message)
+        except:
+            raise exceptions.PermissionDenied(detail=message)
 
 
 class IsOwnerQuestionInSurvey(permissions.BasePermission):
@@ -92,6 +107,7 @@ class IsPublishedSurvey(permissions.BasePermission):
     """
         Проверка опроса на опубликованность
     """
+
     def has_permission(self, request, view):
         try:
             if request.data.get('taking_survey') is not None:
@@ -117,6 +133,7 @@ class IsActiveTakingSurvey(permissions.BasePermission):
     """
         Проверка завершённости прохождения опроса
     """
+
     def has_permission(self, request, view):
         try:
             taking_survey_id = request.data.get('taking_survey')
@@ -135,6 +152,7 @@ class IsAnswerInSurvey(permissions.BasePermission):
     """
         Проверка корректного выбора ответа и вопроса
     """
+
     def has_permission(self, request, view):
         try:
             taking_survey_id = request.data.get('taking_survey')
@@ -159,6 +177,7 @@ class IsCorrectAnswerSerializer(permissions.BasePermission):
     """
         Проверка корректного сериализатора при сохранениии ответа
     """
+
     def has_permission(self, request, view):
 
         resource_type = request.data.get('resourcetype')
@@ -177,6 +196,7 @@ class IsOnlySelectAnswer(permissions.BasePermission):
     """
         Проверка на наличие уже выбранного ответа
     """
+
     def has_permission(self, request, view):
 
         taking_survey_id = request.data.get('taking_survey')
@@ -186,6 +206,47 @@ class IsOnlySelectAnswer(permissions.BasePermission):
             return True
         else:
             message = 'Ответ уже выбран'
+            raise exceptions.PermissionDenied(detail=message)
+
+
+class IsQuestionInSurvey(permissions.BasePermission):
+    """
+        Проверка корректного выбора вопроса и опроса
+    """
+
+    def has_permission(self, request, view):
+        message = 'Опрос или вопрос не существуют'
+        try:
+            survey_id = request.data.get('survey')
+            survey = ISurvey.objects.get(pk=survey_id)
+            question_id = request.data.get('question')
+            question = IQuestion.objects.get(pk=question_id)
+            if question.survey == survey:
+                return True
+            else:
+                message = 'Вопрос не принадлежит опросу'
+                raise exceptions.PermissionDenied(detail=message)
+        except:
+            raise exceptions.PermissionDenied(detail=message)
+
+
+class IsQuestionHaveAnalytics(permissions.BasePermission):
+    """
+        Проверка наличия аналитики у вопроса
+    """
+
+    def has_permission(self, request, view):
+        message = 'Вопрос не существует'
+        try:
+            question_id = view.kwargs.get('question_id')
+            question = IQuestion.objects.get(pk=question_id)
+            analytics = SimpleAnalytics.objects.get(question=question)
+            if analytics is not None:
+                return True
+            else:
+                message = 'У вопроса нет аналитики'
+                raise exceptions.PermissionDenied(detail=message)
+        except:
             raise exceptions.PermissionDenied(detail=message)
 
 
