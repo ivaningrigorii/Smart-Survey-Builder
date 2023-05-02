@@ -55,7 +55,12 @@ This is our team project. The system allows you to collect feedback and analyze 
     
     Переходим в командной строке в папку проекта, например, было Smart-Survey-Builder.
     Внутри папки проекта устанавливаете виртуальную среду python с помощью команды:
-      python -m venv venv    (для Windows)
+  
+  ```
+      python -m venv venv
+  ```
+  
+    (для Windows)
     Активируйте виртуальное окружение
   
  ```
