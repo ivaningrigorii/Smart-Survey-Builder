@@ -15,7 +15,7 @@ import ShowPolls from './ShowPolls';
 
 const ps = new PollsServices();
 const auths = new AuthServices();
-const PAGE_SIZE = 4;
+const PAGE_SIZE = 6;
 
 const useStylesThis = makeStyles({
     grid_style: {

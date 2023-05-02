@@ -6,6 +6,8 @@ import { reverse } from 'named-urls';
 
 class ConstructorServices {
 
+    constructor(){}
+
     //опрос
     getPollOptions(id) {
         return axios.get(reverse("api/v1/manage/surv/survey-header/:id/", {id: id, }), {
@@ -17,6 +19,20 @@ class ConstructorServices {
         .catch((error)=>{
             console.log("ошибочка");
             return Promise.reject(error);
+        })
+    }
+
+    updateIsPublished(id, option_is_published) {
+        return axios.patch(reverse("api/v1/manage/surv/survey-header/:id/", {id:id}), {
+            option_is_published: option_is_published,
+        }, {
+            headers: { 'Authorization': 'Bearer ' + _token(), }
+        })
+        .then((response) => {
+            return(Promise.resolve);
+        })
+        .catch((err) => {
+            return Promise.reject(err);
         })
     }
 
@@ -36,15 +52,33 @@ class ConstructorServices {
             headers: { 'Authorization': 'Bearer ' + _token(), }
         },)
             .then((response) => {
-                return Promise.resolve({id: response.data.id});
+                return Promise.resolve(response.data);
             } )
             .catch((error) => {
                 return Promise.reject(error);
             });
     }
 
+    deleteQuestion(id) {
+        let path = reverse("api/v1/manage/quest/question/:id/", {id: id});
+        return axios.delete(path, {
+            headers: { 'Authorization': 'Bearer ' + _token(), }
+        })
+        .then((respone)=>{ return Promise.resolve(respone.data);})
+        .catch((error)=>{ return Promise.reject(error);})
+    }
+
+    saveQuestion(dataquestion) {
+        let path = reverse("api/v1/manage/quest/question/:id/", {id: dataquestion.id});
+        return axios.patch(path, dataquestion, {
+            headers: { 'Authorization': 'Bearer ' + _token(), }
+        })
+        .then((respone)=>{ return Promise.resolve(respone.data);})
+        .catch((error)=>{ return Promise.reject(error);})
+    }
+
     //ответы
-    getAllAnswers(id) {
+    getAllAnswers (id) {
         let path = reverse("api/v1/manage/ans/answers-question/:id/", {id: id});
         return axios.get(path, {
             headers: { 'Authorization': 'Bearer ' + _token(), }

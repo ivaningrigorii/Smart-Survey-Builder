@@ -8,14 +8,15 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     height: '5vh',
-    marginBottom:'1%'
+    marginBottom: '1%'
   }
 };
 function CreatePollButton() {
 
   return (
-    <div style={styles.center}>      
-      <Button  sx={{ my: 2,  display: 'block' }} color="secondary" variant="contained" href={routes.polls.create} >
+    <div style={styles.center}>
+      <Button sx={{ my: 2, display: 'block', }}
+        color="secondary" variant="contained" href={routes.polls.create} >
         Создать опрос
       </Button>
     </div>

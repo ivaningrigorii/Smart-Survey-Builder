@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_cleanup.apps.CleanupConfig',
     'apps.analitics.complex_analytics.apps.ComplexAnalyticsConfig',
     'apps.analitics.simple_analytics.apps.SimpleAnalyticsConfig',
     'apps.survey_manage.answer_blocks.apps.AnswerBlocksConfig',

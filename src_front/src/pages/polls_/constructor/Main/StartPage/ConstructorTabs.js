@@ -7,14 +7,15 @@ import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
 import Box from '@mui/material/Box';
 import { useState, useEffect, useLayoutEffect } from 'react';
-import Constructor from '../components/Constructor';
-import SpecialSettings from '../components/SettingPoll/SpecialSettings';
-import StandartSettings from '../components/SettingPoll/StandartSettings';
-import axios from 'axios';
-import { reverse } from 'named-urls';
+
+import SpecialSettings from '../TabPages/SettingPoll/SpecialSettings';
+import StandartSettings from '../TabPages/SettingPoll/StandartSettings';
+
 import _token from '../../../../../AxiosTokens';
 import ConstructorServices from '../ConstructorServices';
-import { makeStyles } from '@mui/styles';
+
+import ListQuestions from '../TabPages/ConstructorPoll/Questions/ListQuestions';
+import SendPoll from '../TabPages/SendPoll/SendPoll';
 
 const cs = new ConstructorServices();
 
@@ -30,29 +31,31 @@ const ConstructorTabs = ({ poll, }) => {
     }
 
     cs.getPollOptions(poll)
-    .then((result)=>setPollOptions(result))
-    .catch((error)=>{ alert("выполненение невозможно, ошибка!")})
+      .then((result) => setPollOptions(result))
+      .catch((error) => { alert("выполненение невозможно, ошибка!") })
 
-  }, [pollOptions, ]);
+  }, [pollOptions,]);
 
   return (
     <Box sx={{
-      marginTop: 10, flexGrow: 1, minHeight: '110vh',    }}>
+      marginTop: 6, flexGrow: 1, minHeight: '110vh',
+    }}>
       {pollOptions &&
         <TabsUnstyled defaultValue={0}>
           <TabsList>
             <Tab value={0}>Конструктор опроса</Tab>
-            <Tab value={1}>Общие настройки</Tab>
-            {pollOptions.resourcetype != "SurveySimple" &&
-              <Tab value={2}>Специальные настройки</Tab>
-            }
+            <Tab value={1}>Поделиться опросом</Tab>
           </TabsList>
-          <TabPanel value={0}><Constructor idPoll={pollOptions.id} 
-            typePoll={pollOptions.resourcetype}/> </TabPanel>
-          <TabPanel value={1}><StandartSettings /></TabPanel>
-          {pollOptions.resourcetype != "SurveySimple" &&
-            <TabPanel value={2}><SpecialSettings /></TabPanel>
-          }
+          <TabPanel value={0}>
+            <ListQuestions idPoll={pollOptions.id}
+              poll_type={pollOptions.resourcetype}
+              typePoll={pollOptions.resourcetype} />
+          </TabPanel>
+          <TabPanel value={1}>
+            <SendPoll slug={pollOptions.slug} 
+              option_is_published={pollOptions.option_is_published} 
+              id={pollOptions.id}/>
+          </TabPanel>
         </TabsUnstyled>
       }
     </Box>

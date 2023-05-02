@@ -2,7 +2,7 @@ import { useCallback, useState, } from "react";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { TextField, InputAdornment, IconButton,  } from '@mui/material';
 
-const TextBoxPassword = ({setPassword, style}) => {
+const TextBoxPassword = ({setPassword, style, size, label}) => {
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
@@ -12,10 +12,11 @@ const TextBoxPassword = ({setPassword, style}) => {
     }, [setPassword]);
 
     return (
-        <TextField label="Пароль"
+        <TextField label={label}
             type={showPassword ? "text" : "password"}
             className={style}
             onChange={handleInputChange}
+            size={size}
             InputProps={{
                 endAdornment: (
                     <InputAdornment position="end">
