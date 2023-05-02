@@ -59,6 +59,11 @@ const PollCard = ({ poll, make_get }) => {
     window.location.replace(path);
   }
 
+  const handleAnalyticsCards = (event) => {
+    let path = reverse(routes.polls.analytics, { poll: poll.id });
+    window.location.replace(path);
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Card sx={{ backgroundColor: ' #f8f7f8 ', }}>
@@ -83,7 +88,7 @@ const PollCard = ({ poll, make_get }) => {
         </CardContent>
         <Grid alignItems="center">
           <IconButton onClick={handleReloadCards}><Delete sx={{ color: pink[500] }} /></IconButton>
-          <IconButton><Poll /></IconButton>
+          <IconButton  onClick={handleAnalyticsCards}><Poll /></IconButton>
           <IconButton onClick={handleEditCards}><Edit /></IconButton>
           {poll.option_is_published &&
             <IconButton onClick={() => {

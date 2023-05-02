@@ -12,6 +12,7 @@ import StartPassing from "./pages/polls_/passing/StartPage/Passing";
 import LogoutWithotPage from "./pages/personal/Auth/LogOut/LogoutWithotPage";
 import RegistrationPage from "./pages/personal/Auth/Registration/RegistrationPage";
 import ProfilePageEdit from "./pages/personal/ProfilePage/ProfilePageEdit";
+import AnalyticsPage from "./pages/polls_/analytics/Main/StartPage/ConstructorPage";
 import routes from './routes.js'
 
 
@@ -36,6 +37,7 @@ class App extends Component {
 
           <Route path={routes.polls.create} element={<CreatePage />} />
           <Route path={routes.polls.constructor} element={<ConstructorPage />} />
+          <Route path={routes.polls.analytics} element={<AnalyticsPage />} />
 
           <Route path={routes.polls.passing.to} element={<StartPassing />} />
         </Routes>

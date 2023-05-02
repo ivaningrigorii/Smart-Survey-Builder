@@ -22,7 +22,7 @@ export default {
 
         create: "create/",
         constructor: "constructor/:poll/",
-
+        analytics: "analytics/:poll/",
         
 
         passing: {
