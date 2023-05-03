@@ -1,70 +1,31 @@
-import { useState, useCallback, useEffect } from 'react';
-import Card from '@mui/material/Card';
-import { Grid, IconButton } from '@mui/material';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
-import { Poll, Reply, Delete, Edit } from '@mui/icons-material';
-import { pink } from '@mui/material/colors';
-// import PollsServices from '../PollsServices';
+import { useState, useEffect } from 'react';
 import AnServices from '../AnServices';
-import { reverse } from 'named-urls';
-import routes from '../../../../routes';
-import { useClipboard } from 'use-clipboard-copy';
 
-import { Box, Stack } from "@mui/material";
-import {
-  createTheme,
-  responsiveFontSizes,
-  ThemeProvider,
-} from '@mui/material/styles';
-
-// let theme = createTheme();
-// theme = responsiveFontSizes(theme);
-
+import { Box } from "@mui/material";
+import FormData from 'form-data'
+import { PieChart, Pie, Tooltip, Cell } from 'recharts';
 
 const as = new AnServices();
 
-// const Item = styled(Paper)(({ theme }) => ({
-//   // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-//   // ...theme.typography.body2,
-//   // padding: theme.spacing(1),
-//   // textAlign: 'center',
-//   // color: theme.palette.text.secondary,
-// }));
-
-
 const AnalyticsCard = (props) => {
   const idPoll=props.id;
-  const [name, setName] = useState();
-  const [desc, setDesc] = useState();
+  const idQuestion=props.id_qw;
   const [questions, setQuestions] = useState();
+  const [data, setData] = useState(new FormData());
 
   useEffect(() => {
     console.log(idPoll);
-    // as.getPollOptions(idPoll)
-    as.getAll(idPoll)
+    console.log(idQuestion);
+    var data_ = data;
+    data_.append('survey', idPoll);
+    data_.append('question', idQuestion);
+ 
+    setData(data_);
+    as.postPollAnalize(data)
         .then((result) => {
-            // console.log(result);
-            //  const res = JSON.parse(JSON.stringify(result));
-            //  const res2 = JSON.parse(JSON.stringify(res.results));
-            // setName(result.name);
-            // console.log(result);
-            // console.log(name);
-            // console.log(result.results.name);
-            // console.log(typeof result.results.name);
-            // console.log(name);
-            // setDesc(result.description)
-            setQuestions(result.results.questions);
-            console.log(result.results.questions);
+            setQuestions(result);
+            console.log(result);
             console.log(questions);
-            const json = JSON.parse(JSON.stringify(result.results.questions));
-            // const obj = JSON.parse(result.results.questions);
-            // const obj2 = JSON.parse(JSON.stringify(obj));
-            console.log(json);
-            console.log(json);
         })
         .catch((error) => {
             console.log(error);
@@ -72,69 +33,33 @@ const AnalyticsCard = (props) => {
         })
 }, []);
 
-// const obj = JSON.parse(questions);
-// console.log(obj.id); // "John"
+useEffect(() => {
+  console.log(questions);
+}, [questions]);
 
-  // const clipboard = useClipboard();
-  // const url = "http://" + window.location.host + reverse(routes.polls.analytics, { poll: poll.id });
-  // console.log(props.id);
-
-
-
-
-  // const handleReloadCards = (event) => {
-  //   let result = window.confirm("Вы желаете удалить опрос?");
-  //   if (result) {
-  //     ps.deletePoll(poll.id)
-  //       .then((result) => { handleMake(event) })
-  //       .catch((error) => { return false })
-  //   }
-  // }
-
+const COLORS = ['#0088FE', '#00C49F', 'violet', '#FF8042'];
  
-
-  return (
-   
-    <Box>
-         {/* <Box>
-            {questions &&
-                questions.map((question) => {
-                    return (
-                        <Box key={question.id}>
-                            {question}
-                        </Box>
-                    );
-                })}
-            <Box sx={{ marginTop: "5vh" }} />
-        </Box> */}
-        <Typography  marginTop={10}>
-            {
-            JSON.stringify(questions)}
-          </Typography>
-
-          {/* <Typography  marginTop={10}>
-            
-          {JSON.parse(questions)}
-          </Typography> */}
-
-{/* <h2>{questions.text_question}</h2> */}
-      {/* <ul>
-        {questions.answers.map(answer => (
-          <li key={answer}>{answer}</li>
+  return ( 
+    <Box>   
+          <PieChart width={500} height={400} marginLeft={1}>
+      <Pie
+        dataKey="count"
+        isAnimationActive={false}
+        data={questions}
+        cx={200}
+        cy={200}
+        outerRadius={80}
+        fill="#8884d8"
+        labelLine={false}
+        label={({ text, count }) => `${text}: ${count}`}
+      >
+        {questions&&questions.map((entry, index) => (
+          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
         ))}
-      </ul> */}
-          {/* <Typography  marginTop={1}>
-            {desc}
-          </Typography> */} 
-       
-          {/* <ul>
-        {questions.map(item => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul> */}
+      </Pie>
+      <Tooltip />
+    </PieChart>
           </Box>
-
-
   );
 }
 export default AnalyticsCard;

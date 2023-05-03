@@ -4,7 +4,7 @@ import { Box, Stack } from "@mui/material";
 
 import QuestSimple from "./Base/QuestionSimple";
 import QuestTestSimpleEv from './Base/QuestionTestSimpleEv';
-
+import AnalyticsCard from "../../../../components/AnalyticsCard";
 import CreateQuestion from "./DialogCreateQuestion";
 
 
@@ -84,6 +84,7 @@ const ListQuestions = ({ idPoll, poll_type, }) => {
                 questions.map((question) => {
                     return (
                         <Box key={question.id}>
+                          
                             {type_question(question, deleteQuestion, saveQuestion)}
                         </Box>
                     );
