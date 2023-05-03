@@ -2,6 +2,13 @@ from rest_framework import serializers
 from rest_polymorphic.serializers import PolymorphicSerializer
 
 from apps.survey_passing.models import TakingSurvey, ResultSelect, ResultTextInput
+from .models import ISurvey
+
+#change slug to id
+class ISurveySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ISurvey
+        fields = ["id", "slug"]
 
 
 class TakingSurveySerializer(serializers.ModelSerializer):

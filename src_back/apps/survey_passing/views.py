@@ -23,6 +23,12 @@ class QuestionsPagination(PageNumberPagination):
     max_page_size = 1000
 
 
+class IdSurveyFromSlug(generics.RetrieveAPIView):
+    serializer_class = ISurveySerializer
+    lookup_field = 'slug'
+    queryset = ISurvey.objects.all()
+    
+
 class ListAllQuestionsInSurvey(generics.RetrieveAPIView):
     """
         Возврат шапки опроса и вопросов с вариантами ответов (5 вопросов на странице)
