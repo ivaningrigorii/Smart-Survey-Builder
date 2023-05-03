@@ -16,7 +16,7 @@ class TakingSurvey(models.Model):
     """ Прохождение опроса (их может быть несколько у одного пользователя)"""
     survey = models.ForeignKey(ISurvey, verbose_name='Проходимый опрос', on_delete=models.CASCADE)
     user = models.ForeignKey(get_user_model(), verbose_name='Проходящий',
-                             null=True, on_delete=models.SET_NULL)
+                             null=True, on_delete=models.SET_NULL, blank=True, )
 
     time_passing = models.IntegerField(verbose_name='Время прохождения в минутах', null=True, blank=True)
     time_start = models.DateTimeField(null=True, verbose_name='Начало прохождения')

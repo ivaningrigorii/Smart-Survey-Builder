@@ -1,3 +1,4 @@
+import logging
 from django.contrib.auth import get_user_model
 from rest_framework import permissions, exceptions
 from rest_framework.generics import get_object_or_404
@@ -87,6 +88,22 @@ class IsOwnerAnswerInQuestionInSurvey(permissions.BasePermission):
             return user and (survey.user == user)
         except:
             return False
+
+
+class IsPublishedSurveyObj(permissions.BasePermission):
+    """
+        Проверка опроса на опубликованность
+    """
+    def has_object_permission(self, request, view, obj):
+        if type(obj) == TakingSurvey:
+            return True;
+        try:
+            if obj.option_is_published==True:
+                logging.warning("возвращаем")
+                return True
+        except:
+            return False
+        return False
 
 
 class IsPublishedSurvey(permissions.BasePermission):

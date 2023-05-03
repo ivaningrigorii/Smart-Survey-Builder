@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from apps.survey_manage.survey_base.models import ISurvey
 from src_back.permissions import IsPublishedSurvey, IsActiveTakingSurvey, IsAnswerInSurvey, IsCorrectAnswerSerializer, \
-    IsOnlySelectAnswer
+    IsOnlySelectAnswer, IsPublishedSurveyObj
 from .models import IResultAnswer
 from .serializers import *
 from ..survey_manage.answer_blocks.models import IAnswer
@@ -14,6 +14,7 @@ from ..survey_manage.answer_blocks.serializers import IAnswerFullSerializer
 from ..survey_manage.question_blocks.models import IQuestion
 from ..survey_manage.question_blocks.serializers import IQuestionFullSerializer
 from ..survey_manage.survey_base.serializers import ISurveyFullSerializer
+import logging;
 
 
 class QuestionsPagination(PageNumberPagination):
@@ -33,16 +34,23 @@ class ListAllQuestionsInSurvey(generics.RetrieveAPIView):
     """
         Возврат шапки опроса и вопросов с вариантами ответов (5 вопросов на странице)
     """
-    serializer_class = ISurveyFullSerializer
-    permission_classes = (IsAuthenticated, IsPublishedSurvey)
+    permission_classes = [IsPublishedSurveyObj, ]
+    serializer_class = TakingSurveySerializer
     lookup_field = 'id'
-    queryset = ISurvey.objects.all()
+    queryset = TakingSurvey.objects.all()
     pagination_class = QuestionsPagination
 
     def get(self, request, *args, **kwargs):
         instance = self.get_object()
-        serializer = self.get_serializer(instance)
-        questions = IQuestion.objects.filter(survey=instance)
+
+        survey=ISurvey.objects.get(pk=instance.survey.pk)
+        self.check_object_permissions(self.request, survey)
+
+        logging.warning(survey.pk)
+
+        serializer = ISurveyFullSerializer(survey)
+
+        questions = IQuestion.objects.filter(survey=survey)
         # Пагинация ответа по вопросам
         paginator = self.pagination_class()
         result_page = paginator.paginate_queryset(questions, request)
@@ -64,23 +72,34 @@ class StartTakingSurveyAPIView(generics.CreateAPIView):
         Создание прохождения опроса
     """
     serializer_class = TakingSurveySerializer
-    permission_classes = (IsAuthenticated, IsPublishedSurvey)
+    permission_classes = (IsPublishedSurvey, )
 
     def post(self, request, *args, **kwargs):
+        taking_survey = ""
         survey = get_object_or_404(ISurvey, id=request.data.get('survey'))
-        request.data["user"] = request.user.id
-        user = request.data["user"]
-        taking_surveys = TakingSurvey.objects.filter(survey=survey, user_id=user)
 
-        # Поиск незавершённого прохождения и его возврат
-        for taking_survey in taking_surveys:
-            if not taking_survey.is_completed:
-                serializer = self.get_serializer(taking_survey)
-                return Response(serializer.data)
+        # Проверка анонимности прохождения и доступности этого
+        if not request.user.id and survey.option_only_for_register_users==True:
+            return Response({
+                'error': 'Для прохождения необходимо зарегистрироваться.'
+            }, status=status.HTTP_401_UNAUTHORIZED)
 
-        # Проверка кол-ва попыток прохождения
-        if taking_surveys.count() >= survey.max_attempts:
-            return Response({'error': 'Превышено количество попыток прохождения.'}, status=status.HTTP_400_BAD_REQUEST)
+        if request.user.id:
+            request.data["user"] = request.user.id
+            user = request.data["user"]
+            taking_surveys = TakingSurvey.objects.filter(survey=survey, user_id=user)
+
+            # Поиск незавершённого прохождения и его возврат
+            for taking_survey in taking_surveys:
+                if not taking_survey.is_completed:
+                    serializer = self.get_serializer(taking_survey)
+                    return Response(serializer.data)
+
+            # Проверка кол-ва попыток прохождения
+            if taking_surveys.count() >= survey.max_attempts:
+                return Response({
+                    'error': 'Превышено количество попыток прохождения.'
+                }, status=status.HTTP_400_BAD_REQUEST)
 
         return self.create(request, *args, **kwargs)
 
