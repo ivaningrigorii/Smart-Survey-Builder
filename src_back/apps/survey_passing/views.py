@@ -24,7 +24,7 @@ class QuestionsPagination(PageNumberPagination):
 
 
 class IdSurveyFromSlug(generics.RetrieveAPIView):
-    serializer_class = ISurveySerializer
+    serializer_class = ISurveyFullSerializer
     lookup_field = 'slug'
     queryset = ISurvey.objects.all()
     
