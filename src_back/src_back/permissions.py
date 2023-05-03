@@ -39,20 +39,6 @@ class IsOwnerISurvey(permissions.BasePermission):
         except:
             return False
 
-    def has_permission(self, request, view):
-        message = 'Опрос или вопрос не существуют'
-        try:
-            survey_id = request.data.get('survey')
-            survey = ISurvey.objects.get(pk=survey_id)
-
-            if survey.user == request.user:
-                return True
-            else:
-                message = 'Не владелец опроса'
-                raise exceptions.PermissionDenied(detail=message)
-        except:
-            raise exceptions.PermissionDenied(detail=message)
-
 
 class IsOwnerQuestionInSurvey(permissions.BasePermission):
     "Для вопросов в опросе, которыми user владеет"
@@ -245,6 +231,24 @@ class IsQuestionHaveAnalytics(permissions.BasePermission):
                 return True
             else:
                 message = 'У вопроса нет аналитики'
+                raise exceptions.PermissionDenied(detail=message)
+        except:
+            raise exceptions.PermissionDenied(detail=message)
+
+
+class IsOwnerISurveyAnalytics(permissions.BasePermission):
+    "Доступ только если хозяин объекта"
+
+    def has_permission(self, request, view):
+        message = 'Опрос или вопрос не существуют'
+        try:
+            survey_id = request.data.get('survey')
+            survey = ISurvey.objects.get(pk=survey_id)
+
+            if survey.user == request.user:
+                return True
+            else:
+                message = 'Не владелец опроса'
                 raise exceptions.PermissionDenied(detail=message)
         except:
             raise exceptions.PermissionDenied(detail=message)
