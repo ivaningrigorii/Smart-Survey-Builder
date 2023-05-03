@@ -8,6 +8,23 @@ class ConstructorServices {
 
     constructor(){}
 
+    // postPollAnalize(data) {
+    //     return axios.post('api/v1/analytics/simple_analytics/', data, {
+    //         headers: { 'Authorization': 'Bearer ' + _token(), }
+    //     },)
+    //         .then((response) => {
+    //             return Promise.resolve({id: response.data.id});
+    //         } )
+    //         .catch((error) => {
+    //             return Promise.reject(error);
+    //         });
+    // }
+
+
+
+
+
+
     //опрос
     getPollOptions(id) {
         return axios.get(reverse("api/v1/manage/surv/survey-header/:id/", {id: id, }), {
