@@ -6,7 +6,8 @@ from rest_framework.response import Response
 
 from apps.analitics.simple_analytics.models import SimpleAnalytics
 from apps.analitics.simple_analytics.serializers import SimpleAnalyticsSerializer
-from src_back.permissions import IsPublishedSurvey, IsOwnerISurvey, IsQuestionInSurvey, IsQuestionHaveAnalytics
+from src_back.permissions import IsPublishedSurvey,  IsQuestionInSurvey, IsQuestionHaveAnalytics, \
+    IsOwnerISurveyAnalytics
 
 
 class CreateSimpleAnalyticsAPIView(generics.CreateAPIView):
@@ -14,7 +15,7 @@ class CreateSimpleAnalyticsAPIView(generics.CreateAPIView):
         Создание аналитики вопроса
     """
     serializer_class = SimpleAnalyticsSerializer
-    permission_classes = (IsAuthenticated, IsPublishedSurvey, IsQuestionInSurvey, IsOwnerISurvey)
+    permission_classes = (IsAuthenticated, IsPublishedSurvey, IsQuestionInSurvey, IsOwnerISurveyAnalytics, )
     queryset = SimpleAnalytics.objects.all()
 
     def post(self, request, *args, **kwargs):
