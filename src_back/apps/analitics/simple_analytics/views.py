@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from apps.analitics.simple_analytics.models import SimpleAnalytics
 from apps.analitics.simple_analytics.serializers import SimpleAnalyticsSerializer
-from permissions import IsPublishedSurvey, IsOwnerISurvey, IsQuestionInSurvey, IsQuestionHaveAnalytics
+from src_back.permissions import IsPublishedSurvey, IsOwnerISurvey, IsQuestionInSurvey, IsQuestionHaveAnalytics
 
 
 class CreateSimpleAnalyticsAPIView(generics.CreateAPIView):
