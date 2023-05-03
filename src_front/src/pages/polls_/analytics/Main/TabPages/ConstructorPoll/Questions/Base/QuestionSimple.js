@@ -16,7 +16,7 @@ import CreateAnswer from '../../Answers/DialogCreateAnswer';
 import { IconButton, TextField } from '@material-ui/core';
 
 import EditQuestion from './EditQuestions/DialogEditQuestion';
-
+import AnalyticsCard from '../../../../../components/AnalyticsCard';
 
 const allow_fields_adding = [
     "AnswerTextInput",
@@ -166,8 +166,7 @@ const QuestSimple = ({ question, deleteQuestion, saveQuestion, }) => {
                             <p>Обязателен к прохождению</p>
                         }
                     </Stack>
-
-
+                    <AnalyticsCard id={question.survey} id_qw={question.id} />
                 </CardContent>
             </Card>
         </Box >

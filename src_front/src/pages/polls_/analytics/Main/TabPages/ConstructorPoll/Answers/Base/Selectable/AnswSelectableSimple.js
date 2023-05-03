@@ -63,9 +63,8 @@ const ASelectableSimple = ({ answer, deleteAnswer, saveAnswer, one_answer_with_a
             setFieldEdit(false);
         }
     }
-
     return (
-        <Box>
+        <Box>      
             <Card className={classes.card_style} sx={{ borderRadius: "25px", }}>
                 {field_edit == true &&
                     <CardContent>
@@ -73,7 +72,6 @@ const ASelectableSimple = ({ answer, deleteAnswer, saveAnswer, one_answer_with_a
                             <Stack onClick={cancelChanging} >
                                 ответ на простой вопрос
                             </Stack>
-
                             <IconButton size="small" color="primary"
                                 onClick={handleDelete}>
                                 <DeleteOutline fontSize="inherit" />
@@ -86,43 +84,21 @@ const ASelectableSimple = ({ answer, deleteAnswer, saveAnswer, one_answer_with_a
                                 onClick={cancelChanging}>
                                 <Undo fontSize="inherit" />
                             </IconButton>
-
                         </Stack>
-
-                        <TextField name="text" fullWidth size="small" label="Ответ на вопрос"
-                            defaultValue={text} onChange={handleChangeText}
-                            onKeyUp={handlEnterKeyUp} />
-
                     </CardContent>
                 }
                 {field_edit == false &&
                     <Stack direction="row"
                         justifyContent="space-between"
                         alignItems="center"
-                        onClick={() => setFieldEdit(true)}
+                        // onClick={() => setFieldEdit(true)}
                     >
                         <FormControlLabel control={one_answer_with_a_choice != true ?
                             <Checkbox size="small" /> : <Radio size="small" />
                         }
                             label={text}
                             sx={{ marginLeft: "5px", }}
-                        />
-
-                        <Stack direction="row"
-                            justifyContent="flex-end"
-                            alignItems="center"
-                            onClick={(event) => event.stopPropagation()}>
-                            {/* <IconButton size="small" color="primary"
-                                onClick={handleDelete}>
-                                <DeleteOutline fontSize="inherit" />
-                            </IconButton> */}
-
-                            {/* <IconButton size="small" color="primary"
-                                onClick={() => setFieldEdit(true)}>
-                                <Edit fontSize="inherit" />
-                            </IconButton> */}
-                        </Stack>
-
+                        />               
                     </Stack>
                 }
             </Card>
