@@ -8,10 +8,12 @@ from rest_framework.pagination import PageNumberPagination
 
 from src_back.permissions import IsOwnerISurvey
 
+
 class ResultsSetPaginationSyrveys(PageNumberPagination):
     page_size = 6
     page_size_query_param = 'page_size'
     max_page_size = 6
+
 
 class ProfileOwner(generics.RetrieveUpdateAPIView):
     """
@@ -23,7 +25,8 @@ class ProfileOwner(generics.RetrieveUpdateAPIView):
     def get_object(self):
         user = self.request.user
         return get_user_model().objects.get(id=user.pk)
-    
+
+
 class RealProfileOwner(generics.UpdateAPIView):
     serializer_class = ProfileSerializer
     permission_classes = (IsAuthenticated, )

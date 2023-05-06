@@ -14,7 +14,7 @@ from ..survey_manage.answer_blocks.serializers import IAnswerFullSerializer
 from ..survey_manage.question_blocks.models import IQuestion
 from ..survey_manage.question_blocks.serializers import IQuestionFullSerializer
 from ..survey_manage.survey_base.serializers import ISurveyFullSerializer
-import logging;
+import logging
 
 
 class QuestionsPagination(PageNumberPagination):
@@ -136,7 +136,6 @@ class SaveResultAnswerAPIView(generics.CreateAPIView):
                           IsActiveTakingSurvey, IsAnswerInSurvey,
                           IsCorrectAnswerSerializer, IsOnlySelectAnswer)
     queryset = IResultAnswer.objects.all()
-
 
 
 

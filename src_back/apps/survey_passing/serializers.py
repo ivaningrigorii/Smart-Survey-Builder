@@ -5,6 +5,7 @@ from apps.survey_passing.models import TakingSurvey, ResultSelect, ResultTextInp
 from apps.survey_manage.survey_base.models import *
 from .models import ISurvey
 
+
 class SurveyTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = SurveyTest
