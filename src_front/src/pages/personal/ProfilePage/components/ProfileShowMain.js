@@ -37,8 +37,8 @@ const ProfileShow = () => {
                             height: 100,
                             width: 100,
                             backgroundColor: " #f1c4d5 ",
-                            borderRadius: "100px",
-                            border: 0,
+                            borderRadius: "50%",
+                            objectFit: "cover",
                         }}
                         src={preview && preview}
                     />
