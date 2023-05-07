@@ -6,8 +6,9 @@ from rest_framework.response import Response
 
 from apps.survey_manage.survey_base.models import ISurvey
 from src_back.permissions import IsPublishedSurvey, IsActiveTakingSurvey, IsAnswerInSurvey, IsCorrectAnswerSerializer, \
-    IsOnlySelectAnswer, IsPublishedSurveyObj
+    IsOnlySelectAnswer
 from .models import IResultAnswer
+from .pas_permissions import IsYouIsYouAnsRegister, IsActiveTakingSurveyObj, IsPublishedSurveyObj
 from .serializers import *
 from ..survey_manage.answer_blocks.models import IAnswer
 from ..survey_manage.answer_blocks.serializers import IAnswerFullSerializer
@@ -25,17 +26,21 @@ class QuestionsPagination(PageNumberPagination):
 
 
 class IdSurveyFromSlug(generics.RetrieveAPIView):
+    """
+        API получает slug опроса, а возвращает id этого вопроса
+    """
     serializer_class = ISurveyFullSerializer
     lookup_field = 'slug'
     queryset = ISurvey.objects.all()
-    
+
 
 class ListAllQuestionsInSurvey(generics.RetrieveAPIView):
     """
-        Возврат шапки опроса и вопросов с вариантами ответов (5 вопросов на странице)
+        API получает id прохождения, а возвращает
+        вопросы и ответы к вопросу, с пагинацией, по 5 ответов
+        api/v1/passing/list_questions/{id прохождения}/?page={номер страницы}
     """
     permission_classes = [IsPublishedSurveyObj, ]
-    serializer_class = TakingSurveySerializer
     lookup_field = 'id'
     queryset = TakingSurvey.objects.all()
     pagination_class = QuestionsPagination
@@ -43,25 +48,28 @@ class ListAllQuestionsInSurvey(generics.RetrieveAPIView):
     def get(self, request, *args, **kwargs):
         instance = self.get_object()
 
-        survey=ISurvey.objects.get(pk=instance.survey.pk)
+        survey = ISurvey.objects.get(pk=instance.survey.pk)
         self.check_object_permissions(self.request, survey)
 
-        logging.warning(survey.pk)
-
         serializer = ISurveyFullSerializer(survey)
-
         questions = IQuestion.objects.filter(survey=survey)
+
         # Пагинация ответа по вопросам
         paginator = self.pagination_class()
         result_page = paginator.paginate_queryset(questions, request)
+        pagination_count = result_page.count
+
         questions_serializer = IQuestionFullSerializer(result_page, many=True)
         questions_data = questions_serializer.data
+
         # Добавление вывода ответов вопроса
         for question in questions_data:
             answers = IAnswer.objects.filter(question_id=question['id'])
             answers_serializer = IAnswerFullSerializer(answers, many=True)
             question['answers'] = answers_serializer.data
+
         response = serializer.data
+
         response['questions'] = questions_serializer.data
         # Возвращаем не просто ответ, а пагинированный ответ
         return paginator.get_paginated_response(response)
@@ -69,17 +77,19 @@ class ListAllQuestionsInSurvey(generics.RetrieveAPIView):
 
 class StartTakingSurveyAPIView(generics.CreateAPIView):
     """
-        Создание прохождения опроса
+        API начала прохождения опроса
+        нужно передать только id проходимого опроса;
+        возвращается id прохождения
     """
     serializer_class = TakingSurveySerializer
-    permission_classes = (IsPublishedSurvey, )
+    permission_classes = (IsPublishedSurvey,)
 
     def post(self, request, *args, **kwargs):
         taking_survey = ""
         survey = get_object_or_404(ISurvey, id=request.data.get('survey'))
 
         # Проверка анонимности прохождения и доступности этого
-        if not request.user.id and survey.option_only_for_register_users==True:
+        if not request.user.id and survey.option_only_for_register_users == True:
             return Response({
                 'error': 'Для прохождения необходимо зарегистрироваться.'
             }, status=status.HTTP_401_UNAUTHORIZED)
@@ -106,7 +116,9 @@ class StartTakingSurveyAPIView(generics.CreateAPIView):
 
 class EndTakingSurveyAPIView(generics.UpdateAPIView):
     """
-        Завершение прохождения опроса
+        API окончания прохождения опроса.
+        Когда пользователь уверен, что на всё ответил,
+        завершается прохождение через это API
     """
     serializer_class = TakingSurveyEndSerializer
     permission_classes = (IsAuthenticated, IsPublishedSurvey)
@@ -127,37 +139,61 @@ class EndTakingSurveyAPIView(generics.UpdateAPIView):
         return Response(serializer.data)
 
 
-class SaveResultAnswerAPIView(generics.CreateAPIView):
+class SaveResultAnswerPageAPIView(generics.CreateAPIView):
     """
-        Сохранение выбранного ответа
+        API для сохранения результатов ответов на страничке или
+        их изменения
+        пример API:
+        {
+            "id_passing": 1,
+            "result_questions": [
+            {
+                "id_question": "4",
+                "result_answers": [
+                {
+                    "taking_survey": "1",
+                    "answer": "9",
+                "resourcetype": "ResultSelect"
+                }]
+            }]
+        }
     """
-    serializer_class = IResultAnswerFullSerializer
-    permission_classes = (IsAuthenticated, IsPublishedSurvey,
-                          IsActiveTakingSurvey, IsAnswerInSurvey,
-                          IsCorrectAnswerSerializer, IsOnlySelectAnswer)
-    queryset = IResultAnswer.objects.all()
+    permission_classes = (
+        IsYouIsYouAnsRegister,
+        IsPublishedSurveyObj,
+        IsActiveTakingSurveyObj,
+    )
+    serializer_class = BlockQuestiosSerializer
 
+    def __delete_last_answers(self, ias, id_taking):
+        as_in_db_in_q = IResultAnswer.objects.filter(answer__id__in=ias, taking_survey=id_taking)
+        if as_in_db_in_q is not None:
+            for a in as_in_db_in_q:
+                a.delete()
 
+    def post(self, request, *args, **kwargs):
+        se_questions = BlockQuestiosSerializer(data=request.data)
 
-class UpdateResultAnswerAPIView(generics.UpdateAPIView):
-    """
-        Изменение выбранного ответа
-    """
-    serializer_class = IResultAnswerFullSerializer
-    permission_classes = (IsAuthenticated, IsPublishedSurvey,
-                          IsActiveTakingSurvey, IsAnswerInSurvey,
-                          IsCorrectAnswerSerializer)
-    http_method_names = ['patch']
+        if se_questions.is_valid():
+            id_taking_survey = se_questions.data["id_passing"]
 
-    def patch(self, request, *args, **kwargs):
-        try:
-            result_answer = get_object_or_404(IResultAnswer,
-                                              taking_survey=request.data.get('taking_survey'),
-                                              question=request.data.get('question'))
-        except:
-            return Response({'error': 'Ответ не был выбран.'}, status=status.HTTP_400_BAD_REQUEST)
+            self.check_object_permissions(
+                self.request,
+                get_object_or_404(TakingSurvey, pk=id_taking_survey)
+            )
 
-        serializer = self.get_serializer(result_answer, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
+            for q in se_questions.data["result_questions"]:
+                ias = IAnswer.non_polymorphic.filter(question=q["id_question"]).values("id")
+                self.__delete_last_answers(ias, id_taking_survey)
+
+                for r in q["result_answers"]:
+                    if {"id": r["answer"]} in ias:
+                        res = IResultAnswerFullSerializer(data=r)
+
+                        if res.is_valid():
+                            res.save()
+
+            return Response(se_questions.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(se_questions.errors, status=status.HTTP_400_BAD_REQUEST)
+

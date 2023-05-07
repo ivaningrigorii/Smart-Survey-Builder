@@ -47,7 +47,6 @@ class IResultAnswer(PolymorphicModel, models.Model):
     """Общий класс, описание результата <выбора/ввода и т.п.> ответа"""
     taking_survey = models.ForeignKey(TakingSurvey, on_delete=models.CASCADE, verbose_name='Прохождение')
     answer = models.ForeignKey(IAnswer, on_delete=models.CASCADE, verbose_name='Структура ответа')
-    question = models.ForeignKey(IQuestion, on_delete=models.CASCADE, verbose_name='Вопрос')
 
     class Meta:
         db_table = 'i_result_answer'

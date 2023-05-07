@@ -1,3 +1,5 @@
+from abc import ABC
+
 from rest_framework import serializers
 from rest_polymorphic.serializers import PolymorphicSerializer
 
@@ -49,13 +51,13 @@ class TakingSurveyEndSerializer(serializers.ModelSerializer):
 class ResultSelectSerializer(serializers.ModelSerializer):
     class Meta:
         model = ResultSelect
-        fields = ["id", "taking_survey", "answer", "question"]
+        fields = ["id", "taking_survey", "answer", ]
 
 
 class ResultTextInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = ResultTextInput
-        fields = ["id", "taking_survey", "answer", "question", "input_text"]
+        fields = ["id", "taking_survey", "answer", "input_text"]
 
 
 class IResultAnswerFullSerializer(PolymorphicSerializer):
@@ -63,3 +65,17 @@ class IResultAnswerFullSerializer(PolymorphicSerializer):
         ResultSelect: ResultSelectSerializer,
         ResultTextInput: ResultTextInputSerializer,
     }
+
+
+class PageAnswersSerializer(serializers.Serializer):
+    id_question = serializers.IntegerField()
+    result_answers = IResultAnswerFullSerializer(many=True, )
+
+
+class BlockQuestiosSerializer(serializers.Serializer):
+    id_passing = serializers.IntegerField()
+    result_questions = PageAnswersSerializer(many=True, )
+        
+
+
+

@@ -96,7 +96,7 @@ class IsPublishedSurveyObj(permissions.BasePermission):
     """
     def has_object_permission(self, request, view, obj):
         if type(obj) == TakingSurvey:
-            return True;
+            return True
         try:
             if obj.option_is_published==True:
                 logging.warning("возвращаем")
