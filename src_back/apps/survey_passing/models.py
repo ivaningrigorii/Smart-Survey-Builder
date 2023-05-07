@@ -44,11 +44,13 @@ class IResultAnswer(PolymorphicModel, models.Model):
     """Общий класс, описание результата <выбора/ввода и т.п.> ответа"""
     taking_survey = models.ForeignKey(TakingSurvey, on_delete=models.CASCADE, verbose_name='Прохождение')
     answer = models.ForeignKey(IAnswer, on_delete=models.CASCADE, verbose_name='Структура ответа')
+    non_polymorphic = models.Manager()
 
     class Meta:
         db_table = 'i_result_answer'
         verbose_name = 'рез. ответ (i_result_answer)'
         verbose_name_plural = 'рез. ответы (i_result_answer)'
+        base_manager_name = 'non_polymorphic'
 
 
 # endregion

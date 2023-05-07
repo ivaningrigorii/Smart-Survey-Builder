@@ -25,6 +25,8 @@ class ISurvey(PolymorphicModel, models.Model):
         models.BooleanField(default=False, verbose_name="Необходимость авторизации", blank=True)
     max_attempts = models.IntegerField(default=1, verbose_name='Максимальное число попыток')
 
+    non_polymorphic = models.Manager()
+
     def __str__(self):
         return f"{self.name}"
 
@@ -40,6 +42,7 @@ class ISurvey(PolymorphicModel, models.Model):
         db_table = 'i_survey'
         verbose_name = 'шапка опроса (isurvey)'
         verbose_name_plural = 'все опросы (isurvey)'
+        base_manager_name = 'non_polymorphic'
 
 # endregion
 

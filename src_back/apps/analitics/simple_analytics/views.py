@@ -1,3 +1,5 @@
+import logging
+
 from rest_framework import generics
 
 from rest_framework.generics import get_object_or_404
@@ -19,6 +21,7 @@ class CreateSimpleAnalyticsAPIView(generics.CreateAPIView):
     queryset = SimpleAnalytics.objects.all()
 
     def post(self, request, *args, **kwargs):
+
         survey_id = request.data.get('survey')
         question_id = request.data.get('question')
         existing_analytics = SimpleAnalytics.objects.filter(survey=survey_id, question=question_id).first()

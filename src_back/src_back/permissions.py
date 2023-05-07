@@ -94,11 +94,12 @@ class IsPublishedSurveyObj(permissions.BasePermission):
     """
         Проверка опроса на опубликованность
     """
+
     def has_object_permission(self, request, view, obj):
         if type(obj) == TakingSurvey:
             return True
         try:
-            if obj.option_is_published==True:
+            if obj.option_is_published == True:
                 logging.warning("возвращаем")
                 return True
         except:
@@ -218,19 +219,15 @@ class IsQuestionInSurvey(permissions.BasePermission):
     """
 
     def has_permission(self, request, view):
-        message = 'Опрос или вопрос не существуют'
         try:
-            survey_id = request.data.get('survey')
-            survey = ISurvey.objects.get(pk=survey_id)
+            survey = get_object_or_404(ISurvey, pk=request.data.get('survey'))
+
             question_id = request.data.get('question')
-            question = IQuestion.objects.get(pk=question_id)
-            if question.survey == survey:
+            if IQuestion.objects.get(pk=question_id, survey=survey) is not None:
                 return True
-            else:
-                message = 'Вопрос не принадлежит опросу'
-                raise exceptions.PermissionDenied(detail=message)
+            raise exceptions.PermissionDenied(detail='Вопрос не принадлежит опросу')
         except:
-            raise exceptions.PermissionDenied(detail=message)
+            raise exceptions.PermissionDenied(detail='Опрос или вопрос не существуют')
 
 
 class IsQuestionHaveAnalytics(permissions.BasePermission):
