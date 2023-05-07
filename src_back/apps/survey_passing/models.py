@@ -18,7 +18,6 @@ class TakingSurvey(models.Model):
     user = models.ForeignKey(get_user_model(), verbose_name='Проходящий',
                              null=True, on_delete=models.SET_NULL, blank=True, )
 
-    time_passing = models.IntegerField(verbose_name='Время прохождения в минутах', null=True, blank=True)
     time_start = models.DateTimeField(null=True, verbose_name='Начало прохождения')
     time_end = models.DateTimeField(null=True, verbose_name='Завершение прохождения')
     is_completed = models.BooleanField(default=False, verbose_name='Статус прохождения')
@@ -29,8 +28,6 @@ class TakingSurvey(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.time_start = timezone.now()
-            if hasattr(self.survey, 'time_passing'):
-                self.time_passing = self.survey.time_passing
         elif self.is_completed:
             self.time_end = timezone.now()
         super(TakingSurvey, self).save(*args, **kwargs)

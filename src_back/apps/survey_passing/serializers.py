@@ -39,13 +39,13 @@ class ISurveyFullSerializer(PolymorphicSerializer):
 class TakingSurveySerializer(serializers.ModelSerializer):
     class Meta:
         model = TakingSurvey
-        fields = ["id", "survey", "user", "is_completed", "time_start", "time_passing"]
+        fields = ["id", "survey", "user", "is_completed", "time_start", ]
 
 
 class TakingSurveyEndSerializer(serializers.ModelSerializer):
     class Meta:
         model = TakingSurvey
-        fields = ["id", "survey", "user", "is_completed", "time_start", "time_end", "time_passing"]
+        fields = ["id", "survey", "user", "is_completed", "time_start", "time_end", ]
 
 
 class ResultSelectSerializer(serializers.ModelSerializer):
