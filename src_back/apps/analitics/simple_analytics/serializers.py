@@ -19,7 +19,9 @@ class SimpleAnalyticsSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        result_answer = IResultAnswer.objects.filter(question=instance.question)
+        result_answer = IResultAnswer.objects.filter(
+            answer__in=IAnswer.objects.filter(question=instance.question)
+        )
 
         for answer in data['answers']:
             answer_count = result_answer.filter(answer=answer['id']).count()

@@ -15,7 +15,7 @@ class CreateSimpleAnalyticsAPIView(generics.CreateAPIView):
         Создание аналитики вопроса
     """
     serializer_class = SimpleAnalyticsSerializer
-    permission_classes = (IsAuthenticated, IsPublishedSurvey, IsQuestionInSurvey, IsOwnerISurveyAnalytics, )
+    permission_classes = (IsAuthenticated, IsQuestionInSurvey, IsOwnerISurveyAnalytics, )
     queryset = SimpleAnalytics.objects.all()
 
     def post(self, request, *args, **kwargs):
