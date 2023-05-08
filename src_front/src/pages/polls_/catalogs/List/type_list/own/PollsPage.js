@@ -35,17 +35,14 @@ const PollsPage = () => {
     const isChange = useRef(true);
 
     let {page} = useParams();
-    console.log(page);
     page = page?page:1;
 
     const classes = main();
     const classes_this = useStylesThis();
 
     const make_get = () => {
-        console.log(page);
         ps.getPollsOwn(page, PAGE_SIZE)
             .then((result) => {
-                console.log(result);
                 setPollsOwnList(result.results);
                 setPagintaionData({
                     count: result.count,

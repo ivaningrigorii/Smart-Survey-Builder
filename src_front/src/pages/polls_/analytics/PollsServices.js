@@ -4,10 +4,13 @@ import { useParams } from 'react-router';
 import { reverse } from 'named-urls';
 
 class PollsServices {
-    getPollsOwn(page, page_size) {
+    async getPollsOwn(page, page_size) {
+        let token;
+        await _token().then(async (res)=>token = await res);
+
         return axios.get("api/v1/profile/cats_own/", {
             headers: {
-                'Authorization': 'Bearer ' + _token(),
+                'Authorization': 'Bearer ' + token,
             },
             params: {
                 page: page,
@@ -23,7 +26,10 @@ class PollsServices {
             });
     }
 
-    deletePoll(id) {
+    async deletePoll(id) {
+        let token;
+        await _token().then(async (res)=>token = await res);
+
         try {
             if (!id || id <= 0) {
                 throw new Error();
@@ -32,7 +38,7 @@ class PollsServices {
 
             return axios.delete(path, {
                 headers: {
-                    'Authorization': 'Bearer ' + _token(),
+                    'Authorization': 'Bearer ' + token,
                 }
             })
                 .then((response) => {
