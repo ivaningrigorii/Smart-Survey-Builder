@@ -39,7 +39,7 @@ const ConsructorPage = () => {
 
 const main = makeStyles({
     body_style: {
-        background: 'linear-gradient(45deg, #8778eb 30%, #78a6eb 90%)',
+        background: "linear-gradient(41deg, rgba(242,227,185,1) 15%, rgba(240,180,203,1) 69%)",
     }
   });
 

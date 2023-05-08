@@ -11,10 +11,7 @@ import { createTheme, ThemeProvider, } from "@mui/material/styles";
 const auths = new AuthServices();
 const useStyles = makeStyles({
     body_pages: {
-        background: "linear-gradient(41deg, " + 
-        "rgba(151,131,233,1) 15%, " +
-        "rgba(101,166,167,1) 46%, " +
-        "rgba(177,80,88,1) 67%)",
+        background: "linear-gradient(41deg, rgba(242,227,185,1) 15%, rgba(240,180,203,1) 69%)",
     },
 });
   

@@ -27,7 +27,12 @@ class SurveyCreateHeaderView(generics.CreateAPIView):
     permission_classes = (IsAuthenticated, )
 
     def post(self, request, *args, **kwargs):
+        _mutable = request.data._mutable
+        request.data._mutable = True
+
         request.data["user"] = request.user.id
+
+        request.data._mutable = _mutable
         return self.create(request, *args, **kwargs)
 
 

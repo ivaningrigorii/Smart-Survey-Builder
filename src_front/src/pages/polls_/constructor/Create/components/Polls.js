@@ -30,9 +30,19 @@ const STest = ({ data, setData }) => {
 
     useEffect(() => {
         let data_ = data__;
-        data_.append('start_time', start_time);
-        data_.append('end_time', endTime);
-        data_.append('time_passing', timePassing);
+
+        if (start_time) {
+            data_.append('start_time', start_time);
+        }
+        
+        if (endTime) {
+            data_.append('end_time', endTime);
+        }
+
+        if (timePassing) {
+            data_.append('time_passing', timePassing);
+        }
+        
         setData_(data_);
         handleInputChange();
     }, [start_time, endTime, timePassing]);

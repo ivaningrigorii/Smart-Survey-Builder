@@ -3,16 +3,23 @@ import Name from './custom_mui/Name';
 import React, { useState, useEffect } from 'react';
 import { SSimple, STest } from './Polls';
 import {
-  FormControl, TextField,
-  Autocomplete, Grid, Container,
-  FormLabel, InputLabel, Select, MenuItem, Button,
-  Stack, Box,
+  FormControl, Container,
+  InputLabel, Select, MenuItem, Button,
+  Stack, Box, Typography,
 } from '@mui/material';
 import CreatePollButton from './custom_mui/CreatePollButton';
 import ServicesCreatePage from '../ServicesCreatePage';
 import routes from '../../../../../routes';
 import { reverse } from 'named-urls';
-import FormData from 'form-data'
+import FormData from 'form-data';
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from '@mui/material/styles';
+
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
 
 
 const createPageServices = new ServicesCreatePage();
@@ -49,9 +56,22 @@ const CreateSelecter = () => {
     event.preventDefault();
 
     var data_ = data;
-    data_.append('img', img, img.name);
-    data_.append('name', event.target.name.value);
-    data_.append('description', event.target.description.value);
+
+    if (img) {
+      data_.append('img', img, img.name);
+    }
+
+    if (event.target.name.value) {
+      data_.append('name', event.target.name.value);
+    } else {
+      alert("Название опроса обязательно надо ввести!");
+      return;
+    }
+
+    if (event.target.description.value) {
+      data_.append('description', event.target.description.value);
+    }
+
     setData(data_);
 
     createPageServices.createPoll(data)
@@ -67,18 +87,31 @@ const CreateSelecter = () => {
   };
 
   return (
-    <Container>
-      <Box
-      textAlign="center"
+    <Container
       sx={{
-        backgroundColor: " #e6e2f3 ",
-        mt: "10vh",
-        mx: 20,
-        borderRadius: "20px",
+        minHeight: "120vh",
       }}
+    >
+      <Box
+        textAlign="center"
+        sx={{
+          backgroundColor: " white ",
+          mt: "10vh",
+          mx: 20,
+          borderRadius: "20px",
+          minHeight: "80vh"
+        }}
       >
-        <p>Создание опроса</p>
-        <Box sx={{ mx: "10px", mt: "5px", }}>
+        <Typography color=" #ef5b7f " variant="h6"
+          sx={{ mt: "10px", }} textAlign="center"
+          justifyContent="center">
+          <b>Создание опроса</b>
+        </Typography>
+        <Box sx={{
+          mx: "10px",
+          mt: "10px",
+          height: "fit-content",
+        }}>
           <form onSubmit={handleSubmit}>
             <Stack container
               direction="row"
@@ -95,7 +128,7 @@ const CreateSelecter = () => {
                     width: { xs: 300, },
                     height: { xs: 150, },
                     borderRadius: "25px",
-                    backgroundColor: "#9783e9",
+                    backgroundColor: " #e4e4e2 ",
                   }}>
                   {img &&
                     <Box sx={{ mx: "auto", }}>
@@ -158,7 +191,6 @@ const CreateSelecter = () => {
             }
             <CreatePollButton />
           </form>
-          <Box sx={{mt:"15px",}}/>
         </Box>
       </Box>
     </Container>
