@@ -40,11 +40,6 @@ const PollCard = ({ poll, make_get }) => {
     make_get();
   }, [make_get,]);
 
-  useEffect(() => {
-    console.log(poll.base64_image);
-  }, [])
-
-
   const handleReloadCards = (event) => {
     let result = window.confirm("Вы желаете удалить опрос?");
     if (result) {
