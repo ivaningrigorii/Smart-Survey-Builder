@@ -27,6 +27,7 @@ class ConstructorServices {
 
     //опрос
     getPollOptions(id) {
+        
         return axios.get(reverse("api/v1/manage/surv/survey-header/:id/", {id: id, }), {
             headers: { 'Authorization': 'Bearer ' + _token(), }
         })
