@@ -51,7 +51,7 @@ const COLORS = ['#0088FE', '#00C49F', 'violet', '#FF8042'];
         outerRadius={80}
         fill="#8884d8"
         labelLine={false}
-        label={({ text, count }) => `${text}: ${count}`}
+        label={({ text, count }) => `${text ? text : "Другое"}: ${count}`} 
       >
         {questions&&questions.map((entry, index) => (
           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
