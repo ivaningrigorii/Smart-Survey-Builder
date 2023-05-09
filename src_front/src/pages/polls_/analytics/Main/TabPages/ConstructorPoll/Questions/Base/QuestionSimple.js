@@ -17,7 +17,8 @@ import { IconButton, TextField } from '@material-ui/core';
 
 import EditQuestion from './EditQuestions/DialogEditQuestion';
 import AnalyticsCard from '../../../../../components/AnalyticsCard';
-
+import AnalyticsNumberPassing from '../../../../../components/AnalyticsNumberPassing';
+import AnalyticsTextAnswers from '../../../../../components/AnalyticsTextAnswers';
 const allow_fields_adding = [
     "AnswerTextInput",
     "AnswerSelectableSimple",
@@ -111,6 +112,7 @@ const QuestSimple = ({ question, deleteQuestion, saveQuestion, }) => {
 
     return (
         <Box>
+              <AnalyticsNumberPassing id={question.survey}/>
             <Card className={classes.card_style} sx={{
                 backgroundColor: " #d5dbeb ",
                 borderRadius: "25px",
@@ -167,6 +169,7 @@ const QuestSimple = ({ question, deleteQuestion, saveQuestion, }) => {
                         }
                     </Stack>
                     <AnalyticsCard id={question.survey} id_qw={question.id} />
+                    <AnalyticsTextAnswers id={question.id} />
                 </CardContent>
             </Card>
         </Box >

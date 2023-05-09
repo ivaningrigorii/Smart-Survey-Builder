@@ -40,13 +40,13 @@ useEffect(() => {
 const COLORS = ['#0088FE', '#00C49F', 'violet', '#FF8042'];
  
   return ( 
-    <Box>   
-          <PieChart width={500} height={400} marginLeft={1}>
+    <Box sx={{ marginLeft: "150px" }}>   
+          <PieChart width={600} height={400}>
       <Pie
         dataKey="count"
         isAnimationActive={false}
         data={questions}
-        cx={200}
+        cx={300}
         cy={200}
         outerRadius={80}
         fill="#8884d8"
