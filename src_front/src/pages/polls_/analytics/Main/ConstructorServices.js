@@ -26,9 +26,12 @@ class ConstructorServices {
 
 
     //опрос
-    getPollOptions(id) {
+    async getPollOptions(id) {
+        let token;
+        await _token().then(async (res)=>token = await res);
+
         return axios.get(reverse("api/v1/manage/surv/survey-header/:id/", {id: id, }), {
-            headers: { 'Authorization': 'Bearer ' + _token(), }
+            headers: { 'Authorization': 'Bearer ' + token, }
         })
         .then((response)=>{
             return(response.data);
@@ -39,11 +42,14 @@ class ConstructorServices {
         })
     }
 
-    updateIsPublished(id, option_is_published) {
+    async updateIsPublished(id, option_is_published) {
+        let token;
+        await _token().then(async (res)=>token = await res);
+
         return axios.patch(reverse("api/v1/manage/surv/survey-header/:id/", {id:id}), {
             option_is_published: option_is_published,
         }, {
-            headers: { 'Authorization': 'Bearer ' + _token(), }
+            headers: { 'Authorization': 'Bearer ' + token, }
         })
         .then((response) => {
             return(Promise.resolve);
@@ -55,18 +61,24 @@ class ConstructorServices {
 
     //вопросы
 
-    getAllQuestions(idPoll) {
+    async getAllQuestions(idPoll) {
+        let token;
+        await _token().then(async (res)=>token = await res);
+
         let path = reverse("api/v1/manage/quest/questions-survey/:id/", {id: idPoll});
         return axios.get(path, {
-            headers: { 'Authorization': 'Bearer ' + _token(), }
+            headers: { 'Authorization': 'Bearer ' + token, }
         })
         .then((respone)=>{ return Promise.resolve(respone.data);})
         .catch((error)=>{ return Promise.reject(error);})
     }
 
-    createQuestion(data) {
+    async createQuestion(data) {
+        let token;
+        await _token().then(async (res)=>token = await res);
+
         return axios.post('api/v1/manage/quest/question/', data, {
-            headers: { 'Authorization': 'Bearer ' + _token(), }
+            headers: { 'Authorization': 'Bearer ' + token, }
         },)
             .then((response) => {
                 return Promise.resolve(response.data);
@@ -76,55 +88,73 @@ class ConstructorServices {
             });
     }
 
-    deleteQuestion(id) {
+    async deleteQuestion(id) {
+        let token;
+        await _token().then(async (res)=>token = await res);
+
         let path = reverse("api/v1/manage/quest/question/:id/", {id: id});
         return axios.delete(path, {
-            headers: { 'Authorization': 'Bearer ' + _token(), }
+            headers: { 'Authorization': 'Bearer ' + token, }
         })
         .then((respone)=>{ return Promise.resolve(respone.data);})
         .catch((error)=>{ return Promise.reject(error);})
     }
 
-    saveQuestion(dataquestion) {
+    async saveQuestion(dataquestion) {
+        let token;
+        await _token().then(async (res)=>token = await res);
+
         let path = reverse("api/v1/manage/quest/question/:id/", {id: dataquestion.id});
         return axios.patch(path, dataquestion, {
-            headers: { 'Authorization': 'Bearer ' + _token(), }
+            headers: { 'Authorization': 'Bearer ' + token, }
         })
         .then((respone)=>{ return Promise.resolve(respone.data);})
         .catch((error)=>{ return Promise.reject(error);})
     }
 
     //ответы
-    getAllAnswers (id) {
+    async getAllAnswers (id) {
+        let token;
+        await _token().then(async (res)=>token = await res);
+
         let path = reverse("api/v1/manage/ans/answers-question/:id/", {id: id});
         return axios.get(path, {
-            headers: { 'Authorization': 'Bearer ' + _token(), }
+            headers: { 'Authorization': 'Bearer ' + token, }
         })
         .then((respone)=>{ return Promise.resolve(respone.data);})
         .catch((error)=>{ return Promise.reject(error);})
     }
 
-    delAnswer(id) {
+    async delAnswer(id) {
+        let token;
+        await _token().then(async (res)=>token = await res);
+
         let path = reverse("api/v1/manage/ans/answer/:id/", {id: id});
         return axios.delete(path, {
-            headers: { 'Authorization': 'Bearer ' + _token(), }
+            headers: { 'Authorization': 'Bearer ' + token, }
         })
         .then((respone)=>{ return Promise.resolve(respone.data);})
         .catch((error)=>{ return Promise.reject(error);})
     }
 
-    changeAnswer(data) {
+    async changeAnswer(data) {
+        let token;
+        await _token().then(async (res)=>token = await res);
+
         let path = reverse("api/v1/manage/ans/answer/:id/", {id: data.id});
         return axios.patch(path, data, {
-            headers: { 'Authorization': 'Bearer ' + _token(), }
+            headers: { 'Authorization': 'Bearer ' + token, }
         })
         .then((respone)=>{ return Promise.resolve(respone.data);})
         .catch((error)=>{ return Promise.reject(error);})
     }
 
-    addAnswer(data) {
+    async addAnswer(data) {
+        let token;
+        await _token().then(async (res)=>token = await res);
+
         return axios.post("api/v1/manage/ans/answer/", data, {
-            headers: { 'Authorization': 'Bearer ' + _token(), }
+            headers: { 'Authorization': 'Bearer ' + token, }
         })
         .then((respone)=>{ return Promise.resolve(respone.data);})
         .catch((error)=>{ return Promise.reject(error);})
