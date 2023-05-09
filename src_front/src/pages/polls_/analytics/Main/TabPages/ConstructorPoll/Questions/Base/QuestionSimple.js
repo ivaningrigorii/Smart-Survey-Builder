@@ -112,7 +112,7 @@ const QuestSimple = ({ question, deleteQuestion, saveQuestion, }) => {
 
     return (
         <Box>
-              <AnalyticsNumberPassing id={question.survey}/>
+            
             <Card className={classes.card_style} sx={{
                 backgroundColor: " #d5dbeb ",
                 borderRadius: "25px",

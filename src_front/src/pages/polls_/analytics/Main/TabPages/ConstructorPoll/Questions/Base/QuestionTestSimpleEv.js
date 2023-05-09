@@ -111,7 +111,7 @@ const QuestTestSimpleEv = ({ question, deleteQuestion, saveQuestion, }) => {
 
     return (
         <Box>
-              <AnalyticsNumberPassing id={question.survey}/>
+
             <Card className={classes.card_style} sx={{
                 backgroundColor: " #c7decf ",
                 borderRadius: "25px",
