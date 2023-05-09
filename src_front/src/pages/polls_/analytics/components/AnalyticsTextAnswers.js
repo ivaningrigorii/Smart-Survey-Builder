@@ -32,18 +32,20 @@ useEffect(() => {
 }, [questions]);
 
   return ( 
- <Box sx={{ marginLeft: "10px" }}>   
-<Typography variant="h5">
-  Ответы текстом: 
-  {questions && Object.keys(questions).map((key) => (
-    <div key={key}>
-      <Typography variant="h6">
-        {[key]}:{questions[key]}
-      </Typography>
-    </div>
-  ))}
-</Typography>
-</Box> 
+<Box sx={{ marginLeft: "10px" }}>   
+  {questions && Object.keys(questions).length > 0 && (
+    <Typography variant="h5">
+      Ответы текстом: 
+      {Object.keys(questions).map((key) => (
+        <div key={key}>
+          <Typography variant="h6">
+            {[key]}:{questions[key]}
+          </Typography>
+        </div>
+      ))}
+    </Typography>
+  )}
+</Box>
   );
 }
 export default AnalyticsTextAnswers;
