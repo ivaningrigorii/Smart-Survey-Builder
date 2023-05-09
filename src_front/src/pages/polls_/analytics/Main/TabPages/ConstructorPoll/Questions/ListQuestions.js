@@ -80,6 +80,7 @@ const ListQuestions = ({ idPoll, poll_type, }) => {
 
     return (
         <Box>
+            
             {questions &&
                 questions.map((question) => {
                     return (
