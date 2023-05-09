@@ -27,6 +27,7 @@ export default {
 
         passing: {
             to: ":slug/",
+            gogogo: "passing/:id_passing/:slug/"
         }
     }),
 

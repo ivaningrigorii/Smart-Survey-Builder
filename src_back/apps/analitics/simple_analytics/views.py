@@ -1,3 +1,5 @@
+import logging
+
 from rest_framework import generics
 
 from rest_framework.generics import get_object_or_404
@@ -5,7 +7,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from apps.analitics.simple_analytics.models import SimpleAnalytics
-from apps.analitics.simple_analytics.serializers import SimpleAnalyticsSerializer
+from apps.analitics.simple_analytics.serializers import SimpleAnalyticsSerializer, NumberPassingSerializer
+from apps.survey_manage.survey_base.models import ISurvey
+from apps.survey_passing.models import TakingSurvey
 from src_back.permissions import IsPublishedSurvey,  IsQuestionInSurvey, IsQuestionHaveAnalytics, \
     IsOwnerISurveyAnalytics
 
@@ -15,10 +19,11 @@ class CreateSimpleAnalyticsAPIView(generics.CreateAPIView):
         Создание аналитики вопроса
     """
     serializer_class = SimpleAnalyticsSerializer
-    permission_classes = (IsAuthenticated, IsPublishedSurvey, IsQuestionInSurvey, IsOwnerISurveyAnalytics, )
+    permission_classes = (IsAuthenticated, IsQuestionInSurvey, IsOwnerISurveyAnalytics, )
     queryset = SimpleAnalytics.objects.all()
 
     def post(self, request, *args, **kwargs):
+
         survey_id = request.data.get('survey')
         question_id = request.data.get('question')
         existing_analytics = SimpleAnalytics.objects.filter(survey=survey_id, question=question_id).first()
@@ -42,3 +47,17 @@ class GetSimpleAnalyticsAPIView(generics.RetrieveAPIView):
         question_id = self.kwargs.get('question_id')
         simple_analytics = get_object_or_404(SimpleAnalytics, question_id=question_id)
         return simple_analytics
+
+
+class GetNumberPassingAPIView(generics.RetrieveAPIView):
+    """
+           Просмотр общего кол-ва прохождений
+    """
+    serializer_class = NumberPassingSerializer
+    permission_classes = (IsAuthenticated, IsPublishedSurvey)
+    lookup_field = 'id'
+    queryset = ISurvey.objects.all()
+
+
+
+

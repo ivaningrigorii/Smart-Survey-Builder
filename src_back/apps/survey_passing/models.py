@@ -16,9 +16,8 @@ class TakingSurvey(models.Model):
     """ Прохождение опроса (их может быть несколько у одного пользователя)"""
     survey = models.ForeignKey(ISurvey, verbose_name='Проходимый опрос', on_delete=models.CASCADE)
     user = models.ForeignKey(get_user_model(), verbose_name='Проходящий',
-                             null=True, on_delete=models.SET_NULL)
+                             null=True, on_delete=models.SET_NULL, blank=True, )
 
-    time_passing = models.IntegerField(verbose_name='Время прохождения в минутах', null=True, blank=True)
     time_start = models.DateTimeField(null=True, verbose_name='Начало прохождения')
     time_end = models.DateTimeField(null=True, verbose_name='Завершение прохождения')
     is_completed = models.BooleanField(default=False, verbose_name='Статус прохождения')
@@ -29,8 +28,6 @@ class TakingSurvey(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.time_start = timezone.now()
-            if hasattr(self.survey, 'time_passing'):
-                self.time_passing = self.survey.time_passing
         elif self.is_completed:
             self.time_end = timezone.now()
         super(TakingSurvey, self).save(*args, **kwargs)
@@ -47,12 +44,13 @@ class IResultAnswer(PolymorphicModel, models.Model):
     """Общий класс, описание результата <выбора/ввода и т.п.> ответа"""
     taking_survey = models.ForeignKey(TakingSurvey, on_delete=models.CASCADE, verbose_name='Прохождение')
     answer = models.ForeignKey(IAnswer, on_delete=models.CASCADE, verbose_name='Структура ответа')
-    question = models.ForeignKey(IQuestion, on_delete=models.CASCADE, verbose_name='Вопрос')
+    non_polymorphic = models.Manager()
 
     class Meta:
         db_table = 'i_result_answer'
         verbose_name = 'рез. ответ (i_result_answer)'
         verbose_name_plural = 'рез. ответы (i_result_answer)'
+        base_manager_name = 'non_polymorphic'
 
 
 # endregion

@@ -13,6 +13,7 @@ import LogoutWithotPage from "./pages/personal/Auth/LogOut/LogoutWithotPage";
 import RegistrationPage from "./pages/personal/Auth/Registration/RegistrationPage";
 import ProfilePageEdit from "./pages/personal/ProfilePage/ProfilePageEdit";
 import AnalyticsPage from "./pages/polls_/analytics/Main/StartPage/ConstructorPage";
+import GoGoGo from "./pages/polls_/passing/Passing/GoGoGo";
 import routes from './routes.js'
 
 
@@ -40,6 +41,7 @@ class App extends Component {
           <Route path={routes.polls.analytics} element={<AnalyticsPage />} />
 
           <Route path={routes.polls.passing.to} element={<StartPassing />} />
+          <Route path={routes.polls.passing.gogogo} element={<GoGoGo />} />
         </Routes>
       </BrowserRouter>
     );

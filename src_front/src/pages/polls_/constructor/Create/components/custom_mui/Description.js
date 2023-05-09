@@ -23,9 +23,10 @@ function Description() {
         id="description"
         name="description"
         label="Описание"
-        style={{ mt: "10px", }}
+        sx={{
+          mt: "10px",
+        }}
         size="small"
-        helperText="Введите краткое описание"
         fullWidth
         margin="normal"
         InputLabelProps={{

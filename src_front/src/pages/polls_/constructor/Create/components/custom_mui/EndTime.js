@@ -17,7 +17,7 @@ const DataEnd = ({end_time, setEndTime, }) => {
   return (
     <TextField type="datetime-local" id="end_time" sx={{ m: 1, minWidth: 120 }}
       size='small'
-      helperText="Введите дату закрытия опроса"
+      helperText="Дата закрытия опроса"
       value={end_time}
       onChange={handleInputChange}
       inputProps={{ min: today.toISOString().slice(0, 16), ref: (input) => input && input.focus() }}

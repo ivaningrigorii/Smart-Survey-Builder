@@ -10,7 +10,8 @@ venv
 /vevn
 vevn
 db.sqllite3
-src_back/db.sqlite3
+/src_back/photos
+/src_back/db.sqlite3
 #---------- front react -----------
 
 # dependencies
