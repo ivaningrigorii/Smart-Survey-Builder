@@ -12,7 +12,8 @@ class IsYouIsYouAnsRegister(permissions.BasePermission):
         if type(obj) == TakingSurvey:
             if obj.survey.option_only_for_register_users and request.user is None:
                 raise exceptions.PermissionDenied(detail="Необходимо войти")
-            if obj.user is not None and obj.user != request.user:
+            if (obj.user is not None and obj.user != request.user) or \
+                (obj.user is None and request.user is not None):
                 raise exceptions.PermissionDenied(detail="Прохождение за другого")
         return True
 
