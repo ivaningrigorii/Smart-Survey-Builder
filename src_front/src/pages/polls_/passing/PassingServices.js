@@ -5,6 +5,8 @@ import _token from '../../../AxiosTokens';
 import { Cookies } from 'react-cookie';
 
 const cookies = new Cookies();
+const SELECTABLE_ANSWERS = ["AnswerSelectableSimple", "AnswerSelectableTest",];
+const TEXT_INPUT_ANSWERS = ["AnswerTextInput",];
 
 class PassingServices {
 

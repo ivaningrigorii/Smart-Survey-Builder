@@ -7,17 +7,20 @@ import {
 import { useEffect, useState } from "react";
 import { useParams, } from "react-router-dom";
 import PassingServices from "../PassingServices";
-
-import OneAnsLogic from "./Question/OneAnsLogic";
-import ManyAnsLogic from "./Question/ManyAnsLogic";
+import { Check } from "@mui/icons-material";
 
 const ps = new PassingServices();
+const SELECTABLE_ANSWERS = ["AnswerSelectableSimple", "AnswerSelectableTest",];
+const TEXT_INPUT_ANSWERS = ["AnswerTextInput",];
 
 const GoGoGo = () => {
     const { id_passing } = useParams();
     const [passing_list, setPassingList] = useState();
     const [page, setPage] = useState(1);
     const [data, setData] = useState();
+    
+    const [text_values, setTextValues] = useState();
+    const [select_value, setSelectValue] = useState();
 
     useEffect(() => {
         ps.listQuestions(id_passing, page)
@@ -40,17 +43,65 @@ const GoGoGo = () => {
             </Typography>
 
             {passing_list && passing_list.results.questions.map((question) => {
-                return (
-                    <Box>
-                        <Typography>
-                            {question.text_question}
-                        </Typography>
-                        {question.one_answer_with_a_choice == true ?
-                            <OneAnsLogic answers={question.answers}/> :
-                            <ManyAnsLogic />
-                        }
-                    </Box>
-                );
+
+                //вывод данных
+                if (question.one_answer_with_a_choice == true) {
+                    return (
+                        <Box>
+                            <RadioGroup >
+                                <Typography>
+                                    {question.text_question}
+                                </Typography>
+                                {question.answers.map((answer) => {
+                                    if (SELECTABLE_ANSWERS.indexOf(answer.resourcetype) >= 0) {
+                                        return (
+                                            <FormControlLabel
+                                                value={answer.id}
+                                                label={answer.text}
+                                                control={<Radio />}
+                                            />
+                                        );
+                                    }
+                                    if (TEXT_INPUT_ANSWERS.indexOf(answer.resourcetype) >= 0) {
+                                        return (
+                                            <FormControlLabel
+                                                control={<TextField size="small" />}
+                                            />
+                                        );
+                                    }
+                                })}
+                            </RadioGroup>
+                        </Box>
+                    );
+                    //вывод данных
+                    if (question.one_answer_with_a_choice == false) {
+                        return (
+                            <Box>
+                                    <Typography>
+                                        {question.text_question}
+                                    </Typography>
+                                    {question.answers.map((answer) => {
+                                        if (SELECTABLE_ANSWERS.indexOf(answer.resourcetype) >= 0) {
+                                            return (
+                                                <FormControlLabel
+                                                    value={answer.id}
+                                                    label={answer.text}
+                                                    control={<Check />}
+                                                />
+                                            );
+                                        }
+                                        if (TEXT_INPUT_ANSWERS.indexOf(answer.resourcetype) >= 0) {
+                                            return (
+                                                <FormControlLabel
+                                                    control={<TextField size="small" />}
+                                                />
+                                            );
+                                        }
+                                    })}
+                            </Box>
+                        );
+                    }
+                }
             })}
         </Container>
 
