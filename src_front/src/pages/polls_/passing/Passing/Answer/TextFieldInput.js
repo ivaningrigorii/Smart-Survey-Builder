@@ -1,8 +1,8 @@
-import { FormControlLabel, TextField, } from "@mui/material";
+import { FormControlLabel, TextField, Card, CardActionArea, CardContent, } from "@mui/material";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const TextFieldInput = ({ answer, setDisableOther, setTextValue, 
-        setSelectableValueUp, }) => {
+const TextFieldInput = ({ answer, setDisableOther, setTextValue,
+    setSelectableValueUp, }) => {
 
     const [text, setText] = useState();
     const first = useRef(true);
@@ -19,21 +19,26 @@ const TextFieldInput = ({ answer, setDisableOther, setTextValue,
         }
         setTextValue(text);
         setSelectableValueUp(answer.id);
-    }, [text, ])
+    }, [text,])
 
 
     return (
-        <FormControlLabel
-            key={answer.id}
-            control={
-                <TextField
-                    sx={{ml: "5px", }}
-                    size="small"
-                    onChange={handleChangeDisableOther}
-                    label="введите другой ответ"
+        <Card sx={{ marginTop: '2vh',  minWidth: "50vw", }}>
+            <CardActionArea>
+                <FormControlLabel
+                    key={answer.id}
+                    control={
+                        <TextField
+                            variant="standard"
+                            sx={{ ml: "20px", minWidth: "50vw" }}
+                            size="small"
+                            onChange={handleChangeDisableOther}
+                            label="Другое"
+                        />
+                    }
                 />
-            }
-        />
+            </CardActionArea>
+        </Card>
     );
 }
 export default TextFieldInput;

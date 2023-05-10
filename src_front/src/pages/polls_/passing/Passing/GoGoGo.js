@@ -2,6 +2,7 @@ import {
     Box, Radio,
     Container, Typography,
     RadioGroup, FormControlLabel, TextField, Checkbox, FormGroup, Button,
+    Card, Stack, 
 
 } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -11,6 +12,8 @@ import { Check, Group } from "@mui/icons-material";
 import OneAnsLogic from "./Question/OneAnsLogic";
 import ManyAnsLogic from "./Question/ManyAnsLogic";
 import routes from "../../../../routes";
+import Footer from "../../../../components/Footer/Footer";
+import Header from "../../../../components/Header/Header";
 
 const ps = new PassingServices();
 const SELECTABLE_ANSWERS = ["AnswerSelectableSimple", "AnswerSelectableTest",];
@@ -31,6 +34,7 @@ const GoGoGo = () => {
         ps.listQuestions(id_passing, page)
             .then((res) => {
                 setPassingList(res);
+                console.log(res);
             })
             .catch((err) => {
                 alert("Прохождение невозможно!");
@@ -78,7 +82,7 @@ const GoGoGo = () => {
                     .catch((err) => alert("Выполнение невозможно! " +
                         "Проверьте подключение к интернету!"))
             })
-            .catch(err => alert("Вы заполнили не все обязательные поля!"))
+            .catch(err => alert(err.response.data.error))
     }
 
     const handleEndPassing = () => {
@@ -92,8 +96,7 @@ const GoGoGo = () => {
                                 window.location.replace(routes.home);
                             })
                             .catch((err) => {
-                                alert("Выполнение невозможно! " +
-                                    "Проверьте подключение к интернету!");
+                                alert(err.response.data.error);
                                 console.log(err);
                             })
                     })
@@ -104,49 +107,75 @@ const GoGoGo = () => {
     }
 
     return (
+        <Box sx={{ backgroundColor: "  #ddfae4  " }}>
+            <Header />
+            <Container sx={{ mt: 5, minHeight: "120vh", }}>
 
-        <Container>
-            <Typography variant="h3">
-                Вы проходите опрос
-            </Typography>
+                {passing_list &&
+                    <Typography variant="h3" sx={{ mt: "10", }}>
+                        {passing_list.results.name}
+                    </Typography>
+                }
 
-            {passing_list && passing_list.results.questions.map((question) => {
-                return (
-                    <Box>
-                        <Typography>
-                            {question.text_question}
-                        </Typography>
+                {passing_list && passing_list.results.questions.map((question) => {
+                    return (
 
-                        {question.one_answer_with_a_choice == true ?
-                            <OneAnsLogic answers={question.answers}
-                                taking_survey={id_passing}
-                                id_question={question.id}
-                                questions={questions}
-                                setQuestions={setQuestions} /> :
-                            <ManyAnsLogic answers={question.answers}
-                                taking_survey={id_passing} id_question={question.id}
-                                questions={questions} setQuestions={setQuestions}
-                            />
-                        }
-                        {question.option_required_for_pass == true &&
+                        <Box sx={{ mt: "10px", }}>
                             <Typography>
-                                *Обязательный
+                                <b>{question.text_question}</b>
                             </Typography>
-                        }
-                    </Box>
-                );
-            })}
-            {(passing_list && passing_list.next) &&
-                <Button onClick={handleNextPage}>
-                    Сохранить и продолжить
-                </Button>
-            }
-            {(passing_list && !passing_list.next) &&
-                <Button onClick={handleEndPassing}>
-                    Завершить прохождение
-                </Button>
-            }
-        </Container >
+
+                            <Card sx={{ backgroundColor: " #f1fdd8 ", borderRadius: "25px", maxWidth:"55vw", }}>
+                                <FormGroup aria-setsize="small" sx={{ml: "10px"}}>
+                                    {question.one_answer_with_a_choice == true ?
+                                        <OneAnsLogic answers={question.answers}
+                                            taking_survey={id_passing}
+                                            id_question={question.id}
+                                            questions={questions}
+                                            setQuestions={setQuestions} /> :
+                                        <ManyAnsLogic answers={question.answers}
+                                            taking_survey={id_passing} id_question={question.id}
+                                            questions={questions} setQuestions={setQuestions}
+                                        />
+                                    }
+                                </FormGroup>
+
+
+                                <Box sx={{ mt: "2vh", }} />
+
+                            </Card>
+
+                            {question.option_required_for_pass == true &&
+                                <Typography>
+                                    *Обязательный
+                                </Typography>
+                            }
+                        </Box>
+
+
+
+                    );
+                })}
+                <Stack direction="row"
+                    justifyContent="flex-start"
+                    alignItems="center">
+                    {(passing_list && passing_list.next) &&
+                        <Button variant="contained" color="success" onClick={handleNextPage}>
+                            Сохранить и продолжить
+                        </Button>
+                    }
+                    {(passing_list && !passing_list.next) &&
+                        <Button variant="contained" color="success" onClick={handleEndPassing}>
+                            Завершить прохождение
+                        </Button>
+                    }
+                </Stack>
+
+            </Container >
+            <Footer />
+        </Box>
+
+
 
     )
 }

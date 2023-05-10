@@ -1,4 +1,4 @@
-import { FormControlLabel, Radio, Box, FormControl, } from "@mui/material";
+import { FormControlLabel, Radio, Box, FormControl, Card, CardActionArea, CardContent, } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const SelectableTextRadio = ({ answer, disable_other,
@@ -22,35 +22,40 @@ const SelectableTextRadio = ({ answer, disable_other,
         if (val == true) {
             setSelectableValueUp(answer.id);
         }
-    }, [val]);
+    }, [val,]);
 
     const handleChangeVal = () => {
-        val == true ? setVal(false) : setVal(true);
+        if (disable_other == false) {
+            val == true ? setVal(false) : setVal(true);
+        }
     }
 
     return (
-        <Box>
-            {(disable_other == true) ?
-                <FormControlLabel
-                    key={answer.id}
-                    control={<Radio />}
-                    label={answer.text}
-                    disabled
-                    checked={false}
-                /> :
-                <FormControlLabel
-                    key={answer.id}
-                    control={
-                        <Radio checked={val}
-                            style={{ pointerEvents: "auto" }}
-                            onClick={handleChangeVal}
-                        />
-
-                    }
-                    label={answer.text}
-                />
-            }
-        </Box>
+        <Card sx={{ marginTop: '2vh', minWidth: "50vw", }}>
+            <CardActionArea onClick={handleChangeVal}>
+                {(disable_other == true) ?
+                    <FormControlLabel
+                        key={answer.id}
+                        control={<Radio sx={{ ml: "5px" }} />}
+                        label={answer.text}
+                        disabled
+                        checked={false}
+                    /> :
+                    <FormControlLabel
+                        sx={{ ml: "px" }}
+                        key={answer.id}
+                        control={
+                            <Radio checked={val}
+                                style={{ pointerEvents: "auto" }}
+                                onClick={handleChangeVal}
+                                sx={{ ml: "10px" }}
+                            />
+                        }
+                        label={answer.text}
+                    />
+                }
+            </CardActionArea>
+        </Card>
     );
 }
 export default SelectableTextRadio;

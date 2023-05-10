@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 const SELECTABLE_ANSWERS = ["AnswerSelectableSimple", "AnswerSelectableTest",];
 const TEXT_INPUT_ANSWERS = ["AnswerTextInput",];
 
-const OneAnsLogic = ({ answers, taking_survey, id_question, questions, setQuestions}) => {
+const OneAnsLogic = ({ answers, taking_survey, id_question, questions, setQuestions,}) => {
     const [disable_other, setDisableOther] = useState(false);
 
     const [selectable_value_up, setSelectableValueUp] = useState();
@@ -21,43 +21,43 @@ const OneAnsLogic = ({ answers, taking_survey, id_question, questions, setQuesti
 
         if (result_answers) {
             q.push(result_answers);
-        } 
-        
-        setQuestions(q);
-    }, [result_answers, ]);
-
-    useEffect(() => {
-        let resourcetype;
-        for (let i = 0; i < answers.length; i++) {
-            if (answers[i].id == selectable_value_up) {
-                resourcetype = answers[i].resourcetype;
-            }
         }
 
-        if (disable_other == true) {
-            setResultAnswers({
-                id_question: id_question,
-                result_answers: [{
-                    resourcetype: "ResultTextInput",
-                    input_text: text_value_,
-                    answer: selectable_value_up,
-                    taking_survey: taking_survey,
-                },]
-            });
-        } else {
-            if (selectable_value_up && resourcetype!=="AnswerTextInput") {
+        setQuestions(q);
+    }, [result_answers,]);
+
+    useEffect(() => {
+            let resourcetype;
+            for (let i = 0; i < answers.length; i++) {
+                if (answers[i].id == selectable_value_up) {
+                    resourcetype = answers[i].resourcetype;
+                }
+            }
+
+            if (disable_other == true) {
                 setResultAnswers({
                     id_question: id_question,
                     result_answers: [{
-                        resourcetype: "ResultSelect",
+                        resourcetype: "ResultTextInput",
+                        input_text: text_value_,
                         answer: selectable_value_up,
                         taking_survey: taking_survey,
                     },]
                 });
             } else {
-                setResultAnswers()
+                if (selectable_value_up && resourcetype !== "AnswerTextInput") {
+                    setResultAnswers({
+                        id_question: id_question,
+                        result_answers: [{
+                            resourcetype: "ResultSelect",
+                            answer: selectable_value_up,
+                            taking_survey: taking_survey,
+                        },]
+                    });
+                } else {
+                    setResultAnswers()
+                }
             }
-        }
     }, [selectable_value_up, text_value_,]);
 
     return (

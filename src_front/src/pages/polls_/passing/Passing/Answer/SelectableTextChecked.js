@@ -1,4 +1,4 @@
-import { FormControlLabel, Radio, Box, FormControl, Checkbox, } from "@mui/material";
+import { FormControlLabel, Checkbox, Card, CardActionArea, CardContent, Stack, } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const SelectableTextChecked = ({ answer, disable_other,
@@ -24,35 +24,41 @@ const SelectableTextChecked = ({ answer, disable_other,
         } else {
             setSelectableValueUp(selectable_value_up.filter(val => val != answer.id));
         }
-    }, [val]);
+    }, [val,]);
 
     const handleChangeVal = () => {
-        val == true ? setVal(false) : setVal(true);
+        if (disable_other != true) {
+            val == true ? setVal(false) : setVal(true);
+        }
     }
 
     return (
-        <Box>
-            {(disable_other == true) ?
-                <FormControlLabel
-                    key={answer.id}
-                    control={<Checkbox />}
-                    label={answer.text}
-                    disabled
-                    checked={false}
-                /> :
-                <FormControlLabel
-                    key={answer.id}
-                    control={
-                        <Checkbox checked={val}
-                            style={{ pointerEvents: "auto" }}
-                            onClick={handleChangeVal}
+        <Card sx={{ marginTop: '2vh', minWidth: "50vw", }}>
+            <CardActionArea onClick={handleChangeVal}>
+                <Stack direction="row">
+                    {(disable_other == true) ?
+                        <FormControlLabel
+                            key={answer.id}
+                            control={<Checkbox size="small"/>}
+                            label={answer.text}
+                            disabled
+                            checked={false}
+                            sx={{ ml: "5px", }}
+                        /> :
+                        <FormControlLabel
+                            key={answer.id}
+                            control={
+                                <Checkbox checked={val}
+                                    style={{ pointerEvents: "auto" }}
+                                    sx={{ ml: "10px", }}
+                                />
+                            }
+                            label={answer.text}
                         />
-
                     }
-                    label={answer.text}
-                />
-            }
-        </Box>
+                </Stack>
+            </CardActionArea>
+        </Card>
     );
 }
 export default SelectableTextChecked;

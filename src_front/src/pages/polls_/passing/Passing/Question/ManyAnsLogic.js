@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const SELECTABLE_ANSWERS = ["AnswerSelectableSimple", "AnswerSelectableTest",];
 const TEXT_INPUT_ANSWERS = ["AnswerTextInput",];
 
-const ManyAnsLogic = ({ answers, taking_survey, id_question, questions, setQuestions}) => {
+const ManyAnsLogic = ({ answers, taking_survey, id_question, questions, setQuestions,}) => {
     const [disable_other, setDisableOther] = useState(false);
 
     const [selectable_values_up, setSelectableValuesUp] = useState([]);
@@ -72,14 +72,16 @@ const ManyAnsLogic = ({ answers, taking_survey, id_question, questions, setQuest
                         return (
                             <SelectableTextChecked answer={answer} disable_other={disable_other}
                                 setSelectableValueUp={setSelectableValuesUp}
-                                selectable_value_up={selectable_values_up} />
+                                selectable_value_up={selectable_values_up} 
+                                />
                         );
                     } else if (TEXT_INPUT_ANSWERS.includes(answer.resourcetype) == true) {
                         return (
                             <TextFieldInputCheck answer={answer} setDisableOther={setDisableOther}
                                 setTextValue={setTextValue}
                                 setSelectableValueUp={setSelectableValuesUp}
-                                selectable_values_up={selectable_values_up} />
+                                selectable_values_up={selectable_values_up} 
+                                />
                         );
                     }
                 })}

@@ -1,4 +1,4 @@
-import { FormControlLabel, TextField, } from "@mui/material";
+import { FormControlLabel, TextField, Card, CardActionArea, CardContent, } from "@mui/material";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const TextFieldInputCheck = ({ answer, setDisableOther, setTextValue,
@@ -29,17 +29,22 @@ const TextFieldInputCheck = ({ answer, setDisableOther, setTextValue,
 
 
     return (
-        <FormControlLabel
-            key={answer.id}
-            control={
-                <TextField
-                    sx={{ ml: "5px", }}
-                    size="small"
-                    onChange={handleChangeDisableOther}
-                    label="введите другой ответ"
+        <Card sx={{ marginTop: '2vh', minWidth: "50vw", }}>
+            <CardActionArea>
+                <FormControlLabel
+                    key={answer.id}
+                    control={
+                        <TextField
+                            variant="standard"
+                            sx={{ ml: "20px", minWidth: "50vw"}}
+                            size="small"
+                            onChange={handleChangeDisableOther}
+                            label="Другое"
+                        />
+                    }
                 />
-            }
-        />
+            </CardActionArea>
+        </Card>
     );
 }
 export default TextFieldInputCheck;
