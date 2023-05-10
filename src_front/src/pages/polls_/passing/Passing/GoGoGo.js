@@ -151,9 +151,6 @@ const GoGoGo = () => {
                                 </Typography>
                             }
                         </Box>
-
-
-
                     );
                 })}
                 <Stack direction="row"

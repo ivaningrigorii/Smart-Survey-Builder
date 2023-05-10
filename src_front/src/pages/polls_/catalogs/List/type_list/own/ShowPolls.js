@@ -24,10 +24,11 @@ const ShowPolls = ({ pollsOwnList, setPollsOwnList, make_get, pagination_data })
   return (
     <Box sx={{ minHeight: '80vh', marginTop: 5, }}>
       <Container>
-        <Grid container rowSpacing={{xs: 1, sm: 2, md: 3}} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid container rowSpacing={{xs: 1, sm: 2, md: 3}} columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          justifyContent={{xs: "center", sm: "flex-start", md: "flex-start"}}>
           {pollsOwnList.map(poll => {
             return (
-              <Grid key={poll.id} item xs={8} sm={6} md={4}>
+              <Grid key={poll.id} item xs={12} sm={6} md={4} >
                 <PollCard poll={poll} make_get={make_get} />
               </Grid>
             );

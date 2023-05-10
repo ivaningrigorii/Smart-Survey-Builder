@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import Card from '@mui/material/Card';
-import { Grid, IconButton } from '@mui/material';
+import { Grid, IconButton, Stack } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
@@ -60,7 +60,7 @@ const PollCard = ({ poll, make_get }) => {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+  
       <Card sx={{ backgroundColor: ' #f8f7f8 ', }}>
         <CardMedia
           component="img"
@@ -81,7 +81,7 @@ const PollCard = ({ poll, make_get }) => {
           </Typography>
 
         </CardContent>
-        <Grid alignItems="center">
+        <Stack justifyContent="flex-end" direction="row" alignItems="center">
           <IconButton onClick={handleReloadCards}><Delete sx={{ color: pink[500] }} /></IconButton>
           <IconButton  onClick={handleAnalyticsCards}><Poll /></IconButton>
           <IconButton onClick={handleEditCards}><Edit /></IconButton>
@@ -90,9 +90,9 @@ const PollCard = ({ poll, make_get }) => {
               clipboard.copy(url);
               alert("Ссылка на опрос скопирована");
             }}><Reply /></IconButton>}
-        </Grid>
+        </Stack>
       </Card>
-    </ThemeProvider>
+    
 
 
   );

@@ -8,7 +8,7 @@ const useStyles = makeStyles({
     },
 
     box_elements: {
-        marginTop: '10%',
+        marginTop: '15%',
         width: 250,
         backgroundColor: "#adadeb",
         borderRadius: '25px',

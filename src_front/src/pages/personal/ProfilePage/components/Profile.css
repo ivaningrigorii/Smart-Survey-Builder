@@ -3,7 +3,7 @@
 }
 
 .profile_show_test {
-    margin-top: 9%;
+    margin-top: 15%;
     margin-left: 5%;
 }
 
@@ -35,7 +35,6 @@
     color: gray;
     margin-bottom: 20px;
     border-bottom: 1px solid grey;
-    weight: 600px;
 }
 
 .profile_show_test_shiftenter {
@@ -44,11 +43,10 @@
 }
 
 .profile_show_test_input {
-    width: 600px;
+    width: 85vw;
     height: 40px;
     outline: none;
     padding-left: 20px;
-
 }
 
 .profile_show_test_btn2 {
