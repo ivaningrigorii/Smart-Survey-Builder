@@ -1,8 +1,8 @@
 import { FormControlLabel, TextField, } from "@mui/material";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const TextFieldInput = ({ answer, setDisableOther, setTextValue, 
-        setSelectableValueUp, }) => {
+const TextFieldInputCheck = ({ answer, setDisableOther, setTextValue,
+    setSelectableValueUp, selectable_values_up, }) => {
 
     const [text, setText] = useState();
     const first = useRef(true);
@@ -18,8 +18,14 @@ const TextFieldInput = ({ answer, setDisableOther, setTextValue,
             return;
         }
         setTextValue(text);
-        setSelectableValueUp(answer.id);
-    }, [text, ])
+        if (text && text !== "") {
+            setSelectableValueUp([answer.id,]);
+        } else {
+            let res = selectable_values_up.filter(a_id => a_id != answer.id);
+            setSelectableValueUp(res);
+        }
+
+    }, [text,])
 
 
     return (
@@ -27,7 +33,7 @@ const TextFieldInput = ({ answer, setDisableOther, setTextValue,
             key={answer.id}
             control={
                 <TextField
-                    sx={{ml: "5px", }}
+                    sx={{ ml: "5px", }}
                     size="small"
                     onChange={handleChangeDisableOther}
                     label="введите другой ответ"
@@ -36,4 +42,4 @@ const TextFieldInput = ({ answer, setDisableOther, setTextValue,
         />
     );
 }
-export default TextFieldInput;
+export default TextFieldInputCheck;

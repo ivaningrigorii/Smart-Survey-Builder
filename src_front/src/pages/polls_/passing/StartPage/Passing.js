@@ -50,7 +50,7 @@ const Passing = () => {
                 });
                 window.location.replace(path);
             })
-            .catch((err) => console.log(err))
+            .catch((err) => alert(err.response.data.error))
     }
 
     return (

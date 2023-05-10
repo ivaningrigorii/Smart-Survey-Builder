@@ -1,7 +1,7 @@
-import { FormControlLabel, Radio, Box, FormControl, } from "@mui/material";
+import { FormControlLabel, Radio, Box, FormControl, Checkbox, } from "@mui/material";
 import { useEffect, useState } from "react";
 
-const SelectableTextRadio = ({ answer, disable_other,
+const SelectableTextChecked = ({ answer, disable_other,
     setSelectableValueUp, selectable_value_up, }) => {
 
     const [val, setVal] = useState(false);
@@ -9,18 +9,20 @@ const SelectableTextRadio = ({ answer, disable_other,
     useEffect(() => {
         if (disable_other == true) {
             setVal(false);
+            let sa = [];
+            setSelectableValueUp(sa);
         }
     }, [disable_other]);
 
     useEffect(() => {
-        if (selectable_value_up != answer.id) {
-            setVal(false);
-        }
-    }, [selectable_value_up,]);
-
-    useEffect(() => {
         if (val == true) {
-            setSelectableValueUp(answer.id);
+            let sa = selectable_value_up.slice();
+            if (sa.indexOf(answer.id) < 0) {
+                sa.push(answer.id);
+                setSelectableValueUp(sa);
+            }
+        } else {
+            setSelectableValueUp(selectable_value_up.filter(val => val != answer.id));
         }
     }, [val]);
 
@@ -33,7 +35,7 @@ const SelectableTextRadio = ({ answer, disable_other,
             {(disable_other == true) ?
                 <FormControlLabel
                     key={answer.id}
-                    control={<Radio />}
+                    control={<Checkbox />}
                     label={answer.text}
                     disabled
                     checked={false}
@@ -41,7 +43,7 @@ const SelectableTextRadio = ({ answer, disable_other,
                 <FormControlLabel
                     key={answer.id}
                     control={
-                        <Radio checked={val}
+                        <Checkbox checked={val}
                             style={{ pointerEvents: "auto" }}
                             onClick={handleChangeVal}
                         />
@@ -53,4 +55,4 @@ const SelectableTextRadio = ({ answer, disable_other,
         </Box>
     );
 }
-export default SelectableTextRadio;
+export default SelectableTextChecked;

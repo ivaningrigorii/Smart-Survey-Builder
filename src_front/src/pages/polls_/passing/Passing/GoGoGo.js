@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { useParams, } from "react-router-dom";
 import PassingServices from "../PassingServices";
 import { Check, Group } from "@mui/icons-material";
+import OneAnsLogic from "./Question/OneAnsLogic";
+import ManyAnsLogic from "./Question/ManyAnsLogic";
 
 const ps = new PassingServices();
 const SELECTABLE_ANSWERS = ["AnswerSelectableSimple", "AnswerSelectableTest",];
@@ -22,9 +24,17 @@ const GoGoGo = () => {
     const [text_values, setTextValues] = useState();
     const [select_value, setSelectValue] = useState();
 
+    const [questions, setQuestions] = useState([]);
+
+    useEffect(() => {
+        console.log(questions);
+    }, [questions]);
+
     useEffect(() => {
         ps.listQuestions(id_passing, page)
-            .then((res) => setPassingList(res))
+            .then((res) => {
+                setPassingList(res);
+            })
             .catch((err) => {
                 alert("Прохождение невозможно!");
                 console.log(err);
@@ -50,48 +60,20 @@ const GoGoGo = () => {
                         </Typography>
 
                         {question.one_answer_with_a_choice == true ?
-                            <RadioGroup >
-                                {question.answers.map((answer) => {
-                                    if (SELECTABLE_ANSWERS.indexOf(answer.resourcetype) >= 0) {
-                                        return (
-                                            <FormControlLabel
-                                                key={answer.id}
-                                                value={answer.id}
-                                                label={answer.text}
-                                                control={<Radio />}
-                                            />
-                                        );
-                                    }
-                                    if (TEXT_INPUT_ANSWERS.indexOf(answer.resourcetype) >= 0) {
-                                        return (
-                                            <FormControlLabel
-                                                key={answer.id}
-                                                control={<TextField size="small" />}
-                                            />
-                                        );
-                                    }
-                                })}
-                            </RadioGroup> :
-                            <FormGroup>{
-                                question.answers.map((answer) => {
-                                    if (SELECTABLE_ANSWERS.indexOf(answer.resourcetype) >= 0) {
-                                        return (
-                                            <FormControlLabel
-                                                value={answer.id}
-                                                label={answer.text}
-                                                control={<Checkbox />}
-                                            />
-                                        );
-                                    }
-                                    if (TEXT_INPUT_ANSWERS.indexOf(answer.resourcetype) >= 0) {
-                                        return (
-                                            <FormControlLabel
-                                                control={<TextField size="small" />}
-                                            />
-                                        );
-                                    }
-                                })
-                            }</FormGroup>
+                            <OneAnsLogic answers={question.answers} 
+                                    taking_survey={id_passing} 
+                                    id_question={question.id}
+                                    questions={questions}
+                                    setQuestions={setQuestions}/> :
+                            <ManyAnsLogic answers={question.answers} 
+                                    taking_survey={id_passing} id_question={question.id}
+                                    questions={questions} setQuestions={setQuestions}
+                                    />
+                        }
+                        {question.option_required_for_pass == true &&
+                            <Typography>
+                                *Обязательный
+                            </Typography>    
                         }
                     </Box>
                 );
