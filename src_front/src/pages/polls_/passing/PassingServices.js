@@ -51,16 +51,15 @@ class PassingServices {
             .catch((error) => Promise.reject(error));
     }
 
-    async saveAnswer(id, result_questions) {
+    async saveAnswer(result_questions) {
         let header = {};
 
         if (cookies.get('tokens')) 
             await _token().then(async (res) =>
                 header["Authorization"] = 'Bearer ' + await res);
         
-        return axios.post(reverse("api/v1/list_questions/:id/", { id: id }), {
-            result_questions: result_questions,
-        }, { headers: header, },)
+        return axios.post(reverse("api/v1/passing/save_answers/"), result_questions
+        , { headers: header, },)
             .then((resp) => Promise.resolve(resp))
             .catch((err) => Promise.reject(err))
     }
@@ -72,7 +71,7 @@ class PassingServices {
             await _token().then(async (res) =>
                 header["Authorization"] = 'Bearer ' + await res);
 
-        let path = reverse("/passing/taking_survey/end/:id/", { id: id });
+        let path = reverse("api/v1/passing/taking_survey/end/:id/", { id: id });
 
         return axios.patch(path, { id: id }, { headers: header, },)
             .then((respone) => Promise.resolve(respone.data))

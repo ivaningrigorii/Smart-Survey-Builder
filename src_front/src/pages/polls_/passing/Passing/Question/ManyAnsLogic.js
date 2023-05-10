@@ -39,7 +39,7 @@ const ManyAnsLogic = ({ answers, taking_survey, id_question, questions, setQuest
             setResultAnswers({
                 id_question: id_question,
                 result_answers: [{
-                    resourcetype: resourcetypes[0],
+                    resourcetype: "ResultTextInput",
                     input_text: text_value_,
                     answer: selectable_values_up[0],
                     taking_survey: taking_survey,
@@ -52,7 +52,7 @@ const ManyAnsLogic = ({ answers, taking_survey, id_question, questions, setQuest
                     id_question: id_question,
                     result_answers: selectable_values_up.map((selectable_value_up, index) => {
                         return {
-                            resourcetype: resourcetypes[index],
+                            resourcetype: "ResultSelect",
                             answer: selectable_value_up,
                             taking_survey: taking_survey,
                         };

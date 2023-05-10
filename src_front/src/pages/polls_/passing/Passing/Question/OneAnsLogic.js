@@ -38,7 +38,7 @@ const OneAnsLogic = ({ answers, taking_survey, id_question, questions, setQuesti
             setResultAnswers({
                 id_question: id_question,
                 result_answers: [{
-                    resourcetype: resourcetype,
+                    resourcetype: "ResultTextInput",
                     input_text: text_value_,
                     answer: selectable_value_up,
                     taking_survey: taking_survey,
@@ -49,7 +49,7 @@ const OneAnsLogic = ({ answers, taking_survey, id_question, questions, setQuesti
                 setResultAnswers({
                     id_question: id_question,
                     result_answers: [{
-                        resourcetype: resourcetype,
+                        resourcetype: "ResultSelect",
                         answer: selectable_value_up,
                         taking_survey: taking_survey,
                     },]
