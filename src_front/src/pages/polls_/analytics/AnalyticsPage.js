@@ -31,7 +31,6 @@ const AnalyticsPage = () => {
                 {params &&
                     <AnalyticsCard id={params.poll} />
                 }
-                 
                 <Footer />
             </Box>
         );

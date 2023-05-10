@@ -14,7 +14,8 @@ import GetTypeAnswer from './GetTypeAnswer';
 
 import CreateAnswer from '../../Answers/DialogCreateAnswer';
 import { IconButton, TextField } from '@material-ui/core';
-
+import AnalyticsCard from '../../../../../components/AnalyticsCard';
+import AnalyticsNumberPassing from '../../../../../components/AnalyticsNumberPassing';
 import EditQuestion from './EditQuestions/DialogEditQuestion';
 
 const allow_fields_adding = [
@@ -110,11 +111,13 @@ const QuestTestSimpleEv = ({ question, deleteQuestion, saveQuestion, }) => {
 
     return (
         <Box>
+
             <Card className={classes.card_style} sx={{
                 backgroundColor: " #c7decf ",
                 borderRadius: "25px",
             }}>
                 <CardContent>
+                    
                     <Stack container justifyContent="space-between" direction="row" align="center"
                         sx={{ marginLeft: "10px", marginRight: "10px", }}>
                         <p className={classes.header_question}>{question.text_question}</p>
@@ -165,8 +168,9 @@ const QuestTestSimpleEv = ({ question, deleteQuestion, saveQuestion, }) => {
                             <p>Обязателен к прохождению</p>
                         }
                     </Stack>
-
-
+                   
+                    <AnalyticsCard id={question.survey} id_qw={question.id} />
+                  
                 </CardContent>
             </Card>
         </Box >

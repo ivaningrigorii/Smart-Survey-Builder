@@ -16,7 +16,7 @@ import ConstructorServices from '../ConstructorServices';
 
 import ListQuestions from '../TabPages/ConstructorPoll/Questions/ListQuestions';
 import SendPoll from '../TabPages/SendPoll/SendPoll';
-
+import AnalyticsNumberPassing from '../../components/AnalyticsNumberPassing';
 const cs = new ConstructorServices();
 
 const ConstructorTabs = ({ poll, }) => {
@@ -46,6 +46,7 @@ const ConstructorTabs = ({ poll, }) => {
             <Tab value={0}>Аналитика опроса</Tab>
             {/* <Tab value={1}>Поделиться опросом</Tab> */}
           </TabsList>
+          <AnalyticsNumberPassing id={pollOptions.id}/>
           <TabPanel value={0}>
             <ListQuestions idPoll={pollOptions.id}
               poll_type={pollOptions.resourcetype}
