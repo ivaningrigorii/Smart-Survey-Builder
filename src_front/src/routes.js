@@ -1,34 +1,32 @@
-import { include } from 'named-urls'
+import { include } from "named-urls";
 
 export default {
-    home: "/",
+  home: "/",
 
-    profile: "/profile/",
-    profile_next: include("/profile/", {
-        edit: "edit/",
-    }),
+  profile: "/profile/",
+  profile_next: include("/profile/", {
+    edit: "edit/",
+  }),
 
-    auth: include('/auth/', {
-        login: "login/",
-        logout: "logout/",
-        registration: "reg/",
-    }),
+  auth: include("/auth/", {
+    login: "login/",
+    logout: "logout/",
+    registration: "reg/",
+  }),
 
-    polls: include('/polls/', {
-        cats: {
-            default: "catalogs/",
-            own: "catalogs/:page/",
-        },
+  polls: include("/polls/", {
+    cats: {
+      default: "catalogs/",
+      own: "catalogs/:page/",
+    },
 
-        create: "create/",
-        constructor: "constructor/:poll/",
-        analytics: "analytics/:poll/",
-        
+    create: "create/",
+    constructor: "constructor/:poll/",
+    analytics: "analytics/:poll/",
 
-        passing: {
-            to: ":slug/",
-            gogogo: "passing/:id_passing/:slug/"
-        }
-    }),
-
-}
+    passing: {
+      to: ":slug/",
+      gogogo: "passing/:id_passing/:slug/",
+    },
+  }),
+};
